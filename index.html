@@ -7,27 +7,53 @@
 <style>
 :root{
   --navy:#0A192F; --navy2:#0F2440; --navy3:#14304F; --line:#23486f;
-  --gold:#D4AF37; --gold-dim:#8f7626; --ink:#E8EEF6; --ink-dim:#9db2cc;
+  --gold:#D4AF37; --gold-dim:#8f7626; --ink:#EDF2F9; --ink-dim:#B7C9DE;
   --good:#4ade80; --warn:#fbbf24; --bad:#f87171; --cool:#60a5fa;
   --r1:#f472b6; --r2:#fb923c; --r3:#facc15; --r4:#38bdf8; --r5:#a78bfa;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --panel:var(--panel); --chipsel:#173a5e; --btnink:#1a1405; --scale:1;
+  --shadow:0 1px 0 rgba(255,255,255,.03);
 }
+body.paper{
+  --navy:#F6F2E9; --navy2:#FFFFFF; --navy3:#EFE9DC; --line:#CDC3AE;
+  --gold:#7A5F14; --gold-dim:#9A8235; --ink:#171F29; --ink-dim:#4C5B6B;
+  --panel:#FCF9F2; --chipsel:#FBEFCB; --btnink:#FFFFFF;
+  --good:#15803d; --warn:#a16207; --bad:#b91c1c; --cool:#1d4ed8;
+  --r1:#be185d; --r2:#c2410c; --r3:#a16207; --r4:#0369a1; --r5:#6d28d9;
+  --shadow:0 1px 2px rgba(20,30,40,.06);
+}
+body.paper{ background:#F6F2E9 !important; }
+body.paper .chip .rr{ color:#fff }
+body.paper .axis{ background:linear-gradient(90deg,#fecaca,#fed7aa 28%,#bbf7d0 42%,#bbf7d0 58%,#bfdbfe 72%,#ddd6fe) }
+body.paper .axis .ndl{ background:#111; box-shadow:0 0 5px rgba(0,0,0,.4) }
+body.paper .axis .tk{ color:rgba(0,0,0,.6) }
+body.paper .flag{ background:#fee2e2; border-color:#fca5a5; color:#991b1b }
+body.paper .flag.g{ background:#dcfce7; border-color:#86efac; color:#166534 }
+body.paper .codechip{ background:#fee2e2; border-color:#fca5a5; color:#991b1b }
+body.paper .verdict.v-good{ background:#eafaf0 }
+body.paper .verdict.v-ok{ background:#fdf6e3 }
+body.paper .verdict.v-bad{ background:#fdeaea }
+body.paper .card{ background:#fff; box-shadow:var(--shadow) }
+body.paper .xpbar i, body.paper .dot.on{ background:var(--gold) }
 *{box-sizing:border-box}
+html{font-size:calc(17px * var(--scale))}
 html,body{margin:0;padding:0}
 body{
   background:
     radial-gradient(1200px 600px at 80% -10%, #16365c 0%, transparent 60%),
     radial-gradient(900px 500px at -10% 110%, #123 0%, transparent 60%),
     var(--navy);
-  color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5;
+  color:var(--ink); font-family:var(--sans); font-size:1rem; line-height:1.62;
   -webkit-text-size-adjust:100%;
 }
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px 64px}
 a{color:var(--gold)}
 button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
 h1,h2,h3,h4{margin:0 0 .4em;line-height:1.25;font-weight:650}
-p{margin:0 0 .8em}
+p{margin:0 0 .85em}
+.note .lab{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);margin:7px 0 1px}
+.note .lab:first-child{margin-top:0}
 small{font-size:.8rem}
 
 /* ---------- header ---------- */
@@ -36,11 +62,11 @@ header{
   padding:14px 0 12px;border-bottom:1px solid var(--line);margin-bottom:18px;
 }
 .emblem{width:46px;height:46px;flex:0 0 auto}
-.brand h1{font-size:1.22rem;letter-spacing:.03em;margin:0}
-.brand .sub{font-size:.72rem;color:var(--ink-dim);letter-spacing:.14em;text-transform:uppercase}
+.brand h1{font-size:1.3rem;letter-spacing:.03em;margin:0}
+.brand .sub{font-size:.78rem;color:var(--ink-dim);letter-spacing:.14em;text-transform:uppercase}
 .rankbox{margin-left:auto;text-align:right;min-width:190px}
-.rankbox .rk{font-size:.86rem;color:var(--gold);font-weight:650}
-.rankbox .xp{font-size:.7rem;color:var(--ink-dim)}
+.rankbox .rk{font-size:.94rem;color:var(--gold);font-weight:650}
+.rankbox .xp{font-size:.78rem;color:var(--ink-dim)}
 .xpbar{height:5px;background:var(--navy3);border-radius:3px;overflow:hidden;margin-top:5px}
 .xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));width:0%}
 
@@ -48,16 +74,16 @@ header{
 nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
 nav button{
   background:var(--navy2);border:1px solid var(--line);border-radius:999px;
-  padding:7px 15px;font-size:.85rem;color:var(--ink-dim);transition:.15s;
+  padding:9px 17px;font-size:.93rem;color:var(--ink-dim);transition:.15s;
 }
 nav button:hover{border-color:var(--gold-dim);color:var(--ink)}
-nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:#1a1405;font-weight:650}
+nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:var(--btnink);font-weight:650}
 
 /* ---------- cards ---------- */
 .card{background:rgba(15,36,64,.72);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
 .card.tight{padding:14px}
-.card h3{font-size:1rem;color:var(--gold);letter-spacing:.02em}
-.card h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-dim);margin-bottom:.7em}
+.card h3{font-size:1.1rem;color:var(--gold);letter-spacing:.02em}
+.card h4{font-size:.88rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-dim);margin-bottom:.7em}
 .grid2{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:16px;align-items:start}
 @media(max-width:880px){.grid2{grid-template-columns:1fr}}
 .sticky{position:sticky;top:12px}
@@ -67,33 +93,33 @@ nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);
 .mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 .mcard{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:left;transition:.15s;display:flex;flex-direction:column;gap:8px}
 .mcard:hover{border-color:var(--gold);transform:translateY(-2px)}
-.mcard .mt{font-weight:650;font-size:1rem}
-.mcard .md{font-size:.83rem;color:var(--ink-dim);flex:1}
-.mcard .mm{font-size:.72rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
-.badge{display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-dim)}
+.mcard .mt{font-weight:650;font-size:1.08rem}
+.mcard .md{font-size:.92rem;color:var(--ink-dim);flex:1}
+.mcard .mm{font-size:.79rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.badge{display:inline-block;font-size:.76rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-dim)}
 .badge.done{border-color:var(--good);color:var(--good)}
 
 /* ---------- interlocutor ---------- */
 .who{display:flex;gap:12px;align-items:flex-start;background:var(--navy3);border-radius:10px;padding:12px;margin-bottom:14px}
 .who .av{width:44px;height:44px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;font-weight:700;font-size:1rem;background:var(--navy);border:2px solid var(--gold-dim);color:var(--gold)}
-.who .nm{font-weight:650;font-size:.95rem}
-.who .rl{font-size:.78rem;color:var(--ink-dim)}
-.core{background:#0b2138;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 14px;margin:12px 0}
-.core .lbl{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim)}
-.core .txt{font-family:var(--mono);font-size:.98rem;color:#fff}
+.who .nm{font-weight:650;font-size:1.04rem}
+.who .rl{font-size:.88rem;color:var(--ink-dim)}
+.core{background:var(--panel);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 14px;margin:12px 0}
+.core .lbl{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim)}
+.core .txt{font-family:var(--mono);font-size:1.04rem;color:var(--ink)}
 
 /* ---------- room scoring ---------- */
 .qrow{margin-bottom:12px}
-.qrow .ql{font-size:.87rem;margin-bottom:6px}
+.qrow .ql{font-size:.98rem;margin-bottom:6px}
 .qrow .ql b{color:var(--gold)}
 .opts{display:flex;gap:6px;flex-wrap:wrap}
 .opt{
   background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:7px 11px;
-  font-size:.82rem;text-align:left;color:var(--ink-dim);transition:.12s;flex:1 1 150px;min-width:0;
+  font-size:.92rem;text-align:left;color:var(--ink-dim);transition:.12s;flex:1 1 170px;min-width:0;
 }
 .opt:hover{border-color:var(--gold-dim);color:var(--ink)}
 .opt[aria-pressed="true"]{background:var(--navy3);border-color:var(--gold);color:var(--ink)}
-.opt .k{font-family:var(--mono);color:var(--gold);font-size:.72rem;margin-right:5px}
+.opt .k{font-family:var(--mono);color:var(--gold);font-size:.8rem;margin-right:5px}
 .opt.ok{border-color:var(--good)}
 .opt.no{border-color:var(--bad)}
 
@@ -101,21 +127,21 @@ nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);
 .slot{border-top:1px solid var(--line);padding:13px 0}
 .slot:first-child{border-top:0}
 .slot .sh{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
-.slot .sn{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-.slot .sg{font-size:.76rem;color:var(--ink-dim)}
+.slot .sn{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.slot .sg{font-size:.86rem;color:var(--ink-dim)}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{
   background:var(--navy2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;
-  font-size:.85rem;color:var(--ink);transition:.12s;position:relative;text-align:left;
+  font-size:.95rem;color:var(--ink);transition:.12s;position:relative;text-align:left;
   display:flex;align-items:center;gap:7px;
 }
 .chip:hover{border-color:var(--gold-dim)}
-.chip[aria-pressed="true"]{background:#173a5e;border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
-.chip .rr{font-family:var(--mono);font-size:.66rem;width:15px;height:15px;border-radius:4px;display:grid;place-items:center;color:#0A192F;font-weight:700;flex:0 0 auto}
+.chip[aria-pressed="true"]{background:var(--chipsel);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.chip .rr{font-family:var(--mono);font-size:.72rem;width:17px;height:17px;border-radius:4px;display:grid;place-items:center;color:#0A192F;font-weight:700;flex:0 0 auto}
 .rrc1{background:var(--r1)}.rrc2{background:var(--r2)}.rrc3{background:var(--r3)}.rrc4{background:var(--r4)}.rrc5{background:var(--r5)}
 .rrc0{background:#64748b}
 .note{
-  font-size:.78rem;color:var(--ink-dim);background:#0b2138;border:1px dashed var(--line);
+  font-size:.9rem;color:var(--ink);background:var(--panel);border:1px dashed var(--line);
   border-radius:8px;padding:8px 10px;margin-top:8px;display:none;
 }
 .note.show{display:block}
@@ -123,24 +149,24 @@ nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);
 .note .imp{color:var(--warn)}
 
 /* ---------- assembly ---------- */
-.asm{font-family:var(--mono);font-size:.84rem;line-height:1.9;word-break:break-word}
+.asm{font-family:var(--mono);font-size:.9rem;line-height:2;word-break:break-word}
 .asm .b{background:var(--navy3);border:1px solid var(--line);border-radius:6px;padding:2px 6px;margin:0 2px;display:inline-block}
-.asm .b.empty{color:#587;opacity:.55}
-.sent{font-size:1.02rem;line-height:1.6;background:#0b2138;border-radius:10px;padding:13px;margin:12px 0;min-height:56px;border:1px solid var(--line)}
+.asm .b.empty{color:var(--ink-dim);opacity:.65}
+.sent{font-size:1.12rem;line-height:1.65;background:var(--panel);border-radius:10px;padding:13px;margin:12px 0;min-height:56px;border:1px solid var(--line)}
 .sent.ph{color:var(--ink-dim);font-style:italic}
 
 /* ---------- meters ---------- */
 .mtr{margin-bottom:11px}
-.mtr .ml{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ink-dim);margin-bottom:3px}
+.mtr .ml{display:flex;justify-content:space-between;font-size:.84rem;color:var(--ink-dim);margin-bottom:3px}
 .mtr .ml b{color:var(--ink);font-weight:600}
-.mtr .bar{height:8px;background:var(--navy3);border-radius:4px;overflow:hidden}
+.mtr .bar{height:10px;background:var(--navy3);border-radius:4px;overflow:hidden}
 .mtr .bar i{display:block;height:100%;transition:width .3s,background .3s}
-.axis{position:relative;height:22px;background:linear-gradient(90deg,#7f1d1d,#b45309 28%,#14532d 42%,#14532d 58%,#1e3a8a 72%,#312e81);border-radius:5px;margin-top:3px;overflow:hidden}
+.axis{position:relative;height:24px;background:linear-gradient(90deg,#7f1d1d,#b45309 28%,#14532d 42%,#14532d 58%,#1e3a8a 72%,#312e81);border-radius:5px;margin-top:3px;overflow:hidden}
 .axis .band{position:absolute;left:42%;width:16%;top:0;bottom:0;border-left:1px dashed rgba(255,255,255,.35);border-right:1px dashed rgba(255,255,255,.35)}
 .axis .ndl{position:absolute;top:-2px;bottom:-2px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 6px rgba(255,255,255,.8);transition:left .3s;transform:translateX(-50%)}
 .axis .tk{position:absolute;bottom:2px;font-size:.6rem;color:rgba(255,255,255,.75);letter-spacing:.05em}
 .flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.flag{font-size:.7rem;padding:3px 8px;border-radius:999px;background:#3b1116;border:1px solid #7f1d1d;color:#fca5a5;font-family:var(--mono)}
+.flag{font-size:.78rem;padding:3px 8px;border-radius:999px;background:#3b1116;border:1px solid #7f1d1d;color:#fca5a5;font-family:var(--mono)}
 .flag.g{background:#0c2b1a;border-color:#14532d;color:#86efac}
 
 /* ---------- verdict ---------- */
@@ -148,22 +174,22 @@ nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);
 .verdict.v-good{border-color:var(--good);background:rgba(20,83,45,.28)}
 .verdict.v-ok{border-color:var(--warn);background:rgba(120,77,7,.25)}
 .verdict.v-bad{border-color:var(--bad);background:rgba(127,29,29,.25)}
-.verdict .rx{font-size:1rem;line-height:1.55;margin-bottom:10px}
+.verdict .rx{font-size:1.1rem;line-height:1.6;margin-bottom:10px}
 .verdict .rx em{color:var(--ink-dim)}
 .verdict .sc{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .verdict .big{font-size:2rem;font-weight:700;font-family:var(--mono)}
-.verdict .gr{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
-.model{font-family:var(--mono);font-size:.84rem;background:#0b2138;border-left:3px solid var(--good);padding:10px 13px;border-radius:0 8px 8px 0;margin:10px 0}
+.verdict .gr{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+.model{font-family:var(--mono);font-size:.92rem;background:var(--panel);border-left:3px solid var(--good);padding:10px 13px;border-radius:0 8px 8px 0;margin:10px 0}
 .codes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
-.codechip{font-family:var(--mono);font-size:.72rem;padding:3px 9px;border-radius:6px;background:#3b1116;border:1px solid #7f1d1d;color:#fca5a5}
+.codechip{font-family:var(--mono);font-size:.8rem;padding:3px 9px;border-radius:6px;background:#3b1116;border:1px solid #7f1d1d;color:#fca5a5}
 
 /* ---------- buttons ---------- */
-.btn{background:var(--gold);border:0;border-radius:9px;padding:10px 20px;font-weight:650;color:#1a1405;font-size:.92rem}
+.btn{background:var(--gold);border:0;border-radius:9px;padding:10px 20px;font-weight:650;color:var(--btnink);font-size:.92rem}
 .btn:hover{filter:brightness(1.1)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink-dim)}
 .btn.ghost:hover{border-color:var(--gold-dim);color:var(--ink)}
-.btn.sm{padding:6px 13px;font-size:.8rem}
+.btn.sm{padding:8px 15px;font-size:.88rem}
 .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}
 
 /* ---------- progress dots ---------- */
@@ -174,12 +200,12 @@ nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);
 
 /* ---------- tables (dossier) ---------- */
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
-table{border-collapse:collapse;width:100%;font-size:.82rem;min-width:520px}
-th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
-th{background:var(--navy3);color:var(--gold);font-weight:600;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:520px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--navy3);color:var(--gold);font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
 td em{color:var(--ink-dim)}
 .acc{border:1px solid var(--line);border-radius:10px;margin-bottom:9px;overflow:hidden}
-.acc>button{width:100%;text-align:left;background:var(--navy2);border:0;padding:12px 15px;font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;gap:10px}
+.acc>button{width:100%;text-align:left;background:var(--navy2);border:0;padding:14px 16px;font-weight:600;font-size:1rem;display:flex;justify-content:space-between;gap:10px}
 .acc>button:hover{background:var(--navy3)}
 .acc .body{padding:0 15px 14px;display:none}
 .acc.open .body{display:block}
@@ -187,15 +213,30 @@ td em{color:var(--ink-dim)}
 .acc.open>button .car{transform:rotate(90deg)}
 
 /* ---------- misc ---------- */
-.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.82rem}
-.kv dt{color:var(--gold);font-family:var(--mono);font-size:.76rem}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.92rem}
+.kv dt{color:var(--gold);font-family:var(--mono);font-size:.84rem}
 .kv dd{margin:0;color:var(--ink-dim)}
-.hint{font-size:.78rem;color:var(--ink-dim);background:#0b2138;border-radius:8px;padding:9px 11px;border-left:3px solid var(--gold-dim)}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(90px);background:var(--gold);color:#1a1405;font-weight:650;padding:11px 20px;border-radius:999px;font-size:.88rem;transition:transform .3s;z-index:90;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.hint{font-size:.94rem;color:var(--ink);background:var(--panel);border-radius:8px;padding:11px 13px;border-left:3px solid var(--gold-dim);line-height:1.55}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(90px);background:var(--gold);color:var(--btnink);font-weight:650;padding:11px 20px;border-radius:999px;font-size:.88rem;transition:transform .3s;z-index:90;box-shadow:0 8px 28px rgba(0,0,0,.5)}
 .toast.show{transform:translateX(-50%) translateY(0)}
-footer{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;font-size:.73rem;color:#6b829c}
-.sel{background:var(--navy2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px;font-size:.86rem;max-width:100%}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;font-size:.8rem;color:var(--ink-dim)}
+.sel{background:var(--navy2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:10px 12px;font-size:.95rem;max-width:100%}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.coach{background:var(--panel);border:1px solid var(--gold-dim);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:14px}
+.coach .ch{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.coach p{font-size:.99rem;margin:0 0 .5em;line-height:1.58}
+.coach p:last-child{margin-bottom:0}
+.coach .rule{font-weight:650;color:var(--ink)}
+.hintbox{background:var(--panel);border:1px dashed var(--gold-dim);border-radius:10px;padding:13px 15px;margin-top:12px;font-size:.99rem;line-height:1.55}
+.hintbox .hl{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.chip.suggest{box-shadow:0 0 0 2px var(--good) inset}
+.chip.suggest::after{content:"try this";font-size:.68rem;color:var(--good);margin-left:6px;letter-spacing:.05em}
+.ctrl{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.ctrl button{background:var(--navy2);border:1px solid var(--line);border-radius:8px;color:var(--ink-dim);padding:7px 12px;font-size:.88rem;line-height:1}
+.ctrl button:hover{border-color:var(--gold-dim);color:var(--ink)}
+.ctrl .lb{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);margin-right:2px}
+.tries{font-size:.86rem;color:var(--warn);font-family:var(--mono)}
+@media(max-width:620px){ .rankbox{min-width:140px} .ctrl{width:100%;justify-content:flex-start;margin-left:0 !important} }
 </style>
 </head>
 <body>
@@ -212,7 +253,13 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;font-si
     <h1>REGISTER OPS</h1>
     <div class="sub">Thought Modulation · RTAF Finance English</div>
   </div>
-  <div class="rankbox">
+  <div class="ctrl" id="uictl" style="margin-left:auto">
+    <span class="lb">Text</span>
+    <button data-ui="tsz" data-v="-1" title="Smaller text">A&minus;</button>
+    <button data-ui="tsz" data-v="1" title="Larger text">A+</button>
+    <button data-ui="theme" id="thBtn" title="Switch between dark and paper">Paper</button>
+  </div>
+  <div class="rankbox" style="margin-left:0">
     <div class="rk" id="rkName">Acting Pilot Officer</div>
     <div class="xp" id="rkXp">0 pts</div>
     <div class="xpbar"><i id="rkBar"></i></div>
@@ -762,9 +809,142 @@ turns:[
   teach:"Convert frustration into a countable obstacle plus two options. Naming the feeling upward is heard as complaining, every time."}
 ]}
 );
+/* ---------- trainer mission (first card) ---------- */
+MISSIONS.unshift({
+id:"m0", title:"Basic Training", tag:"Start here · guided",
+trainer:true, simple:true,
+blurb:"Eight short exchanges, one rule each, with the register told to you and the reasoning spelled out. No situation-reading quiz, hints cost nothing.",
+focus:"One rule per exchange · fewer options · full guidance · free hints",
+turns:[
+ {s:"08:00. You arrive at your desk. Ploy is already there with two coffees.",
+  who:"ploy", core:"Hello. How are you?", act:"social",
+  room:{d:0,p:0,s:0}, tgt:{r:1,c:"none",gr:"D",a:1},
+  slots:["greet","addr","core","affect"], frames:"ask",
+  guide:["Ploy is your closest friend at work. Distance 0, Power 0, Stakes 0.",
+         "That adds to 0, so this is <span class='rule'>register 1 — Friendly</span>.",
+         "Pick the friendly end of every row. The numbers on the chips are registers: you want the <b>1</b>s and <b>2</b>s here."],
+  cores:[
+   {t:"how's it going?", r:1, g:[1,2], c:"none", n:"Friendly and easy.", i:"Exactly right between friends."},
+   {t:"how are you?", r:3, g:[2,4], c:"none", n:"Neutral and correct anywhere.", i:"Safe, but a little cool for someone who just bought you a coffee."},
+   {t:"I trust you are well", r:5, g:[0,0], c:"none", n:"Register 5 aimed at a friend.", i:"She will laugh at you, or ask what you want."}],
+  model:"Hey, Ploy! How's it going?",
+  teach:"Register 1 is a real setting, not an absence of politeness. Aiming too high with a friend is as wrong as aiming too low with an officer."},
+
+ {s:"08:10. You pass Wing Commander Anan in the corridor. Exactly the same thought is in your head.",
+  who:"anan", core:"Hello. How are you?", act:"social",
+  room:{d:2,p:2,s:0}, tgt:{r:5,c:"none",gr:"D",a:0},
+  slots:["greet","addr","core","affect"], frames:"ask",
+  guide:["Same words in your head. Different listener.",
+         "Distance 2, Power 2, Stakes 0. <span class='rule'>Power 2 together with Distance 2 always gives register 5</span>, whatever the stakes are.",
+         "Now pick the <b>4</b>s and <b>5</b>s in every row — and notice that the sentence gets <b>shorter</b>, not longer."],
+  cores:[
+   {t:"how's it going?", r:1, g:[0,0], c:"none", n:"The friendly form, aimed two levels up.", i:"He will not reply in kind. Over-familiar."},
+   {t:"how are you, Sir?", r:5, g:[3,5], c:"none", n:"Neutral question plus the address.", i:"Correct and safe. Short is respectful here."},
+   {t:"I hope this morning finds you in good health", r:5, g:[0,0], c:"none", n:"Ornament instead of respect.", i:"Register 5 buys brevity, not decoration. This sounds like a letter from 1910."}],
+  model:"Good morning, Sir. How are you, Sir?",
+  teach:"Register 5 is shorter than register 4, not longer. Learners assume the most respectful sentence is the longest one."},
+
+ {s:"09:30. Wg Cdr Anan has approved your study leave. You want to thank him.",
+  who:"anan", core:"Thank you.", act:"social",
+  room:{d:2,p:2,s:0}, tgt:{r:5,c:"none",gr:"D",a:1},
+  slots:["addr","core","affect"], frames:"ask",
+  guide:["Register 5 again — but this one has an exception in it.",
+         "At register 5 you normally keep emotion out of your voice. <span class='rule'>Gratitude is the one warm thing allowed through</span>.",
+         "So pick a formal form, and then set Delivery to <b>Warm</b> rather than Calm. Warmth here is correct, not a slip."],
+  cores:[
+   {t:"thanks!", r:1, g:[0,0], c:"none", a:2, n:"The friendly form.", i:"Too casual upward, and the exclamation makes it worse."},
+   {t:"thank you very much indeed, Sir", r:5, g:[4,5], c:"none", a:1, n:"Formal and genuinely warm at the same time.", i:"Exactly right. Gratitude passes the ceiling."},
+   {t:"your approval is acknowledged", r:5, g:[0,0], c:"none", a:0, n:"Formal with the warmth removed.", i:"Reads as cold, or even as displeasure."}],
+  model:"Sir — thank you very much indeed.",
+  teach:"Positive feeling aimed at the other person passes through the register ceiling. Everything else comes down as the register goes up."},
+
+ {s:"10:15. You need the June payment file. Khun Nok in Procurement has it. You have spoken to her a few times.",
+  who:"nok", core:"You send me the file.", act:"ask",
+  room:{d:1,p:0,s:1}, tgt:{r:3,d:4,c:"none",gr:"C",a:0},
+  slots:["greet","addr","core","reason","close"], frames:"ask",
+  guide:["This is the single most useful rule in English politeness, so read it twice.",
+         "<span class='rule'>A request becomes a question, and the modal goes into its past form: can → could.</span>",
+         "<b>“Please” does not do this job.</b> “Please send me the file” is still an order with a courtesy word attached. Thai puts politeness in particles; English puts it in the grammar of the sentence.",
+         "Also fill the Justification row. A reason does more politeness work than any softener."],
+  cores:[
+   {t:"send me the June payment file", r:2, g:[0,0], d:0, n:"A bare order to someone at your own level.", i:"You do not outrank her. This will be remembered."},
+   {t:"please send me the June payment file", r:2, g:[0,0], d:1, n:"An order with a courtesy word on it.", i:"The trap. Polite-sounding to you, an instruction to her."},
+   {t:"could you send me the June payment file", r:3, g:[3,5], d:4, n:"Question form, past-form modal.", i:"The workhorse. Right almost everywhere above register 2."}],
+  reasons:[
+   {t:"", lbl:"(no reason)", r:0, g:[1,5], n:"No reason given.", i:"Requests without reasons get done last."},
+   {t:"— I need it to finish the June return", r:3, g:[2,5], n:"One clause of why.", i:"She can now rank your request against her other twelve. This is the big lever."},
+   {t:"— it's important", r:3, g:[2,5], n:"Pressure with no information.", i:"Everything is important. She has heard it before."}],
+  model:"Hello, Khun Nok. Could you send me the June payment file — I need it to finish the June return? Thank you.",
+  teach:"Question form plus a past-form modal plus a reason. If she learns one request pattern, this is the one."},
+
+ {s:"11:00. You have checked the June return twice. It balances. Sqn Ldr Malee asks how it is going.",
+  who:"malee", core:"The June return is finished.", act:"report",
+  room:{d:1,p:1,s:1}, tgt:{r:3,c:"fact",gr:"D",a:0},
+  slots:["addr","frame","core","close"], frames:"fact",
+  guide:["You have checked this. Twice.",
+         "<span class='rule'>A fact you have verified takes no modal at all.</span> No <em>might</em>, no <em>should</em>, no <em>I think</em>.",
+         "Learners add a modal to sound careful, and it makes them sound unsure of their own arithmetic — the worst impression an accountant can leave.",
+         "So set the Softener row to <b>(no softener)</b> and pick the plain statement."],
+  cores:[
+   {t:"the June return might be finished", r:3, g:[3,4], c:"might", n:"A modal on something you counted twice.", i:"She will ask whether you actually checked it."},
+   {t:"the June return should be finished", r:3, g:[3,4], c:"should", n:"Expectation, not fact.", i:"Right for something someone else is doing. Wrong for your own completed work."},
+   {t:"the June return is finished and it balances", r:3, g:[2,5], c:"fact", n:"Plain present tense, no modal.", i:"This is what a checked figure is supposed to sound like."}],
+  model:"Khun Malee — the June return is finished and it balances. Thank you.",
+  teach:"No modal on a checked number. Save the modals for the causes you have not proved yet."},
+
+ {s:"13:40. Gp Capt Wichai, the visiting auditor, asks you something while a trolley rattles past. You caught none of it.",
+  who:"wichai", core:"Please repeat.", act:"repair",
+  room:{d:2,p:2,s:1}, tgt:{r:5,c:"none",gr:"D",a:0},
+  slots:["core","affect"], frames:"ask",
+  guide:["You did not hear him. You have three seconds to decide what to do.",
+         "<span class='rule'>Asking for a repeat is not impolite. Guessing is.</span>",
+         "Silence is the worst option of all — and the one learners choose, because the rank and the language both push that way. Give yourself permission to ask.",
+         "Pick a register-5 form. Note that the best version also <b>names the part you missed</b>, so he repeats four words instead of thirty."],
+  cores:[
+   {t:"what?", r:1, g:[0,0], c:"none", n:"Fine with a friend.", i:"To a Group Captain, sharp enough to be remembered."},
+   {t:"sorry, could you say that again?", r:3, g:[3,4], c:"none", n:"Polite, and it replays everything.", i:"Perfectly acceptable. You just made him say it all twice."},
+   {t:"I beg your pardon, Sir — I only caught the last part", r:5, g:[4,5], c:"none", n:"Apologises, then locates the gap.", i:"Best answer. Locating the breakdown is the whole skill."}],
+  model:"I beg your pardon, Sir — I only caught the last part.",
+  teach:"Locate the breakdown. Name the part you missed and the repair takes four words instead of a whole question."},
+
+ {s:"14:00. Gp Capt Wichai asks for the petty-cash balance at 31 March. The book is in the safe. You could have it in twenty minutes.",
+  who:"wichai", core:"I don't know.", act:"repair",
+  room:{d:2,p:2,s:2}, tgt:{r:5,c:"fact",gr:"C",a:0},
+  slots:["core","detail"], frames:"fact",
+  guide:["You do not have the answer. That is allowed.",
+         "<span class='rule'>“I don't know” is a complete professional answer — but only with a second half.</span>",
+         "The second half says <b>where the answer is</b> and <b>when he will have it</b>. Without it you sound unprepared; with it you sound reliable.",
+         "Never guess a figure in front of an auditor. He will write it down and check it."],
+  cores:[
+   {t:"I think it's about ninety thousand", r:4, g:[0,0], c:"might", clar:-25, pen:10, code:["GS","guessed a figure in front of an auditor"], n:"A guess at a number.", i:"He writes down 90,000 and checks it. If it is wrong, everything else you said is now suspect."},
+   {t:"I don't know", r:3, g:[2,4], c:"fact", clar:-18, n:"True, and bare.", i:"Sounds unprepared on its own. It needs the second half."},
+   {t:"I don't have that figure to hand, Sir", r:5, g:[4,5], c:"fact", n:"Names the limit exactly — not having it here is not the same as not knowing it.", i:"Composed and accurate. The professional form."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no second half)", n:"Nothing added.", i:"An admission with no plan is the weakest thing you can say all afternoon."},
+   {t:"The book is in the safe — I'll have it for you within the half hour.", gr:"C", n:"Where it is, and when he gets it.", i:"This is what turns “I don't know” into “I am reliable”."},
+   {t:"I'll try to find out.", gr:"D", n:"No place, no time.", i:"Better than nothing, and much weaker than a deadline."}],
+  model:"I don't have that figure to hand, Sir. The book is in the safe — I'll have it for you within the half hour.",
+  teach:"Where the answer is, and when you will have it. Those two facts convert an admission into a demonstration of competence."},
+
+ {s:"16:20. Your exam result has just arrived. You passed. Ploy is packing up beside you.",
+  who:"ploy", core:"I passed the exam.", act:"social",
+  room:{d:0,p:0,s:0}, tgt:{r:1,c:"fact",gr:"C",a:3},
+  slots:["greet","addr","core","affect"], frames:"fact",
+  guide:["Last one, and it runs the other way.",
+         "<span class='rule'>The affect dial has a floor as well as a ceiling.</span>",
+         "With a close friend and good news, a flat delivery does not read as composure — it reads as <em>something is wrong</em>.",
+         "So pick the excited form and set Delivery to <b>Very emphatic</b>. Here that is the correct answer, not a mistake."],
+  cores:[
+   {t:"I passed!! I actually passed!", r:1, g:[1,2], c:"fact", a:3, n:"Full affect with a friend, about good news.", i:"Exactly right. There is no ceiling here and using one would be strange."},
+   {t:"I passed the exam", r:3, g:[2,4], c:"fact", a:0, n:"Flat delivery of your own good news.", i:"She will ask whether you are all right."},
+   {t:"I am pleased to inform you that I have passed", r:5, g:[0,0], c:"fact", a:0, n:"Register 5 aimed at your closest friend.", i:"She will assume you are joking — or that you are cross with her."}],
+  model:"Ploy! I passed!! I actually passed!",
+  teach:"Under-shooting is an error too. Match the person in front of you, not the seriousness of the subject."}
+]});
 /* ============================================================
    ENGINE
    ============================================================ */
+MISSIONS.forEach(m=>m.turns.forEach(t=>{ if(m.simple) t.simple=true; if(m.trainer) t.trainer=true; }));
 const SLOT_ORDER = ["greet","addr","frame","core","time","detail","reason","close","affect"];
 const SLOT_META = {
   greet:{n:"Greeting", g:"Set by register. First contact only."},
@@ -811,16 +991,26 @@ function addrOpts(turn){
   });
   return out;
 }
+const SIMPLE_ADDR = {first:1, khun:1, rank:1, sir:1};
 function optsFor(turn, slot){
   switch(slot){
-    case "greet":  return [{t:"", r:0, g:[1,5], lbl:"(no greeting)", n:"Straight in.", i:"Correct mid-conversation; abrupt at first contact."}].concat(GREET);
-    case "addr":   return addrOpts(turn);
-    case "frame":  return turn.frames==="ask" ? FRAME_ASK : FRAME_FACT;
+    case "greet":  {
+      const all=[{t:"", r:0, g:[1,5], lbl:"(no greeting)", n:"Straight in, with no greeting.", i:"Correct mid-conversation; abrupt at first contact."}].concat(GREET);
+      return turn.simple ? [all[0],all[1],all[3],all[4]] : all;
+    }
+    case "addr":   {
+      const all=addrOpts(turn);
+      return turn.simple ? all.filter(o=>!o.key || SIMPLE_ADDR[o.key]) : all;
+    }
+    case "frame":  {
+      const all = turn.frames==="ask" ? FRAME_ASK : FRAME_FACT;
+      return turn.simple ? all.slice(0,3) : all;
+    }
     case "core":   return turn.cores;
     case "time":   return turn.times||[];
     case "detail": return turn.details||[];
     case "reason": return turn.reasons||[];
-    case "close":  return CLOSE;
+    case "close":  return turn.simple ? [CLOSE[0],CLOSE[2],CLOSE[3],CLOSE[5]] : CLOSE;
     case "affect": return AFFECT;
   }
   return [];
@@ -1025,7 +1215,72 @@ function registerFrom(d,p,s){
 const FLAT = [];
 MISSIONS.forEach((m,mi)=>m.turns.forEach((t,ti)=>FLAT.push({mi,ti,m,t})));
 
-let VIEW={screen:"missions", mid:null, ti:0, phase:"room", sel:{}, room:{}, locked:false, res:null, tally:[], cRef:0, cReg:null, dIdx:0, dScore:0, dAns:null};
+let VIEW={screen:"missions", mid:null, ti:0, phase:"room", sel:{}, room:{}, locked:false, res:null, tally:[], paid:{},
+  attempt:1, hints:0, hintTxt:"", revealed:false,
+  cRef:0, cReg:null, dIdx:0, dScore:0, dAns:null, dTries:0, dWrong:[]};
+const PASS=75;
+
+/* ---------- hint engine ---------- */
+const RULES={
+  greet:"Above register 3 the greeting is “Good morning.” \u2014 and it never sounds wrong. Below that, “Hey!” and “Hi!” are for people you know well.",
+  addr:"Register 4 and 5 want the rank with the first name, or simply “Sir” / “Ma'am”. Register 2\u20133 wants Khun + first name, or the first name alone.",
+  frame:"Hedge the ask, and hedge a cause you cannot prove. Never hedge a number, a date, or your own mistake.",
+  core:"A fact you have checked takes no modal. A request becomes a question with the modal in its past form \u2014 “could you”.",
+  reason:"A reason does more politeness work than any softener. One clause of why, every time.",
+  close:"Above register 3 a closer is expected, and its absence is noticed.",
+  detail:"Grain is set by what this listener has to DO with the information \u2014 not by how formal you are being.",
+  time:"A commitment with no date is not a commitment. “As soon as possible” is heard upward as “I don't know”.",
+  affect:"Affect comes down as the register goes up. Gratitude is the one exception \u2014 and with a close friend the dial has a floor too."
+};
+const CODE_SLOT={"R\u2191":null,"R\u2193":null,"CL":null,"H+":"frame","H\u2212":"frame","D+":"core","D\u2212":"core",
+  "G+":"detail","G\u2212":"detail","M":"core","AF+":"affect","AF\u2212":"affect","ST":"addr","RP":"core","GS":"core"};
+function worstSlot(turn, sel){
+  const tr=turn.tgt.r; let worst=null, wp=0;
+  REG_SLOTS.forEach(k=>{
+    if(!turn.slots.includes(k)) return;
+    const o=sel[k]; if(!o) return;
+    const g=o.g||[o.r,o.r]; let p=0;
+    if(g[0]===0&&g[1]===0) p=2.2;
+    else if(o.r===0) p=0;
+    else if(tr<g[0]) p=g[0]-tr;
+    else if(tr>g[1]) p=tr-g[1];
+    if(p>wp){ wp=p; worst=k; }
+  });
+  if(!worst){
+    if(turn.slots.includes("greet") && tr>=3 && !(sel.greet&&sel.greet.t)) return ["greet",1.2];
+    if(turn.slots.includes("addr") && tr>=4 && !(sel.addr&&sel.addr.t)) return ["addr",1.0];
+  }
+  return [worst,wp];
+}
+function suggestion(turn, sel){
+  const ws=worstSlot(turn,sel)[0]; if(!ws) return null;
+  const opts=optsFor(turn,ws); let best=-1, bi=-1;
+  opts.forEach((o,i)=>{
+    const g=o.g||[o.r,o.r];
+    if((g[0]===0&&g[1]===0) || !o.r) return;
+    if(turn.tgt.r>=g[0] && turn.tgt.r<=g[1]){ const sc=100-Math.abs(o.r-turn.tgt.r); if(sc>best){best=sc;bi=i;} }
+  });
+  return bi>=0 ? {slot:ws, i:bi} : null;
+}
+function hintFor(turn, sel, level){
+  const tr=turn.tgt.r, a=assess(turn,sel);
+  const pair=worstSlot(turn,sel), ws=pair[0], wp=pair[1];
+  if(level<=1){
+    if(ws && wp>=1){
+      const o=sel[ws];
+      const dir = (o && o.r && o.r>tr) ? "too formal for this listener" : "too casual for this listener";
+      if(!o || !o.t) return "You have left <b>"+SLOT_META[ws].n+"</b> empty. At register "+tr+" its absence is noticed.";
+      return "Look again at <b>"+SLOT_META[ws].n+"</b>. You are at register "+(o.r||"—")+" there, and this listener needs register <b>"+tr+"</b> \u2014 so it is "+dir+".";
+    }
+    if(a.codes.length){ const c=a.codes[0]; return "Your registers line up. The problem is <b>"+c[0]+"</b> \u2014 "+c[1]+"."; }
+    return "Nothing is clashing. Check the <b>Detail</b> and <b>Justification</b> rows against what this listener actually needs, then say it.";
+  }
+  let slot = ws;
+  if(!slot && a.codes.length) slot = CODE_SLOT[a.codes[0][0]] || "core";
+  if(!slot) slot = "detail";
+  const extra = a.clash ? "<br>Your greeting and your address are also at different registers \u2014 read those two together, they have to agree." : "";
+  return "<b>Rule:</b> "+RULES[slot]+"<br>For this listener you want a <b>register "+tr+"</b> option in <b>"+SLOT_META[slot].n+"</b>."+extra;
+}
 
 const NAVS=[["missions","Missions"],["console","Console"],["drill","Reverse drill"],["dossier","Dossier"]];
 function renderNav(){
@@ -1044,6 +1299,11 @@ function render(){
   window.scrollTo({top:0,behavior:"instant"});
 }
 function regChip(r){ return '<span class="rr rrc'+(r||0)+'">'+(r||"·")+'</span>'; }
+function noteFor(o){
+  if(!o) return "";
+  return '<div class="note show"><span class="lab">Why this one</span>'+esc(o.n||"")
+    +'<span class="lab">Likely impact</span>'+esc(o.i||"")+'</div>';
+}
 
 /* ---------- missions list ---------- */
 function vMissions(){
@@ -1053,12 +1313,12 @@ function vMissions(){
       +'<span class="mm">'+esc(m.tag)+'</span>'
       +'<span class="mt">'+esc(m.title)+'</span>'
       +'<span class="md">'+esc(m.blurb)+'</span>'
-      +'<span class="md" style="color:var(--gold-dim);font-size:.76rem">'+esc(m.focus)+'</span>'
+      +'<span class="md" style="color:var(--gold-dim);font-size:.88rem">'+esc(m.focus)+'</span>'
       +'<span>'+(b?'<span class="badge done">Best '+b+'/100</span>':'<span class="badge">'+m.turns.length+' exchanges</span>')+'</span>'
       +'</button>';
   }).join("");
   return '<div class="card"><h3>How this works</h3>'
-    +'<p style="font-size:.9rem">You are given a situation and a <b>core thought</b> — one blunt clause with no politeness in it. '
+    +'<p style="font-size:.98rem">You are given a situation and a <b>core thought</b> — one blunt clause with no politeness in it. '
     +'You read the room, set the dials, and the sentence assembles as you choose. Then you find out what the other person heard.</p>'
     +'<div class="hint">Every exchange scores your <b>reading of the situation</b> as well as the sentence. Getting the register right for the wrong reasons still costs you points.</div>'
     +'</div><div class="mlist">'+cards+'</div>'
@@ -1072,15 +1332,17 @@ function curM(){ return MISSIONS.find(m=>m.id===VIEW.mid); }
 function curT(){ return curM().turns[VIEW.ti]; }
 function askRoom(){
   const m=curM();
+  if(m.trainer) return false;
   if(VIEW.ti===0) return true;
   return m.turns[VIEW.ti].who !== m.turns[VIEW.ti-1].who;
 }
 function startMission(id){
-  VIEW.mid=id; VIEW.ti=0; VIEW.tally=[]; VIEW.screen="play";
+  VIEW.mid=id; VIEW.ti=0; VIEW.tally=[]; VIEW.paid={}; VIEW.screen="play";
   startTurn();
 }
 function startTurn(){
   VIEW.sel={}; VIEW.room={}; VIEW.locked=false; VIEW.res=null;
+  VIEW.attempt=1; VIEW.hints=0; VIEW.hintTxt=""; VIEW.revealed=false;
   VIEW.phase = askRoom() ? "room" : "build";
   if(VIEW.phase==="build") preselect();
 }
@@ -1095,10 +1357,10 @@ function preselect(){
 function vPlay(){
   const m=curM(), t=curT(), p=PEOPLE[t.who];
   const dots = m.turns.map((_,i)=>'<span class="dot '+(i<VIEW.ti?"on":i===VIEW.ti?"cur":"")+'"></span>').join("");
-  const left = VIEW.phase==="room" ? pRoom() : VIEW.phase==="build" ? pBuild() : pVerdict();
+  const left = VIEW.phase==="room" ? pRoom() : VIEW.phase==="build" ? pBuild() : VIEW.phase==="coach" ? pCoach() : pVerdict();
   return '<div class="row" style="margin:0 0 10px"><button class="btn ghost sm" data-act="back">‹ Missions</button>'
     +'<span style="font-weight:650">'+esc(m.title)+'</span>'
-    +'<span style="color:var(--ink-dim);font-size:.85rem">Exchange '+(VIEW.ti+1)+' of '+m.turns.length+'</span></div>'
+    +'<span style="color:var(--ink-dim);font-size:.95rem">Exchange '+(VIEW.ti+1)+' of '+m.turns.length+'</span></div>'
     +'<div class="dots">'+dots+'</div>'
     +'<div class="grid2"><div>'
       +'<div class="card"><div class="who"><div class="av">'+p.init+'</div><div><div class="nm">'+esc(p.name)+'</div><div class="rl">'+esc(p.role)+'</div></div></div>'
@@ -1128,16 +1390,18 @@ function pRoom(){
     after='<div class="verdict '+(pts===3?"v-good":pts===2?"v-ok":"v-bad")+'">'
       +'<div class="rx">Read: <b>'+pts+'/3</b>. Correct scoring is D'+t2.d+' P'+t2.p+' S'+t2.s+' = <b>register '+r+', '+REG_NAME[r]+'</b>.'
       +(mine!==r?' Your scoring would have given register '+mine+' — that is the decision the whole sentence hangs on.':'')+'</div>'
-      +(t2.p===2?'<div style="font-size:.82rem;color:var(--ink-dim)">Power = 2 sets a floor of register 3, whatever the other scores say.'+(t2.d===2?' Distance 2 with Power 2 takes it to 5.':'')+'</div>':'')
-      +(t2.s===2?'<div style="font-size:.82rem;color:var(--ink-dim)">Stakes = 2 sets a floor of register 4. Bad news is delivered seriously even to a friend.</div>':'')
+      +(t2.p===2?'<div style="font-size:.94rem;color:var(--ink-dim)">Power = 2 sets a floor of register 3, whatever the other scores say.'+(t2.d===2?' Distance 2 with Power 2 takes it to 5.':'')+'</div>':'')
+      +(t2.s===2?'<div style="font-size:.94rem;color:var(--ink-dim)">Stakes = 2 sets a floor of register 4. Bad news is delivered seriously even to a friend.</div>':'')
       +'<div class="row"><button class="btn" data-act="toBuild">Build the sentence ›</button></div></div>';
   }
-  return '<div class="card"><h3>1 · Read the room</h3><p style="font-size:.85rem;color:var(--ink-dim)">Score each question 0, 1 or 2. Ten seconds, no sentence yet.</p>'
+  return '<div class="card"><h3>1 · Read the room</h3><p style="font-size:.95rem;color:var(--ink-dim)">Score each question 0, 1 or 2. Ten seconds, no sentence yet.</p>'
     +qs+'<div class="row"><button class="btn" data-act="lock" '+(done?"":"disabled")+'>Lock in the reading</button></div></div>'+after;
 }
 function pBuild(){
-  const t=curT();
+  const t=curT(), m=curM();
   const tgtR=t.tgt.r;
+  const showSug = (VIEW.attempt>=2 && m.trainer) || VIEW.hints>=2;
+  const sug = showSug ? suggestion(t,VIEW.sel) : null;
   const slots = t.slots.map(s=>{
     const opts=optsFor(t,s);
     if(!opts.length) return "";
@@ -1145,19 +1409,36 @@ function pBuild(){
     const chips = opts.map((o,i)=>{
       const lbl = o.lbl || o.t || "—";
       const rc = (s==="affect") ? '<span class="rr rrc0">'+("·♪!!".charAt(o.a)||"·")+'</span>' : regChip(o.r);
-      return '<button class="chip" data-act="pick" data-slot="'+s+'" data-i="'+i+'" aria-pressed="'+(sel===o)+'">'+rc+esc(lbl)+'</button>';
+      const sg = (sug && sug.slot===s && sug.i===i) ? " suggest" : "";
+      return '<button class="chip'+sg+'" data-act="pick" data-slot="'+s+'" data-i="'+i+'" aria-pressed="'+(sel===o)+'">'+rc+esc(lbl)+'</button>';
     }).join("");
-    const note = sel ? '<div class="note show"><b>Why:</b> '+esc(sel.n||"")+' <span class="imp">Likely impact: '+esc(sel.i||"")+'</span></div>' : '';
     return '<div class="slot"><div class="sh"><span class="sn">'+SLOT_META[s].n+'</span><span class="sg">'+SLOT_META[s].g+'</span></div>'
-      +'<div class="chips">'+chips+'</div>'+note+'</div>';
+      +'<div class="chips">'+chips+'</div>'+noteFor(sel)+'</div>';
   }).join("");
   const ready = !!VIEW.sel.core;
-  return '<div class="card"><h3>2 · Set the dials</h3>'
-    +'<p style="font-size:.85rem;color:var(--ink-dim)">Target for this listener: <b style="color:var(--gold)">register '+tgtR+' — '+REG_NAME[tgtR]+'</b>. '
-    +'Numbers on the chips are the register each option belongs to.</p>'
-    +slots
+  const coach = t.guide ? '<div class="coach"><div class="ch">Coach</div>'+t.guide.map(g=>'<p>'+g+'</p>').join("")+'</div>' : '';
+  const hintsLeft = 2-VIEW.hints;
+  const hintBtn = hintsLeft>0
+    ? '<button class="btn ghost sm" data-act="hint">Need a hint?'+(m.trainer?" (free)":" (−6 pts)")+'</button>' : '';
+  const hintBox = VIEW.hintTxt ? '<div class="hintbox"><div class="hl">Hint '+VIEW.hints+' of 2</div>'+VIEW.hintTxt+'</div>' : '';
+  const tries = VIEW.attempt>1 ? '<span class="tries">second attempt · worth 60%</span>' : '';
+  return '<div class="card">'+coach+'<h3>'+(m.trainer?"Set the dials":"2 · Set the dials")+'</h3>'
+    +'<p style="font-size:.95rem;color:var(--ink-dim)">Target for this listener: <b style="color:var(--gold)">register '+tgtR+' — '+REG_NAME[tgtR]+'</b>. '
+    +'The number on each chip is the register that option belongs to.</p>'
+    +slots+hintBox
     +'<div class="row"><button class="btn" data-act="submit" '+(ready?"":"disabled")+'>Say it</button>'
-    +'<button class="btn ghost sm" data-act="say">🔊 Hear it</button></div></div>';
+    +'<button class="btn ghost sm" data-act="say">🔊 Hear it</button>'+hintBtn+tries+'</div></div>';
+}
+function pCoach(){
+  const t=curT(), r=VIEW.res, p=PEOPLE[t.who];
+  const pool=p.rx[r.rx]||p.rx.good;
+  return '<div class="verdict v-ok"><div class="rx">'+pool[r.seed % pool.length]+'</div>'
+    +'<div class="sc"><span class="big">'+r.raw+'</span><span class="gr">not there yet — nothing scored</span></div>'
+    +(r.codes.length?'<div class="codes">'+r.codes.map(c=>'<span class="codechip" title="'+esc(c[1])+'">'+c[0]+'</span>').join("")+'</div>':'')
+    +'<div class="hintbox"><div class="hl">What to change</div>'+hintFor(t,VIEW.sel,1)+'<br><br>'+hintFor(t,VIEW.sel,2)+'</div>'
+    +'<p style="font-size:.95rem;margin-top:12px">Your choices are still set. Change what the hint points at and say it again — a correct second attempt is worth <b>60%</b> of the points.</p>'
+    +'<div class="row"><button class="btn" data-act="again">Try again ›</button>'
+    +'<button class="btn ghost sm" data-act="reveal">Show me the answer (45%)</button></div></div>';
 }
 function pVerdict(){
   const t=curT(), r=VIEW.res, p=PEOPLE[t.who];
@@ -1165,11 +1446,14 @@ function pVerdict(){
   const line=pool[r.seed % pool.length];
   const cls = r.total>=75?"v-good":r.total>=55?"v-ok":"v-bad";
   const last = VIEW.ti===curM().turns.length-1;
+  const multTxt = r.mult>=1 ? "first attempt \u00b7 full points" : (VIEW.revealed?"answer revealed \u00b7 45%":"second attempt \u00b7 60%");
   return '<div class="verdict '+cls+'"><div class="rx">'+line+'</div>'
-    +'<div class="sc"><span class="big">'+r.total+'</span><span class="gr">'+grade(r.total)+'</span>'
+    +'<div class="sc"><span class="big">'+r.awarded+'</span><span class="gr">'+grade(r.total)+'</span>'
+    +'<span class="gr">'+r.total+' raw \u00b7 '+multTxt+'</span>'
+    +(r.hintPen?'<span class="gr">\u2212'+r.hintPen+' for hints</span>':'')
     +(r.roomPts!=null?'<span class="gr">room read '+r.roomPts+'/3</span>':'')+'</div>'
     +(r.codes.length?'<div class="codes">'+r.codes.map(c=>'<span class="codechip" title="'+esc(c[1])+'">'+c[0]+'</span>').join("")+'</div>'
-      +'<div style="font-size:.8rem;color:var(--ink-dim)">'+r.codes.map(c=>'<b>'+c[0]+'</b> '+esc(c[1])).join(' · ')+'</div>':'<div class="codes"><span class="codechip" style="background:#0c2b1a;border-color:#14532d;color:#86efac">clean — no clashes</span></div>')
+      +'<div style="font-size:.92rem;color:var(--ink-dim)">'+r.codes.map(c=>'<b>'+c[0]+'</b> '+esc(c[1])).join(' · ')+'</div>':'<div class="codes"><span class="codechip" style="background:#0c2b1a;border-color:#14532d;color:#86efac">clean — no clashes</span></div>')
     +'<h4 style="margin-top:14px">Model answer</h4><div class="model">'+esc(t.model)+'</div>'
     +'<div class="hint"><b>The lesson:</b> '+esc(t.teach)+'</div>'
     +'<div class="row"><button class="btn" data-act="next">'+(last?"Debrief ›":"Next exchange ›")+'</button>'
@@ -1184,6 +1468,15 @@ function meter(lbl,val,pair){
 }
 function pPanel(){
   const t=curT();
+  if(!VIEW.sel.core){
+    return '<div class="card"><h4>Assembly</h4>'
+      +'<div class="asm">'+buildBrackets(t,VIEW.sel)+'</div>'
+      +'<div class="sent ph">Your sentence will appear here as you choose.</div>'
+      +'<h4 style="margin-top:14px">What '+esc(PEOPLE[t.who].short)+' hears</h4>'
+      +'<div class="hint">Nothing said yet. Pick a <b>core thought</b> option and these four readings start moving: '
+      +'<b>Respect</b> (rude at one end, stiff at the other, with a green band in the middle), '
+      +'<b>Clarity</b>, <b>Credibility</b> and <b>Composure</b>.</div></div>';
+  }
   const sent = buildSentence(t,VIEW.sel);
   const live = assess(t,VIEW.sel);
   const [rl,rt]=L_RESP(live.respect);
@@ -1209,13 +1502,26 @@ function submitTurn(){
     roomPts=ROOM_Q.reduce((a,q)=>a+(VIEW.room[q.k]===t.room[q.k]?1:0),0);
     total=Math.round(r.build*0.8 + (roomPts/3)*100*0.2);
   }
-  r.total=clamp(total,0,100); r.roomPts=roomPts; r.seed=Math.floor(Math.random()*97);
+  r.raw=clamp(total,0,100); r.roomPts=roomPts; r.seed=Math.floor(Math.random()*97);
+  if(VIEW.attempt===1 && r.raw<PASS){ VIEW.res=r; VIEW.phase="coach"; render(); return; }
+  award(r);
+}
+function award(r){
+  const m=curM();
+  r.total=r.raw;
+  r.mult = VIEW.revealed ? 0.45 : (VIEW.attempt===1 ? 1 : 0.6);
+  r.hintPen = m.trainer ? 0 : VIEW.hints*6;
+  r.awarded = clamp(Math.round(r.raw*r.mult) - r.hintPen, 0, 100);
   VIEW.res=r; VIEW.phase="verdict";
-  VIEW.tally[VIEW.ti]=r.total;
-  ST.xp += Math.round(r.total/4);
-  const nr=nextRank(ST.xp-Math.round(r.total/4));
-  save();
-  if(nr && ST.xp>=nr.x) toast("Promoted — "+nr.n);
+  VIEW.tally[VIEW.ti]=r.awarded;
+  if(!VIEW.paid[VIEW.ti]){
+    VIEW.paid[VIEW.ti]=true;
+    const before=ST.xp;
+    ST.xp += Math.round(r.awarded/4);
+    const nr=nextRank(before);
+    save();
+    if(nr && ST.xp>=nr.x) toast("Promoted — "+nr.n);
+  }
   render();
 }
 function finishMission(){
@@ -1252,11 +1558,10 @@ function vConsole(){
       const rc=(s==="affect")?'<span class="rr rrc0">'+("·♪!!".charAt(o.a)||"·")+'</span>':regChip(o.r);
       return '<button class="chip" data-act="pick" data-slot="'+s+'" data-i="'+i+'" aria-pressed="'+(cur===o)+'">'+rc+esc(o.lbl||o.t||"—")+'</button>';
     }).join("");
-    const note=cur?'<div class="note show"><b>Why:</b> '+esc(cur.n||"")+' <span class="imp">Likely impact: '+esc(cur.i||"")+'</span></div>':"";
-    return '<div class="slot"><div class="sh"><span class="sn">'+SLOT_META[s].n+'</span><span class="sg">'+SLOT_META[s].g+'</span></div><div class="chips">'+chips+'</div>'+note+'</div>';
+    return '<div class="slot"><div class="sh"><span class="sn">'+SLOT_META[s].n+'</span><span class="sg">'+SLOT_META[s].g+'</span></div><div class="chips">'+chips+'</div>'+noteFor(cur)+'</div>';
   }).join("");
   return '<div class="card"><h3>Modulation console</h3>'
-    +'<p style="font-size:.88rem">Pick any core thought, then move the dials and watch the sentence and the listener\'s reading change. '
+    +'<p style="font-size:.98rem">Pick any core thought, then move the dials and watch the sentence and the listener\'s reading change. '
     +'Nothing is scored here. Change <b>who is listening</b> without changing a single word and see the same sentence go from appropriate to rude.</p>'
     +'<div class="row" style="margin-top:4px"><select class="sel" data-act="cref" style="flex:1 1 320px">'+sel+'</select></div>'
     +'<div class="who" style="margin-top:12px"><div class="av">'+p.init+'</div><div><div class="nm">'+esc(p.name)+'</div><div class="rl">'+esc(p.role)+'</div></div></div>'
@@ -1267,6 +1572,11 @@ function vConsole(){
     +'<div><div class="sticky">'+cPanel(t)+'</div></div></div>';
 }
 function cPanel(t){
+  if(!VIEW.sel.core){
+    return '<div class="card"><h4>Assembly</h4><div class="asm">'+buildBrackets(t,VIEW.sel)+'</div>'
+      +'<div class="sent ph">Choose a core thought option to begin.</div>'
+      +'<div class="hint">Pick a <b>core thought</b> below, then change the listener register above and watch the readings move without touching a single word.</div></div>';
+  }
   const sent=buildSentence(t,VIEW.sel), live=assess(t,VIEW.sel);
   const [rl,rt]=L_RESP(live.respect);
   const rcol=rt==="good"?"var(--good)":rt==="warn"?"var(--warn)":"var(--bad)";
@@ -1280,7 +1590,7 @@ function cPanel(t){
     +meter("Credibility",live.cred,L_CRED(live.cred))
     +meter("Composure",live.comp,L_COMP(live.comp,live.flat))
     +(live.codes.length?'<div class="flags">'+live.codes.map(c=>'<span class="flag" title="'+esc(c[1])+'">'+c[0]+'</span>').join("")+'</div>':'<div class="flags"><span class="flag g">clean</span></div>')
-    +(live.codes.length?'<div style="font-size:.76rem;color:var(--ink-dim);margin-top:7px">'+live.codes.map(c=>'<b>'+c[0]+'</b> '+esc(c[1])).join('<br>')+'</div>':"")
+    +(live.codes.length?'<div style="font-size:.88rem;color:var(--ink-dim);margin-top:7px">'+live.codes.map(c=>'<b>'+c[0]+'</b> '+esc(c[1])).join('<br>')+'</div>':"")
     +'</div>';
 }
 
@@ -1288,73 +1598,95 @@ function cPanel(t){
 const DRILL=[
  {u:"Hey, Wing Commander Anan — the numbers are all over the place.", c:"Said to the Division head, about a 4,200-baht variance.",
   o:["CL — clash: a register-1 greeting with a register-4 address","R↑ — too formal for him","H+ — over-hedged","Nothing is wrong"], a:0,
+  h:"Two of your slots are not at the same register. Read the greeting and the address together — they have to agree.",
   fix:"Two slots, two registers. Also no figure: <em>“Good morning, Sir. The May travel claims are 4,200 baht over budget.”</em>"},
  {u:"There might possibly be a small issue with maybe the travel claims.", c:"To her section head, about a figure she has counted twice.",
   o:["D+ — too indirect","H+ — over-hedged: she softened a verified fact","G− — too little detail","Nothing is wrong"], a:1,
+  h:"Count the softeners: <em>might</em>, <em>possibly</em>, <em>small</em>, <em>maybe</em>. Now ask whether the figure was checked.",
   fix:"Three hedges on a number she has checked. Register never softens a number, a date, or her own mistake."},
  {u:"Would it be possible for you to pass me the stapler?", c:"To Ploy, at the next desk, who she eats lunch with every day.",
   o:["D+ — too indirect for a close friend","R↓ — too casual","M — modal on a fact","Nothing is wrong"], a:0,
+  h:"She is at the next desk and you eat lunch together every day. Is the problem that this is too blunt, or too careful?",
   fix:"Over-indirectness is an error too. It implies the stapler is a serious matter. <em>“Ploy — pass me the stapler?”</em>"},
  {u:"Please send me the receipt for claim 114.", c:"To Khun Nok in Procurement, whom she barely knows.",
   o:["H+ — over-hedged","D− — still an imperative; 'please' does not make it a request","R↑ — too formal","Nothing is wrong"], a:1,
+  h:"It is grammatically an imperative. Which word is doing the politeness work — and is that enough in English?",
   fix:"English makes a request by turning the sentence into a question and pushing the modal into its past form: <em>“Could you send me the receipt for claim 114?”</em>"},
  {u:"Good morning, Sir. I found the error!!", c:"To the Division head, in his office doorway.",
   o:["AF+ — affect above the ceiling for register 5","R↓ — too casual","G+ — too much detail","Nothing is wrong"], a:0,
+  h:"The words are fine. Look at the punctuation, and think about what the Division head is supposed to see in you.",
   fix:"At register 5 the impression to aim for is composure. Exclamation reads as losing it. <em>“Good morning, Sir. I've found the cause of the variance.”</em>"},
  {u:"I'll have it done as soon as possible.", c:"To her section head, who asked when the correction would be ready.",
   o:["H+ — over-hedged","No date: 'as soon as possible' is heard upward as 'I don't know'","AF− — too flat","Nothing is wrong"], a:1,
+  h:"Ask what the listener can write in her diary after hearing this.",
   fix:"A commitment with no date is not a commitment. <em>“I'll have the corrected reconciliation to you by Thursday.”</em>"},
  {u:"Owing to the fact that Procurement have not responded, the matter remains outstanding.", c:"Spoken aloud to her section head at her desk.",
   o:["Written-English connectors used in speech","R↓ — too casual","M — modal on a fact","Nothing is wrong"], a:0,
+  h:"The connector is correct English. Ask whether it is correct English <em>spoken aloud</em>.",
   fix:"Spoken register 5 uses short words in a formal frame. <em>“Procurement hasn't responded to three emails since Monday.”</em>"},
  {u:"Good morning, Sir. The May travel claims are 4,200 baht over budget — a duplicated claim. I'm correcting it by Thursday.", c:"To the Division head, in a corridor, holding a folder.",
   o:["G+ — too much detail","H+ — over-hedged","R↑ — too formal","Nothing is wrong"], a:3,
+  h:"Headline, cause, action, date — check whether all four are there, and whether anything extra has crept in.",
   fix:"Headline, cause, action, date. Four seconds, nothing left to chase. This is the target."},
  {u:"I think it might have been me.", c:"Asked directly by the Division head whose error it was. It was hers.",
   o:["The forbidden hedge — she softened her own mistake","G− — too little detail","R↓ — too casual","Nothing is wrong"], a:0,
+  h:"Whose mistake is being discussed, and which of the three unhedgeable things does that make it?",
   fix:"He hears someone trying not to be blamed. <em>“Mine, Sir. I imported the file twice on the 16th. It's corrected.”</em>"},
  {u:"It shall be completed by Thursday.", c:"Promising her section head a corrected reconciliation.",
   o:["'shall' is contract English, not a stronger 'will'","H+ — over-hedged","AF+ — too emphatic","Nothing is wrong"], a:0,
+  h:"This is the modal that means something different from what most learners think. What does it mean in a contract?",
   fix:"<em>shall</em> means obligation in a contract (<em>“The Contractor shall submit…”</em>) or an offer (<em>“Shall I open a new file?”</em>). For a promise: <em>“I'll have it to you by Thursday.”</em>"},
  {u:"That's unfortunate.", c:"To Ploy, who has just told her that her transfer was refused and her mother is ill.",
   o:["R↑ — a register-4 form aimed at her closest friend","AF+ — too emphatic","H− — under-hedged","Nothing is wrong"], a:0,
+  h:"The sentence is correct English. The question is which listener it was built for.",
   fix:"Correct English, one register too high, and it lands as cold. <em>“Oh Ploy, no. I'm so sorry.”</em>"},
  {u:"I don't know.", c:"To an auditor two ranks above her, who has asked for the petty-cash balance at 31 March.",
   o:["Missing the second half — where the answer is and when he gets it","R↓ — too casual","D+ — too indirect","Nothing is wrong"], a:0,
+  h:"It is a true and acceptable answer. Something is simply missing from the end of it.",
   fix:"<em>“I don't have that figure to hand, Sir. The book is in the safe — I'll have it for you within the half hour.”</em>"},
  {u:"Could you send me the receipt for claim 114 — I need it to close the May file?", c:"To Khun Nok in Procurement.",
   o:["D+ — too indirect","H+ — over-hedged","R↑ — too formal","Nothing is wrong"], a:3,
+  h:"Question form, past-form modal, reason attached. Check each one before you answer.",
   fix:"Question form, past-form modal, and a reason attached. A reason does more politeness work than any softener."}
 ];
+const DMAX = DRILL.length*2;
 function vDrill(){
   if(VIEW.dIdx>=DRILL.length){
-    const pct=Math.round(VIEW.dScore/DRILL.length*100);
+    const pct=Math.round(VIEW.dScore/DMAX*100);
     return '<div class="card"><h3>Reverse drill complete</h3>'
-      +'<div class="sc" style="display:flex;gap:14px;align-items:center"><span style="font-size:2.4rem;font-weight:700;font-family:var(--mono)">'+VIEW.dScore+'/'+DRILL.length+'</span><span class="gr">'+grade(pct)+'</span></div>'
-      +'<p style="font-size:.9rem;margin-top:10px">This is the drill that shows real understanding, and the only one that works as homework — she names the settings instead of producing them.</p>'
+      +'<div class="sc" style="display:flex;gap:14px;align-items:center"><span style="font-size:2.4rem;font-weight:700;font-family:var(--mono)">'+VIEW.dScore+'/'+DMAX+'</span><span class="gr">'+grade(pct)+'</span></div>'
+      +'<p style="font-size:1rem;margin-top:10px">Two points for a first-attempt answer, one for a second attempt. This is the drill that shows real understanding, and the only one that works as homework — she names the settings instead of producing them.</p>'
       +'<div class="row"><button class="btn" data-act="dreset">Run it again</button></div></div>';
   }
   const d=DRILL[VIEW.dIdx];
-  const answered=VIEW.dAns!=null;
+  const answered = VIEW.dAns!=null;
   const opts=d.o.map((o,i)=>{
     let cls="opt";
-    if(answered){ if(i===d.a) cls+=" ok"; else if(i===VIEW.dAns) cls+=" no"; }
-    return '<button class="'+cls+'" style="flex:1 1 100%" data-act="dans" data-v="'+i+'" aria-pressed="'+(VIEW.dAns===i)+'"'+(answered?" disabled":"")+'>'+esc(o)+'</button>';
+    const wrongBefore = VIEW.dWrong.indexOf(i)>=0;
+    if(answered){ if(i===d.a) cls+=" ok"; else if(wrongBefore||i===VIEW.dAns) cls+=" no"; }
+    else if(wrongBefore) cls+=" no";
+    const dis = answered || wrongBefore;
+    return '<button class="'+cls+'" style="flex:1 1 100%" data-act="dans" data-v="'+i+'" aria-pressed="'+(VIEW.dAns===i)+'"'+(dis?" disabled":"")+'>'+esc(o)+'</button>';
   }).join("");
-  return '<div class="card"><h3>Reverse drill <span style="color:var(--ink-dim);font-weight:400;font-size:.85rem">'+(VIEW.dIdx+1)+' / '+DRILL.length+' · score '+VIEW.dScore+'</span></h3>'
-    +'<p style="font-size:.85rem;color:var(--ink-dim)">You are given the finished sentence. Name what is wrong with it — or say that nothing is.</p>'
+  const retryBox = (!answered && VIEW.dTries===1)
+    ? '<div class="hintbox"><div class="hl">Hint — one more try, worth 1 point</div>'+d.h+'</div>' : '';
+  const gained = answered ? (VIEW.dAns===d.a ? (VIEW.dTries===0?2:1) : 0) : 0;
+  return '<div class="card"><h3>Reverse drill <span style="color:var(--ink-dim);font-weight:400;font-size:.94rem">'+(VIEW.dIdx+1)+' / '+DRILL.length+' · score '+VIEW.dScore+' of '+DMAX+'</span></h3>'
+    +'<p style="font-size:.95rem;color:var(--ink-dim)">You are given the finished sentence. Name what is wrong with it — or say that nothing is. Right first time scores 2; right after a hint scores 1.</p>'
     +'<div class="sent" style="font-style:normal">“'+esc(d.u)+'”</div>'
-    +'<p style="font-size:.84rem;color:var(--ink-dim)">'+esc(d.c)+'</p>'
+    +'<p style="font-size:.94rem;color:var(--ink-dim)">'+esc(d.c)+'</p>'
     +'<div class="opts" style="flex-direction:column">'+opts+'</div>'
+    +retryBox
     +(answered?'<div class="verdict '+(VIEW.dAns===d.a?"v-good":"v-bad")+'" style="margin-top:14px">'
-       +'<div class="rx">'+(VIEW.dAns===d.a?"Correct.":"Not quite.")+' '+d.fix+'</div>'
+       +'<div class="rx">'+(VIEW.dAns===d.a?("Correct"+(gained===1?" — 1 point after the hint.":" — 2 points."))
+                                            :"Not quite. The right answer is highlighted above.")+' '+d.fix+'</div>'
        +'<div class="row"><button class="btn" data-act="dnext">Next ›</button></div></div>':"")
     +'</div>';
 }
 /* ---------- dossier ---------- */
 const DOSSIER=[
 ["The five registers — the master dial",
-`<p style="font-size:.86rem">One decision, seven consequences. Read down any column: every cell has to agree. That is what makes register a dial and not five dials.</p>
+`<p style="font-size:.96rem">One decision, seven consequences. Read down any column: every cell has to agree. That is what makes register a dial and not five dials.</p>
 <div class="tw"><table><thead><tr><th></th><th>1 Friendly</th><th>2 Informal</th><th>3 Professional</th><th>4 Serious</th><th>5 Deference</th></tr></thead><tbody>
 <tr><th>Greeting</th><td>Hey!</td><td>Hi!</td><td>Hello.</td><td>Good morning.</td><td>Good morning, Sir / Ma'am.</td></tr>
 <tr><th>Address</th><td>Nickname</td><td>First name</td><td>Khun + first name · Ms./Mr. + surname</td><td>Rank + first name</td><td>Sir / Ma'am · Rank + first name</td></tr>
@@ -1373,13 +1705,13 @@ const DOSSIER=[
 <tr><th>Power</th><td>Same level, or junior to me</td><td>A step or two above</td><td>Commander, senior officer, auditor</td></tr>
 <tr><th>Stakes</th><td>Nothing; a small favour</td><td>Money, a deadline, work to redo</td><td>An error, a rule breached, blame in the room</td></tr>
 </tbody></table></div>
-<p style="font-size:.86rem">Add the three. 0 → register 1 · 1 → 2 · 2–3 → 3 · 4–5 → 4 · 6 → 5. Then the floors, which matter more than the arithmetic:</p>
-<ul style="font-size:.86rem"><li><b>Power 2</b> sets a floor of register 3 — never below professional with a senior officer, however friendly.</li>
+<p style="font-size:.96rem">Add the three. 0 → register 1 · 1 → 2 · 2–3 → 3 · 4–5 → 4 · 6 → 5. Then the floors, which matter more than the arithmetic:</p>
+<ul style="font-size:.96rem"><li><b>Power 2</b> sets a floor of register 3 — never below professional with a senior officer, however friendly.</li>
 <li><b>Stakes 2</b> sets a floor of register 4 — bad news is delivered seriously even to a friend.</li>
 <li><b>Power 2 with Distance 2</b> takes it to 5.</li></ul>`],
 
 ["Directness — where English keeps its politeness",
-`<p style="font-size:.86rem">Thai puts politeness in particles and status words while the clause stays an imperative. English moves it into the grammar of the clause. <b>“Please” barely raises politeness in English</b> — it makes an order a polite order, not a request.</p>
+`<p style="font-size:.96rem">Thai puts politeness in particles and status words while the clause stays an imperative. English moves it into the grammar of the clause. <b>“Please” barely raises politeness in English</b> — it makes an order a polite order, not a request.</p>
 <div class="tw"><table><thead><tr><th>#</th><th>Form</th><th>Example</th><th>Use with</th></tr></thead><tbody>
 <tr><td>0</td><td>Bare imperative</td><td>Send me the receipt.</td><td>Juniors, urgency, safety</td></tr>
 <tr><td>1</td><td>Marked imperative</td><td>Please send me the receipt.</td><td>Peers, small favours</td></tr>
@@ -1391,7 +1723,7 @@ const DOSSIER=[
 <tr><td>7</td><td>Impersonal / conditional</td><td>Would it be possible to have it by Friday?</td><td>Register 5, or may be refused</td></tr>
 </tbody></table></div>
 <div class="hint"><b>Could</b>, <b>would</b> and <b>might</b> are not past tense here. They are remoteness markers — the same past morphology that makes <em>if I were</em> hypothetical makes <em>could you</em> a hypothetical request. Distance is what politeness is made of in English.</div>
-<p style="font-size:.86rem"><b>Over-indirectness is also an error.</b> <em>“Would it be possible for you to pass me the stapler?”</em> to a friend implies the stapler is a serious matter. And the dial is <b>asymmetric</b>: the Division head may say <em>“Send me that file”</em> to you; you cannot say it back.</p>`],
+<p style="font-size:.96rem"><b>Over-indirectness is also an error.</b> <em>“Would it be possible for you to pass me the stapler?”</em> to a friend implies the stapler is a serious matter. And the dial is <b>asymmetric</b>: the Division head may say <em>“Send me that file”</em> to you; you cannot say it back.</p>`],
 
 ["Commitment — the calibrated ladder",
 `<div class="tw"><table><thead><tr><th>Confidence</th><th>Form</th><th>Example</th></tr></thead><tbody>
@@ -1403,15 +1735,15 @@ const DOSSIER=[
 <tr><td>90–95%</td><td>must · will · almost certainly</td><td>The discrepancy must be the duplicate entry.</td></tr>
 <tr><td><b>100%</b></td><td><b>no modal at all</b></td><td>The travel-claims line is 4,200 baht over.</td></tr>
 </tbody></table></div>
-<p style="font-size:.86rem"><em>might</em> and <em>may</em> are the same confidence level — the difference is register, not probability.</p>
+<p style="font-size:.96rem"><em>might</em> and <em>may</em> are the same confidence level — the difference is register, not probability.</p>
 <h4>Two modals doing two jobs</h4>
 <div class="tw"><table><thead><tr><th></th><th>Obligation</th><th>Deduction / expectation</th></tr></thead><tbody>
 <tr><th>must</th><td>You must sign the form.</td><td>It must be a rounding error.</td></tr>
 <tr><th>should</th><td>You should check the receipt.</td><td>The payment should arrive Friday.</td></tr>
 </tbody></table></div>
-<p style="font-size:.86rem">Heuristic: an animate <em>you</em> means obligation; <em>it / the figure / the payment</em> means deduction.</p>
+<p style="font-size:.96rem">Heuristic: an animate <em>you</em> means obligation; <em>it / the figure / the payment</em> means deduction.</p>
 <h4>What <em>shall</em> actually does</h4>
-<ul style="font-size:.86rem">
+<ul style="font-size:.96rem">
 <li><b>Contract obligation</b> — <em>“The Contractor shall submit invoices within thirty days.”</em> This means <b>must</b>. Recognise it with total reliability; you will read it constantly.</li>
 <li><b>Offers and suggestions with I/we</b> — <em>“Shall I open a new file?”</em> Produce this one.</li>
 <li><b>Formal first-person future</b> — <em>“I shall write to them today.”</em> Correct and dated. Comprehension only.</li>
@@ -1425,12 +1757,12 @@ const DOSSIER=[
 <tr><td>4</td><td>It appears that… · My understanding is that… · On the figures I have… · Subject to confirmation…</td></tr>
 <tr><td>5</td><td>If I may… · I'd want to verify this, but… · Pending the reconciliation…</td></tr>
 </tbody></table></div>
-<p style="font-size:.86rem">Softening a <b>request</b> has its own frames: <em>I'm sorry to ask, but… · When you have a moment… · I know you're busy, but… · If it's not too much trouble…</em></p>
+<p style="font-size:.96rem">Softening a <b>request</b> has its own frames: <em>I'm sorry to ask, but… · When you have a moment… · I know you're busy, but… · If it's not too much trouble…</em></p>
 <blockquote style="border-left:3px solid var(--gold);padding:10px 14px;margin:12px 0;background:#0b2138;border-radius:0 8px 8px 0;font-size:.95rem">
 <b>Register never softens three things: a number, a date, or your own mistake.</b></blockquote>
-<p style="font-size:.86rem">The hedge goes on the <b>ask</b> and on <b>other people's blame</b>, never on the facts you are reporting. Bad news at register 5 is <b>hard fact, soft ask</b>:</p>
+<p style="font-size:.96rem">The hedge goes on the <b>ask</b> and on <b>other people's blame</b>, never on the facts you are reporting. Bad news at register 5 is <b>hard fact, soft ask</b>:</p>
 <div class="model">“Good morning, Sir. The May travel claims are 4,200 baht over budget. The cause is a duplicated claim from the 14th — that part I still need to confirm with Accounts. I could have a corrected reconciliation to you by Thursday, if that works.”</div>
-<p style="font-size:.86rem">Unhedged: the amount, the date, the line item. Hedged: the unverified cause, and the proposed deadline.</p>`],
+<p style="font-size:.96rem">Unhedged: the amount, the date, the line item. Hedged: the unverified cause, and the proposed deadline.</p>`],
 
 ["Grain and order — BLUF",
 `<div class="tw"><table><thead><tr><th></th><th>Grain</th><th>When</th></tr></thead><tbody>
@@ -1440,9 +1772,9 @@ const DOSSIER=[
 <tr><td>D</td><td>Status only</td><td>Tracking many things</td></tr>
 <tr><td>E</td><td>Pattern</td><td>Looking across periods</td></tr>
 </tbody></table></div>
-<p style="font-size:.86rem">Grain is set by <b>what this person has to do with the information</b>, not by how formal you are being. A commander who asks <em>“walk me through how you found it”</em> has just requested setting A.</p>
+<p style="font-size:.96rem">Grain is set by <b>what this person has to do with the information</b>, not by how formal you are being. A commander who asks <em>“walk me through how you found it”</em> has just requested setting A.</p>
 <h4>The four-part upward report</h4>
-<ol style="font-size:.88rem"><li><b>What</b> — the result, with its number</li><li><b>Why</b> — the cause, one clause</li><li><b>What I'm doing</b> — action and deadline</li><li><b>What I need from you</b> — or <em>nothing needed from you</em></li></ol>
+<ol style="font-size:.98rem"><li><b>What</b> — the result, with its number</li><li><b>Why</b> — the cause, one clause</li><li><b>What I'm doing</b> — action and deadline</li><li><b>What I need from you</b> — or <em>nothing needed from you</em></li></ol>
 <div class="hint">Part 4 is the one learners leave out, and its absence forces the listener to ask. <em>“Nothing needed from you, Sir”</em> is a complete and very well-received sentence.</div>`],
 
 ["Time anchoring",
@@ -1464,7 +1796,7 @@ const DOSSIER=[
 <tr><td>4</td><td>Low</td><td>Any intensifier stronger than <em>very</em></td></tr>
 <tr><td>5</td><td>Very low</td><td>Visible emotion of any kind</td></tr>
 </tbody></table></div>
-<p style="font-size:.86rem"><b>Exception:</b> positive affect aimed at the other person passes through the ceiling. <em>“Thank you very much indeed, Sir”</em> is warm and entirely correct at register 5.</p>
+<p style="font-size:.96rem"><b>Exception:</b> positive affect aimed at the other person passes through the ceiling. <em>“Thank you very much indeed, Sir”</em> is warm and entirely correct at register 5.</p>
 <div class="tw"><table><thead><tr><th></th><th>Register 1–2</th><th>Register 3</th><th>Register 4–5</th></tr></thead><tbody>
 <tr><th>Happiness</th><td>Yes! That's brilliant!</td><td>That's great news.</td><td>That's very good news, thank you.</td></tr>
 <tr><th>Surprise</th><td>No way! Seriously?</td><td>Oh, really? I wasn't expecting that.</td><td>I see — that's unexpected.</td></tr>
@@ -1486,7 +1818,7 @@ const DOSSIER=[
 <tr><th>Buying time</th><td>Umm… let me think.</td><td>Let me think about that for a moment.</td><td>Could I come back to you on that, Sir?</td></tr>
 <tr><th>Don't know</th><td>No idea, sorry.</td><td>I don't know, but I'll find out today.</td><td>I don't have that to hand, Sir. I'll confirm it within the hour.</td></tr>
 </tbody></table></div>
-<ul style="font-size:.86rem">
+<ul style="font-size:.96rem">
 <li><b>Locate the breakdown.</b> <em>“Sorry — by Thursday, or by Friday?”</em> beats replaying the whole question.</li>
 <li><b>Confirm upward, always.</b> Repeating an instruction back reads as competence, and it protects you from acting on a misheard number.</li>
 <li><b>“I don't know” needs a second half.</b> Where the answer is, and when you will have it.</li>
@@ -1521,7 +1853,7 @@ const DOSSIER=[
 <div class="hint">None of these codes is about grammar. She will often be marked heavily on a sentence containing no grammatical error at all — which is exactly the lesson.</div>`],
 
 ["Address — the Thai and English forms",
-`<ul style="font-size:.88rem">
+`<ul style="font-size:.98rem">
 <li><b>Thai title + first name vs English title + surname.</b> Thai workplace practice attaches the honorific to the first name — <em>Khun Siriporn</em>. English attaches it to the surname — <em>Ms. Chaiyasit</em>. Both are correct in their own contexts: <em>Khun</em> + first name with Thai colleagues, <em>Ms.</em> + surname in English correspondence and with foreign counterparts. What does not work is <em>Ms. Siriporn</em> in a formal English letter.</li>
 <li><b>Rank pairs with the first name.</b> Thai service practice is <em>Wing Commander Anan</em>, not <em>Wing Commander Prasert</em>. Copying the Western rank + surname habit is understood but marks you as working from an English textbook. Confirm the spellings and abbreviations your own unit uses on English correspondence.</li>
 <li><b>Sir and Ma'am do the work when the rank fails.</b> If the rank or the surname will not come, <em>Sir</em> or <em>Ma'am</em> alone is complete and correct. <em>“Good morning, Sir”</em> never fails — and hesitating in front of a senior officer reads as reluctance rather than as vocabulary trouble.</li>
@@ -1530,7 +1862,7 @@ const DOSSIER=[
 </ul>`],
 
 ["The slot card",
-`<div class="asm" style="font-size:.9rem;margin-bottom:12px">[Greeting] [Address] [Frame] [CORE THOUGHT + modal] [Time] [Detail] [Justification] [Closer]</div>
+`<div class="asm" style="font-size:.98rem;margin-bottom:12px">[Greeting] [Address] [Frame] [CORE THOUGHT + modal] [Time] [Detail] [Justification] [Closer]</div>
 <div class="tw"><table><thead><tr><th>Step</th><th></th></tr></thead><tbody>
 <tr><th>1. What do I mean?</th><td>One clause, no politeness</td></tr>
 <tr><th>2. Distance / Power / Stakes?</th><td>Three numbers → register</td></tr>
@@ -1542,7 +1874,7 @@ const DOSSIER=[
 <div class="hint">A reason in the Justification slot does more politeness work than any softener. <em>“Could you send me the receipt? I need it to close the May file”</em> beats <em>“Could you possibly send me the receipt?”</em> every time.</div>`]
 ];
 function vDossier(){
-  return '<div class="card tight"><h3>Dossier</h3><p style="font-size:.86rem;margin:0">Every table behind the scoring. Open it during an exchange if you are stuck.</p></div>'
+  return '<div class="card tight"><h3>Dossier</h3><p style="font-size:.96rem;margin:0">Every table behind the scoring. Open it during an exchange if you are stuck.</p></div>'
     + DOSSIER.map((d,i)=>'<div class="acc'+(i===0?" open":"")+'"><button data-act="acc"><span>'+esc(d[0])+'</span><span class="car">›</span></button><div class="body">'+d[1]+'</div></div>').join("");
 }
 
@@ -1578,6 +1910,11 @@ document.getElementById("main").addEventListener("click",e=>{
       else { VIEW.ti++; startTurn(); render(); }
       break;
     case "retry": startTurn(); render(); break;
+    case "hint":
+      if(VIEW.hints<2){ VIEW.hints++; VIEW.hintTxt=hintFor(curT(),VIEW.sel,VIEW.hints); render(); }
+      break;
+    case "again": VIEW.attempt=2; VIEW.phase="build"; VIEW.hintTxt=hintFor(curT(),VIEW.sel,1); render(); break;
+    case "reveal": VIEW.revealed=true; award(VIEW.res); break;
     case "say": {
       const t=activeTurn();
       const s=buildSentence(t,VIEW.sel);
@@ -1587,16 +1924,38 @@ document.getElementById("main").addEventListener("click",e=>{
     }
     case "sayModel": say(curT().model, curT().tgt.r, curT().tgt.a||0); break;
     case "creg": VIEW.cReg=+b.dataset.v; render(); break;
-    case "dans":
-      if(VIEW.dAns==null){ VIEW.dAns=+b.dataset.v; if(VIEW.dAns===DRILL[VIEW.dIdx].a) VIEW.dScore++; render(); }
-      break;
-    case "dnext": VIEW.dIdx++; VIEW.dAns=null; render(); break;
-    case "dreset": VIEW.dIdx=0; VIEW.dScore=0; VIEW.dAns=null; render(); break;
+    case "dans": {
+      if(VIEW.dAns!=null) break;
+      const v=+b.dataset.v, d=DRILL[VIEW.dIdx];
+      if(v===d.a){ VIEW.dAns=v; VIEW.dScore += (VIEW.dTries===0?2:1); }
+      else if(VIEW.dTries===0){ VIEW.dTries=1; VIEW.dWrong=[v]; }
+      else { VIEW.dAns=v; VIEW.dWrong=VIEW.dWrong.concat([v]); }
+      render(); break;
+    }
+    case "dnext": VIEW.dIdx++; VIEW.dAns=null; VIEW.dTries=0; VIEW.dWrong=[]; render(); break;
+    case "dreset": VIEW.dIdx=0; VIEW.dScore=0; VIEW.dAns=null; VIEW.dTries=0; VIEW.dWrong=[]; render(); break;
   }
+});
+
+/* ---------- ui controls ---------- */
+function applyUi(){
+  document.documentElement.style.setProperty("--scale", ST.scale||1);
+  document.body.classList.toggle("paper", !!ST.paper);
+  const b=document.getElementById("thBtn"); if(b) b.textContent = ST.paper ? "Dark" : "Paper";
+}
+document.getElementById("uictl").addEventListener("click",e=>{
+  const b=e.target.closest("[data-ui]"); if(!b) return;
+  if(b.dataset.ui==="tsz"){
+    const s=clamp(Math.round(((ST.scale||1)+ (+b.dataset.v)*0.08)*100)/100, 0.85, 1.45);
+    ST.scale=s; toast("Text size "+Math.round(s*100)+"%");
+  } else { ST.paper=!ST.paper; }
+  save(); applyUi();
 });
 
 /* ---------- init ---------- */
 load();
+if(!ST.scale) ST.scale=1;
+applyUi();
 VIEW.sel={affect:AFFECT[0]};
 render();
 pickVoice();
