@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register Ops — RTAF Finance English</title>
+<style>
+:root{
+  --navy:#0A192F; --navy2:#0F2440; --navy3:#14304F; --line:#23486f;
+  --gold:#D4AF37; --gold-dim:#8f7626; --ink:#E8EEF6; --ink-dim:#9db2cc;
+  --good:#4ade80; --warn:#fbbf24; --bad:#f87171; --cool:#60a5fa;
+  --r1:#f472b6; --r2:#fb923c; --r3:#facc15; --r4:#38bdf8; --r5:#a78bfa;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1200px 600px at 80% -10%, #16365c 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, #123 0%, transparent 60%),
+    var(--navy);
+  color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 64px}
+a{color:var(--gold)}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4{margin:0 0 .4em;line-height:1.25;font-weight:650}
+p{margin:0 0 .8em}
+small{font-size:.8rem}
+
+/* ---------- header ---------- */
+header{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:14px 0 12px;border-bottom:1px solid var(--line);margin-bottom:18px;
+}
+.emblem{width:46px;height:46px;flex:0 0 auto}
+.brand h1{font-size:1.22rem;letter-spacing:.03em;margin:0}
+.brand .sub{font-size:.72rem;color:var(--ink-dim);letter-spacing:.14em;text-transform:uppercase}
+.rankbox{margin-left:auto;text-align:right;min-width:190px}
+.rankbox .rk{font-size:.86rem;color:var(--gold);font-weight:650}
+.rankbox .xp{font-size:.7rem;color:var(--ink-dim)}
+.xpbar{height:5px;background:var(--navy3);border-radius:3px;overflow:hidden;margin-top:5px}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));width:0%}
+
+/* ---------- nav ---------- */
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+nav button{
+  background:var(--navy2);border:1px solid var(--line);border-radius:999px;
+  padding:7px 15px;font-size:.85rem;color:var(--ink-dim);transition:.15s;
+}
+nav button:hover{border-color:var(--gold-dim);color:var(--ink)}
+nav button[aria-current="true"]{background:var(--gold);border-color:var(--gold);color:#1a1405;font-weight:650}
+
+/* ---------- cards ---------- */
+.card{background:rgba(15,36,64,.72);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.card.tight{padding:14px}
+.card h3{font-size:1rem;color:var(--gold);letter-spacing:.02em}
+.card h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-dim);margin-bottom:.7em}
+.grid2{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:880px){.grid2{grid-template-columns:1fr}}
+.sticky{position:sticky;top:12px}
+@media(max-width:880px){.sticky{position:static}}
+
+/* ---------- mission list ---------- */
+.mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.mcard{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:left;transition:.15s;display:flex;flex-direction:column;gap:8px}
+.mcard:hover{border-color:var(--gold);transform:translateY(-2px)}
+.mcard .mt{font-weight:650;font-size:1rem}
+.mcard .md{font-size:.83rem;color:var(--ink-dim);flex:1}
+.mcard .mm{font-size:.72rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.badge{display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--ink-dim)}
+.badge.done{border-color:var(--good);color:var(--good)}
+
+/* ---------- interlocutor ---------- */
+.who{display:flex;gap:12px;align-items:flex-start;background:var(--navy3);border-radius:10px;padding:12px;margin-bottom:14px}
+.who .av{width:44px;height:44px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;font-weight:700;font-size:1rem;background:var(--navy);border:2px solid var(--gold-dim);color:var(--gold)}
+.who .nm{font-weight:650;font-size:.95rem}
+.who .rl{font-size:.78rem;color:var(--ink-dim)}
+.core{background:#0b2138;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 14px;margin:12px 0}
+.core .lbl{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim)}
+.core .txt{font-family:var(--mono);font-size:.98rem;color:#fff}
+
+/* ---------- room scoring ---------- */
+.qrow{margin-bottom:12px}
+.qrow .ql{font-size:.87rem;margin-bottom:6px}
+.qrow .ql b{color:var(--gold)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opt{
+  background:var(--navy2);border:1px solid var(--line);border-radius:8px;padding:7px 11px;
+  font-size:.82rem;text-align:left;color:var(--ink-dim);transition:.12s;flex:1 1 150px;min-width:0;
+}
+.opt:hover{border-color:var(--gold-dim);color:var(--ink)}
+.opt[aria-pressed="true"]{background:var(--navy3);border-color:var(--gold);color:var(--ink)}
+.opt .k{font-family:var(--mono);color:var(--gold);font-size:.72rem;margin-right:5px}
+.opt.ok{border-color:var(--good)}
+.opt.no{border-color:var(--bad)}
+
+/* ---------- slots ---------- */
+.slot{border-top:1px solid var(--line);padding:13px 0}
+.slot:first-child{border-top:0}
+.slot .sh{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
+.slot .sn{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.slot .sg{font-size:.76rem;color:var(--ink-dim)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  background:var(--navy2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;
+  font-size:.85rem;color:var(--ink);transition:.12s;position:relative;text-align:left;
+  display:flex;align-items:center;gap:7px;
+}
+.chip:hover{border-color:var(--gold-dim)}
+.chip[aria-pressed="true"]{background:#173a5e;border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.chip .rr{font-family:var(--mono);font-size:.66rem;width:15px;height:15px;border-radius:4px;display:grid;place-items:center;color:#0A192F;font-weight:700;flex:0 0 auto}
+.rrc1{background:var(--r1)}.rrc2{background:var(--r2)}.rrc3{background:var(--r3)}.rrc4{background:var(--r4)}.rrc5{background:var(--r5)}
+.rrc0{background:#64748b}
+.note{
+  font-size:.78rem;color:var(--ink-dim);background:#0b2138;border:1px dashed var(--line);
+  border-radius:8px;padding:8px 10px;margin-top:8px;display:none;
+}
+.note.show{display:block}
+.note b{color:var(--gold);font-weight:600}
+.note .imp{color:var(--warn)}
+
+/* ---------- assembly ---------- */
+.asm{font-family:var(--mono);font-size:.84rem;line-height:1.9;word-break:break-word}
+.asm .b{background:var(--navy3);border:1px solid var(--line);border-radius:6px;padding:2px 6px;margin:0 2px;display:inline-block}
+.asm .b.empty{color:#587;opacity:.55}
+.sent{font-size:1.02rem;line-height:1.6;background:#0b2138;border-radius:10px;padding:13px;margin:12px 0;min-height:56px;border:1px solid var(--line)}
+.sent.ph{color:var(--ink-dim);font-style:italic}
+
+/* ---------- meters ---------- */
+.mtr{margin-bottom:11px}
+.mtr .ml{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ink-dim);margin-bottom:3px}
+.mtr .ml b{color:var(--ink);font-weight:600}
+.mtr .bar{height:8px;background:var(--navy3);border-radius:4px;overflow:hidden}
+.mtr .bar i{display:block;height:100%;transition:width .3s,background .3s}
+.axis{position:relative;height:22px;background:linear-gradient(90deg,#7f1d1d,#b45309 28%,#14532d 42%,#14532d 58%,#1e3a8a 72%,#312e81);border-radius:5px;margin-top:3px;overflow:hidden}
+.axis .band{position:absolute;left:42%;width:16%;top:0;bottom:0;border-left:1px dashed rgba(255,255,255,.35);border-right:1px dashed rgba(255,255,255,.35)}
+.axis .ndl{position:absolute;top:-2px;bottom:-2px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 6px rgba(255,255,255,.8);transition:left .3s;transform:translateX(-50%)}
+.axis .tk{position:absolute;bottom:2px;font-size:.6rem;color:rgba(255,255,255,.75);letter-spacing:.05em}
+.flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.flag{font-size:.7rem;padding:3px 8px;border-radius:999px;background:#3b1116;border:1px solid #7f1d1d;color:#fca5a5;font-family:var(--mono)}
+.flag.g{background:#0c2b1a;border-color:#14532d;color:#86efac}
+
+/* ---------- verdict ---------- */
+.verdict{border-radius:12px;padding:16px;margin-top:14px;border:1px solid var(--line);background:var(--navy3)}
+.verdict.v-good{border-color:var(--good);background:rgba(20,83,45,.28)}
+.verdict.v-ok{border-color:var(--warn);background:rgba(120,77,7,.25)}
+.verdict.v-bad{border-color:var(--bad);background:rgba(127,29,29,.25)}
+.verdict .rx{font-size:1rem;line-height:1.55;margin-bottom:10px}
+.verdict .rx em{color:var(--ink-dim)}
+.verdict .sc{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.verdict .big{font-size:2rem;font-weight:700;font-family:var(--mono)}
+.verdict .gr{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+.model{font-family:var(--mono);font-size:.84rem;background:#0b2138;border-left:3px solid var(--good);padding:10px 13px;border-radius:0 8px 8px 0;margin:10px 0}
+.codes{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.codechip{font-family:var(--mono);font-size:.72rem;padding:3px 9px;border-radius:6px;background:#3b1116;border:1px solid #7f1d1d;color:#fca5a5}
+
+/* ---------- buttons ---------- */
+.btn{background:var(--gold);border:0;border-radius:9px;padding:10px 20px;font-weight:650;color:#1a1405;font-size:.92rem}
+.btn:hover{filter:brightness(1.1)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink-dim)}
+.btn.ghost:hover{border-color:var(--gold-dim);color:var(--ink)}
+.btn.sm{padding:6px 13px;font-size:.8rem}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}
+
+/* ---------- progress dots ---------- */
+.dots{display:flex;gap:5px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.dot{width:26px;height:6px;border-radius:3px;background:var(--navy3)}
+.dot.on{background:var(--gold)}
+.dot.cur{background:var(--ink)}
+
+/* ---------- tables (dossier) ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.82rem;min-width:520px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--navy3);color:var(--gold);font-weight:600;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+td em{color:var(--ink-dim)}
+.acc{border:1px solid var(--line);border-radius:10px;margin-bottom:9px;overflow:hidden}
+.acc>button{width:100%;text-align:left;background:var(--navy2);border:0;padding:12px 15px;font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;gap:10px}
+.acc>button:hover{background:var(--navy3)}
+.acc .body{padding:0 15px 14px;display:none}
+.acc.open .body{display:block}
+.acc>button .car{color:var(--gold);transition:transform .2s}
+.acc.open>button .car{transform:rotate(90deg)}
+
+/* ---------- misc ---------- */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.82rem}
+.kv dt{color:var(--gold);font-family:var(--mono);font-size:.76rem}
+.kv dd{margin:0;color:var(--ink-dim)}
+.hint{font-size:.78rem;color:var(--ink-dim);background:#0b2138;border-radius:8px;padding:9px 11px;border-left:3px solid var(--gold-dim)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(90px);background:var(--gold);color:#1a1405;font-weight:650;padding:11px 20px;border-radius:999px;font-size:.88rem;transition:transform .3s;z-index:90;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;font-size:.73rem;color:#6b829c}
+.sel{background:var(--navy2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px;font-size:.86rem;max-width:100%}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true">
+    <circle cx="32" cy="32" r="30" fill="#0F2440" stroke="#D4AF37" stroke-width="1.6"/>
+    <path d="M32 13l3.1 6.6 7.2.9-5.3 5 1.4 7.1L32 29.2l-6.4 3.4 1.4-7.1-5.3-5 7.2-.9z" fill="#D4AF37"/>
+    <path d="M10 40c7-3.5 14-4.5 22-4.5S47 36.5 54 40c-7 1.2-11 2.6-14 4.4-2.6-1.6-5-2.4-8-2.4s-5.4.8-8 2.4C21 42.6 17 41.2 10 40z" fill="#8f7626"/>
+    <rect x="24" y="48" width="16" height="2.2" rx="1.1" fill="#D4AF37"/>
+    <rect x="27" y="52" width="10" height="2.2" rx="1.1" fill="#8f7626"/>
+  </svg>
+  <div class="brand">
+    <h1>REGISTER OPS</h1>
+    <div class="sub">Thought Modulation · RTAF Finance English</div>
+  </div>
+  <div class="rankbox">
+    <div class="rk" id="rkName">Acting Pilot Officer</div>
+    <div class="xp" id="rkXp">0 pts</div>
+    <div class="xpbar"><i id="rkBar"></i></div>
+  </div>
+</header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<footer>
+  Register Ops — an unofficial English-language training aid. Emblem, ranks and scenarios are for
+  language practice only and do not represent the Royal Thai Air Force or any real unit, person or procedure.
+  Progress is saved in this browser only.
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+"use strict";
+/* ============================================================
+   REGISTER OPS — data
+   r  = primary register (1-5, 0 = neutral/none)
+   g  = acceptable register range [lo,hi]
+   d  = directness level (0-7)
+   c  = commitment: none|might|should|will|fact
+   h  = hedge weight 0-3
+   a  = affect 0-3
+   gr = grain A..E
+   n  = guidance note   i = likely impact
+   ============================================================ */
+
+const RANKS = [
+  {n:"Acting Pilot Officer", x:0},
+  {n:"Pilot Officer", x:400},
+  {n:"Flying Officer", x:1000},
+  {n:"Flight Lieutenant", x:1800},
+  {n:"Squadron Leader", x:2800},
+  {n:"Wing Commander", x:4000},
+  {n:"Group Captain", x:5500}
+];
+
+/* ---------- shared option pools ---------- */
+const GREET = [
+  {t:"Hey!", pre:"Hey", pk:"!", r:1, g:[1,1], n:"Friendly. For someone you eat lunch with.", i:"To anyone senior this lands as over-familiar."},
+  {t:"Hi!", pre:"Hi", pk:"!", r:2, g:[1,2], n:"Informal and easy. Colleagues you know.", i:"Fine at your own level; it drops the respect a senior officer is owed."},
+  {t:"Hello.", pre:"Hello", pk:".", r:3, g:[2,3], n:"Neutral. Safe with anyone at your own level or another section.", i:"Never wrong, never warm."},
+  {t:"Good morning.", pre:"Good morning", pk:".", r:4, g:[3,5], n:"The professional default before noon.", i:"Safe at every level above a close friend. If unsure, pick this."},
+  {t:"Good morning. I hope I'm not interrupting.", pre:"Good morning", pk:".", post:"I hope I'm not interrupting.", r:5, g:[4,5], n:"A pre-sequence: you ask for the floor before taking it.", i:"Considerate to a senior officer; over-careful with a peer."}
+];
+const ADDR_DEFS = [
+  {k:"nick",  r:1, g:[1,1], n:"Nickname. Close friends only.", i:"Over-familiar with anyone senior."},
+  {k:"first", r:2, g:[1,3], n:"Bare first name. Colleagues you know.", i:"With a senior officer this drops the rank he is owed."},
+  {k:"khun",  r:3, g:[2,4], n:"Khun + first name. Correct Thai-English courtesy; the workplace default.", i:"Polite and safe among Thai colleagues at any level below officer rank."},
+  {k:"title", r:3, g:[3,4], n:"Ms./Mr. + surname. English-letter convention, and the right form with foreigners.", i:"Slightly cold face to face with a Thai colleague, correct in writing."},
+  {k:"rank",  r:4, g:[3,5], n:"Rank + first name — RTAF practice pairs the rank with the first name, not the surname.", i:"Respectful and precise. The safest formal address if you know the rank."},
+  {k:"rankS", r:4, g:[4,5], pen:7, code:["ST","rank paired with the surname \u2014 Thai service practice pairs it with the first name"], n:"Rank + surname. A Western habit; not how Thai service names work.", i:"Understood, but marks you as copying an English textbook."},
+  {k:"sir",   r:5, g:[4,5], n:"Sir / Ma'am alone. Complete and correct — and it never fails when the rank escapes you.", i:"Always safe upward. To a peer it sounds sarcastic."}
+];
+const FRAME_FACT = [
+  {t:"", r:0, g:[1,5], h:0, lbl:"(no softener)", n:"State it straight. Correct whenever you have checked it.", i:"A verified number needs no cushion — softening it makes you sound unsure of your own work."},
+  {t:"I have a feeling", r:1, g:[1,2], h:3, n:"Very soft, very informal.", i:"At work this sounds like a guess, because it is one."},
+  {t:"I think", r:3, g:[1,4], h:1, n:"Light hedge. Honest when you have not verified.", i:"Fine on a cause. Wrong on a number you have counted."},
+  {t:"It looks like", r:3, g:[2,4], h:1, n:"Evidence-flavoured hedge.", i:"Signals 'this is what the data suggests, not what I have confirmed'."},
+  {t:"It appears that", r:4, g:[4,5], h:2, n:"Formal hedge for a cause you still have to prove.", i:"Appropriate upward; slightly stiff with a friend."},
+  {t:"My understanding is that", r:4, g:[4,5], h:2, n:"Marks the claim as second-hand or provisional.", i:"Protects you when you are repeating what someone else told you."}
+];
+const FRAME_ASK = [
+  {t:"", r:0, g:[1,5], h:0, lbl:"(no softener)", n:"Go straight to the request.", i:"Fine for small things; abrupt for anything that costs the other person time."},
+  {t:"When you get a chance,", r:2, g:[1,3], h:1, n:"Removes the urgency, so it removes the pressure.", i:"Warm and easy. Do not use it if you actually need it today."},
+  {t:"Sorry to bother you —", r:3, g:[2,4], h:1, n:"Acknowledges you are interrupting.", i:"Buys a lot of goodwill for one short phrase."},
+  {t:"I know you're busy, but", r:3, g:[2,4], h:2, n:"Names the cost to them before you ask.", i:"Effective with a colleague who is visibly under pressure."},
+  {t:"If I may, Sir —", r:5, g:[5,5], h:2, n:"Formal request for permission to speak or to ask.", i:"Correct with a senior officer; theatrical with anyone else."}
+];
+const CLOSE = [
+  {t:"", r:0, g:[1,5], lbl:"(no closer)", n:"Leave it open — normal mid-conversation.", i:"At the end of an exchange it feels unfinished."},
+  {t:"Cheers!", r:1, g:[1,1], n:"Friendly British informal.", i:"Too casual for anyone outside your own desk."},
+  {t:"Thanks!", r:2, g:[1,3], n:"Everyday thanks.", i:"Good with colleagues at your level."},
+  {t:"Thank you.", r:3, g:[2,5], n:"Neutral and correct anywhere.", i:"Never wrong. The safe default."},
+  {t:"Thank you very much.", r:4, g:[3,5], n:"Warmer and more formal.", i:"Good upward — gratitude is the one warm thing allowed at high register."},
+  {t:"Thank you, Sir.", r:5, g:[4,5], n:"Closes an exchange with a senior officer.", i:"Expected. Its absence is noticed."}
+];
+const AFFECT = [
+  {t:"Calm  ( . )", a:0, n:"Level voice, full stop.", i:"Composed. The default above register 3."},
+  {t:"Warm  ( . )", a:1, n:"Same words, wider pitch, a smile in the voice.", i:"Warmth without losing composure — usable at every register."},
+  {t:"Emphatic  ( ! )", a:2, n:"Raised pitch, stress on the key word.", i:"Natural with friends. Above register 3 it starts to read as excitable."},
+  {t:"Very emphatic  ( !! )", a:3, n:"Loud, high, fast.", i:"To a senior officer this reads as losing your composure."}
+];
+
+/* ---------- people ---------- */
+const PEOPLE = {
+  malee:{name:"Squadron Leader Malee Thongchai", short:"Sqn Ldr Malee", init:"M", pron:"she",
+    role:"Your section head. One level above you. Approachable, but she signs off your work.",
+    addr:{nick:"Malee!", first:"Malee,", khun:"Khun Malee,", title:"Ms. Thongchai,", rank:"Squadron Leader Malee,", rankS:"Squadron Leader Thongchai,", sir:"Ma'am,"},
+    rx:{rude:["Sqn Ldr Malee puts her pen down. <em>“Let's start that again, shall we.”</em>","<em>She stiffens.</em> “I'd like you to try that with the rank, please.”"],
+        stiff:["<em>She half-smiles.</em> “You can relax a little — it's only me.”"],
+        unclear:["<em>She waits.</em> “Sorry — what's the actual number?”"],
+        unsure:["<em>She frowns.</em> “Have you checked that, or are you guessing?”"],
+        good:["<em>She nods and writes it down.</em> “Good. Carry on.”","<em>She nods.</em> “Clear. Thank you.”"]}},
+  anan:{name:"Wing Commander Anan Prasert", short:"Wg Cdr Anan", init:"A", pron:"he",
+    role:"Head of the Finance Division, two levels above you. Brisk, reads everything, hates being told a story.",
+    addr:{nick:"Anan!", first:"Anan,", khun:"Khun Anan,", title:"Mr. Prasert,", rank:"Wing Commander Anan,", rankS:"Wing Commander Prasert,", sir:"Sir,"},
+    rx:{rude:["Wg Cdr Anan's expression does not change. <em>“I'll pretend I didn't hear that.”</em>","<em>A long pause.</em> “Who trained you?”"],
+        stiff:["<em>He glances at his watch.</em> “Yes. Get to it.”"],
+        unclear:["<em>He cuts in.</em> “Stop. What is the number and what have you done about it?”"],
+        unsure:["<em>He looks up.</em> “Do you know that, or do you think it?”"],
+        good:["<em>He nods once.</em> “Understood. Carry on.”","“Good. Thank you.” <em>He is already reading again.</em>"]}},
+  wichai:{name:"Group Captain Wichai Sombat", short:"Gp Capt Wichai", init:"W", pron:"he",
+    role:"Internal auditor from outside your unit. Senior, courteous, writes down everything you say.",
+    addr:{nick:"Wichai!", first:"Wichai,", khun:"Khun Wichai,", title:"Mr. Sombat,", rank:"Group Captain Wichai,", rankS:"Group Captain Sombat,", sir:"Sir,"},
+    rx:{rude:["<em>He writes something down.</em> “Interesting.”","<em>He looks up slowly.</em> “I see.”"],
+        stiff:["<em>He waves a hand.</em> “No need for all that. Just the figure.”"],
+        unclear:["“Forgive me — I'm not sure what you're telling me.”"],
+        unsure:["“Is that your assessment, or the record's?”"],
+        good:["<em>He nods, satisfied.</em> “Thank you. That's exactly what I needed.”","“Very good. Clear answer.”"]}},
+  nok:{name:"Khun Nok (Kanokwan)", short:"Khun Nok", init:"N", pron:"she",
+    role:"Clerk in Procurement, your own level. You know her name and not much else. Always behind on filing.",
+    addr:{nick:"Nokkie!", first:"Nok,", khun:"Khun Nok,", title:"Ms. Kanokwan,", rank:"", rankS:"", sir:"Ma'am,"},
+    rx:{rude:["<em>She doesn't look up.</em> “I'll get to it.”","“Wow. Okay.” <em>She turns back to her screen.</em>"],
+        stiff:["<em>She laughs.</em> “It's just a receipt, Ploy's friend. Relax.”"],
+        unclear:["“Sorry — which claim? There are forty in here.”"],
+        unsure:["“Do you need it or not?”"],
+        good:["“Sure, give me ten minutes.” <em>She writes the number down.</em>","“No problem — sending it now.”"]}},
+  ploy:{name:"Ploy", short:"Ploy", init:"P", pron:"she",
+    role:"Your desk neighbour and closest friend in the section. You eat lunch together every day.",
+    addr:{nick:"Ploy!", first:"Ploy,", khun:"Khun Ploy,", title:"Ms. Rattanakosin,", rank:"", rankS:"", sir:"Ma'am,"},
+    rx:{rude:["<em>She blinks.</em> “Okay, rude.”"],
+        stiff:["<em>She stares at you.</em> “Why are you talking like that? It's me.”","<em>She laughs.</em> “Are you being sarcastic?”"],
+        unclear:["“Huh? What are you on about?”"],
+        unsure:["“Do you know or not?”"],
+        good:["<em>She grins.</em> “Yeah, of course!”","“Ha! Nice one.”"]}},
+  surachai:{name:"Mr. Surachai Wattana", short:"Mr. Surachai", init:"S", pron:"he",
+    role:"Accounts manager at an outside supplier. You have never met him. Every email you send him could end up in a file.",
+    addr:{nick:"Surachai!", first:"Surachai,", khun:"Khun Surachai,", title:"Mr. Wattana,", rank:"", rankS:"", sir:"Sir,"},
+    rx:{rude:["<em>A short reply arrives.</em> “Noted.”","<em>He forwards your message to his manager without comment.</em>"],
+        stiff:["“Of course — happy to help. No need to be so formal.”"],
+        unclear:["“Apologies — which invoice are you referring to?”"],
+        unsure:["“Are you saying it was late, or asking whether it was?”"],
+        good:["“Thank you for flagging it — I'll send a corrected copy today.”","“Understood, and apologies for the delay. Resending now.”"]}},
+  adul:{name:"Corporal Adul", short:"Cpl Adul", init:"D", pron:"he",
+    role:"Junior clerk, one level below you. Nineteen, willing, frightened of getting it wrong.",
+    addr:{nick:"Adul!", first:"Adul,", khun:"Khun Adul,", title:"Mr. Kittisak,", rank:"Corporal Adul,", rankS:"Corporal Kittisak,", sir:"Sir,"},
+    rx:{rude:["<em>He goes red and says nothing.</em>","<em>He nods fast, twice, and does not look up again.</em>"],
+        stiff:["<em>He looks confused.</em> “Sorry, Ma'am — do you want me to do it or not?”"],
+        unclear:["“Sorry, Ma'am — which ones by date?”"],
+        unsure:["“So... should I change it or leave it?”"],
+        good:["“Yes, Ma'am — by date. I'll redo them now.”","<em>He looks relieved.</em> “Understood. Thank you.”"]}}
+};
+/* ---------- missions ---------- */
+const MISSIONS = [
+{
+id:"m1", title:"The Variance", tag:"Reporting upward",
+blurb:"4,200 baht is missing from the May travel claims. You have to take it up the chain — twice — and one of the errors turns out to be yours.",
+focus:"Register 4-5 · no modal on a fact · headline first · apology with repair",
+turns:[
+ {s:"08:20. You have just finished the May reconciliation. Sqn Ldr Malee is at her desk with her door open. This is the first thing you have said to her today.",
+  who:"malee", core:"The May travel claims are 4,200 baht over budget.", act:"report",
+  room:{d:1,p:1,s:2}, tgt:{r:4,c:"fact",gr:"C",a:0},
+  slots:["greet","addr","frame","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"the travel claims are a total mess", r:1, g:[1,2], c:"fact", clar:-34, n:"Slang, and an opinion where a figure should be.", i:"She learns how you feel and not what happened."},
+   {t:"something's wrong with the travel claims", r:2, g:[1,3], c:"none", clar:-30, n:"No month, no line, no number.", i:"She has to ask you two questions to get what you already know."},
+   {t:"there might be a problem with the travel claims", r:3, g:[2,4], c:"might", n:"A modal on something you have counted twice.", i:"Reads as unsure of your own arithmetic — the worst impression for an accountant."},
+   {t:"the May travel claims are 4,200 baht over budget", r:4, g:[3,5], c:"fact", n:"Month, line, figure, no modal.", i:"This is what a verified number is supposed to sound like."},
+   {t:"a discrepancy has been identified in the May travel-claim account", r:5, g:[4,5], c:"fact", n:"Passive and nominalised — written-memo English.", i:"Correct on paper. Out loud it hides who found it and sounds evasive."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no detail)", n:"Headline only.", i:"She will have to ask why. One extra exchange."},
+   {t:"I'm correcting it today.", gr:"C", n:"Result plus your action.", i:"Answers the question she was about to ask."},
+   {t:"Claim 114 was entered twice.", gr:"B", n:"Cause, one clause.", i:"Enough for her to decide; she can ask for more."},
+   {t:"I filtered the claims by date and found claim 114 entered on the 14th and again on the 16th, both for 2,100 baht.", gr:"A", n:"Every step of the method.", i:"Right if she is going to re-check your work. Too much if she is not."}],
+  model:"Good morning, Squadron Leader Malee. The May travel claims are 4,200 baht over budget — claim 114 was entered twice. I'm correcting it today.",
+  teach:"A number you have checked takes no modal at all. And the headline comes before the method, never after it."},
+
+ {s:"Malee looks up. <em>“Do you know why?”</em> — You are fairly sure it is a duplicated claim, but you have not confirmed it with Accounts yet.",
+  who:"malee", core:"A claim was entered twice.", act:"report",
+  room:{d:1,p:1,s:2}, tgt:{r:4,c:"might",gr:"B",a:0},
+  slots:["frame","core","detail","affect"],
+  frames:"fact",
+  cores:[
+   {t:"claim 114 was entered twice", r:4, g:[3,5], c:"fact", n:"Flat statement of something you have not verified.", i:"If Accounts contradicts you tomorrow, you told your section head a fact that was not one."},
+   {t:"claim 114 might have been entered twice", r:4, g:[3,5], c:"might", n:"Honest about the limit of what you know.", i:"Correct. The cause is a hypothesis; the number was not."},
+   {t:"claim 114 was probably entered twice", r:4, g:[3,5], c:"should", n:"Higher confidence than the evidence supports.", i:"Acceptable, but it commits you further than you can defend."},
+   {t:"maybe someone made a mistake somewhere", r:2, g:[1,3], c:"might", clar:-32, n:"Hedged and vague at the same time.", i:"She hears nothing usable and wonders whether you looked."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no detail)", n:"", i:"Leaves the verification question open."},
+   {t:"I'm confirming it with Accounts this morning.", gr:"C", n:"Names the gap and closes it.", i:"Turns a hedge into a plan. This is what separates careful from vague."},
+   {t:"I'm not certain yet.", gr:"D", n:"Names the gap without closing it.", i:"Honest, but she now has to ask what you are doing about it."}],
+  model:"It appears claim 114 might have been entered twice. I'm confirming it with Accounts this morning.",
+  teach:"Hedge the cause you have not proved. Never hedge the number you have counted. Then say how the hedge gets removed."},
+
+ {s:"<em>“When can you have it fixed?”</em> — Thursday is realistic. Wednesday is not.",
+  who:"malee", core:"I fix it by Thursday.", act:"report",
+  room:{d:1,p:1,s:2}, tgt:{r:4,c:"will",gr:"C",a:0},
+  slots:["frame","core","time","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"I'll have the corrected reconciliation to you", r:4, g:[3,5], c:"will", n:"A promise, with will.", i:"Firm and clear. Correct for a commitment you can keep."},
+   {t:"I should have it done", r:4, g:[3,5], c:"should", n:"Expectation, not promise.", i:"Useful when the date depends on someone else — but it invites a follow-up."},
+   {t:"I might be able to finish it", r:3, g:[2,4], c:"might", n:"A promise so soft it isn't one.", i:"She cannot plan around this, so she will ask again tomorrow."},
+   {t:"it shall be completed", r:5, g:[0,0], c:"will", n:"Contract English. Shall is not a stronger will.", i:"Sounds like a procurement clause, not a person."}],
+  times:[
+   {t:"", lbl:"(no time)", n:"", i:"A commitment with no date is not a commitment."},
+   {t:"by Thursday", n:"A date you can hit.", i:"Exactly what she needs to write in her diary."},
+   {t:"as soon as possible", n:"No date at all.", i:"Heard as 'I don't know'. Avoid this phrase upward."},
+   {t:"by tomorrow", n:"A date you cannot hit.", i:"Buys you approval today and costs you credibility on Wednesday."}],
+  model:"I'll have the corrected reconciliation to you by Thursday.",
+  teach:"Upward, a date you can keep beats a date that sounds keen. 'As soon as possible' is heard as 'I don't know'."},
+
+ {s:"11:40. Malee has told you to report it to the Division head yourself. You meet Wg Cdr Anan in the corridor outside his office. He has thirty seconds and he is holding a folder.",
+  who:"anan", core:"The May travel claims are 4,200 baht over budget.", act:"report",
+  room:{d:2,p:2,s:2}, tgt:{r:5,c:"fact",gr:"C",a:0},
+  slots:["greet","addr","frame","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"the May travel claims are 4,200 baht over budget", r:4, g:[3,5], c:"fact", n:"Month, line, figure.", i:"He knows what happened in four seconds. This is the target."},
+   {t:"I wanted to let you know about a small issue with some of the claims", r:3, g:[2,4], c:"none", clar:-36, n:"An announcement that you are about to say something.", i:"He has spent five seconds and learned nothing. He will interrupt."},
+   {t:"there's a variance in the travel claims", r:4, g:[3,5], c:"fact", clar:-24, n:"Correct register, no figure.", i:"His next word is 'How much?' — you had the number and did not use it."},
+   {t:"I regret to inform you that an irregularity has arisen", r:5, g:[0,0], c:"fact", clar:-30, n:"Letter English, spoken aloud.", i:"Sounds like a disciplinary notice. He still does not know the amount."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no detail)", n:"", i:"In a corridor, with a folder in his hand, he needs your action too."},
+   {t:"A duplicated claim. Sqn Ldr Malee has it, and I'm correcting it by Thursday.", gr:"C", n:"Cause, who knows, your action, your date.", i:"Complete in one breath. Nothing left for him to chase."},
+   {t:"Claim 114 was entered on the 14th and again on the 16th, both for 2,100 baht, which I found by filtering the claims by date.", gr:"A", n:"Full method to a man in a corridor.", i:"He will stop you. This is setting A delivered to a setting C listener."}],
+  model:"Good morning, Sir. The May travel claims are 4,200 baht over budget — a duplicated claim. Squadron Leader Malee has it, and I'm correcting it by Thursday.",
+  teach:"Register 5 buys brevity, not ornament. The most respectful version of this sentence is also the shortest one."},
+
+ {s:"<em>“Whose error was it?”</em> — It was yours. You imported the claims file twice on the 16th.",
+  who:"anan", core:"I made the mistake.", act:"apology",
+  room:{d:2,p:2,s:2}, tgt:{r:5,c:"fact",gr:"C",a:0},
+  slots:["frame","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"mine, Sir. I imported the file twice on the 16th", r:5, g:[4,5], c:"fact", n:"Named, unhedged, one clause.", i:"Composed and credible. Owning it plainly costs you less than any hedge would."},
+   {t:"I think it might have been me", r:3, g:[0,0], c:"might", n:"A hedge on your own action.", i:"He hears someone trying not to be blamed. The forbidden hedge."},
+   {t:"there was an error in the import process", r:5, g:[0,0], c:"fact", clar:-26, n:"Passive with no agent. Grammatically neat, socially transparent.", i:"He will ask the question again, and less pleasantly."},
+   {t:"it was my fault, I'm so sorry, I really am so sorry about this", r:2, g:[0,0], c:"fact", n:"Apology repeated three times, no repair.", i:"Reads as panic. The problem is still unsolved and now he is managing your feelings."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no repair)", n:"", i:"An apology without a repair leaves him holding the problem."},
+   {t:"It's corrected, and I've added a duplicate check to the import step so it can't recur.", gr:"C", n:"Fixed, plus the thing that stops it happening again.", i:"This is the sentence that turns an error into a demonstration of competence."},
+   {t:"I'll be more careful in future.", gr:"D", n:"A promise about your character.", i:"Unverifiable. A senior officer wants a changed process, not a changed attitude."}],
+  model:"Mine, Sir. I imported the file twice on the 16th. It's corrected, and I've added a duplicate check to the import step so it can't recur.",
+  teach:"Three things register never softens: a number, a date, and your own mistake. Apologise once, then say what you have changed."},
+
+ {s:"<em>“Good. Anything you need from me?”</em> — There is nothing you need.",
+  who:"anan", core:"I need nothing from you.", act:"report",
+  room:{d:2,p:2,s:1}, tgt:{r:5,c:"fact",gr:"D",a:0},
+  slots:["core","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"Nothing needed from you, Sir", r:5, g:[4,5], c:"fact", n:"Short, complete, closes the matter.", i:"Exactly right. He can walk away and stop thinking about it."},
+   {t:"No", r:1, g:[0,0], c:"fact", n:"True, and bare.", i:"Accurate and slightly rude. One word is not enough upward."},
+   {t:"No, I don't think so, unless you want me to check anything else, I could look at the other lines too if you like", r:2, g:[0,0], c:"might", clar:-26, n:"An answer that will not end.", i:"He asked a yes/no question and got a paragraph. This is where register and length get confused."},
+   {t:"I shall not require any assistance", r:5, g:[0,0], c:"will", n:"Archaic and stiff.", i:"Correct English from 1935."}],
+  model:"Nothing needed from you, Sir. Thank you.",
+  teach:"'Nothing needed from you, Sir' is a complete, well-received sentence. Register controls the shape of the language; stakes control the length."}
+]},
+
+{
+id:"m2", title:"Chasing Paper", tag:"Requests and directness",
+blurb:"Six things you need from six different people, ranging from a friend at the next desk to a supplier you have never met. Same act, six settings.",
+focus:"Directness ladder · the 'please' trap · reasons beat softeners · downward requests",
+turns:[
+ {s:"You need the receipt for claim 114 to close the May file. Khun Nok in Procurement has it. You have spoken to her maybe four times.",
+  who:"nok", core:"You send me the receipt for claim 114.", act:"ask",
+  room:{d:1,p:0,s:1}, tgt:{r:3,d:4,c:"none",gr:"C",a:0},
+  slots:["greet","addr","frame","core","reason","close","affect"],
+  frames:"ask",
+  cores:[
+   {t:"send me the receipt for claim 114", r:2, g:[0,0], d:0, n:"Bare imperative to someone at your own level.", i:"You do not outrank her. This is heard as an order."},
+   {t:"please send me the receipt for claim 114", r:2, g:[0,0], d:1, n:"An imperative with a courtesy word on it.", i:"THE trap. 'Please' makes an order polite; it does not make it a request."},
+   {t:"I need the receipt for claim 114", r:3, g:[2,3], d:2, n:"Statement of need.", i:"Fine between colleagues who help each other daily. Blunt otherwise."},
+   {t:"could you send me the receipt for claim 114", r:3, g:[3,5], d:4, n:"Question form, past-form modal. The workhorse.", i:"Appropriate almost everywhere above register 2 and never wrong."},
+   {t:"I was wondering if you could possibly send me the receipt for claim 114", r:4, g:[0,0], d:6, n:"Embedded question for a thirty-second favour.", i:"Over-indirect. It implies the receipt is a serious imposition."}],
+  reasons:[
+   {t:"", lbl:"(no reason)", r:0, g:[1,5], n:"", i:"Requests without reasons get done last."},
+   {t:"— I need it to close the May file", r:3, g:[2,5], n:"One clause of why.", i:"A reason does more politeness work than any softener. This is the big lever."},
+   {t:"— it's urgent", r:3, g:[2,5], n:"Pressure with no information.", i:"Everyone's request is urgent. She has heard it before."}],
+  model:"Hello, Khun Nok. Could you send me the receipt for claim 114 — I need it to close the May file? Thank you.",
+  teach:"English makes a request by turning the sentence into a question and pushing the modal into its past form. 'Please' is decoration on top of that."},
+
+ {s:"An hour later. Nothing has arrived and Nok is visibly buried. You genuinely need it before you leave today.",
+  who:"nok", core:"I need it today.", act:"ask",
+  room:{d:1,p:0,s:1}, tgt:{r:3,d:4,c:"none",gr:"C",a:0},
+  slots:["frame","core","reason","close","affect"],
+  frames:"ask",
+  cores:[
+   {t:"could you send it today", r:3, g:[3,5], d:4, n:"Same workhorse, with the deadline in it.", i:"Clear and still polite. The deadline is information, not pressure."},
+   {t:"when you get a chance, could you send it", r:3, g:[2,4], d:4, n:"A softener that removes your own deadline.", i:"Too soft for something you actually need today. She will do it tomorrow."},
+   {t:"you said you'd send it", r:2, g:[0,0], d:2, n:"Reproach dressed as a reminder.", i:"You may be right. You will still pay for it the next time you need something."},
+   {t:"I have to have it before I leave today", r:3, g:[2,4], d:2, n:"Statement of need with the deadline.", i:"Direct but honest. Works if you add the reason."}],
+  reasons:[
+   {t:"", lbl:"(no reason)", r:0, g:[1,5], n:"", i:"She has no way to rank your request against her other twelve."},
+   {t:"— the file closes at five and I can't submit without it", r:3, g:[2,5], n:"A real constraint, not a feeling.", i:"Lets her make an informed decision. This is how you get moved up the queue."},
+   {t:"— sorry, I know you're swamped", r:3, g:[2,4], n:"Acknowledges the cost to her.", i:"Good, but pair it with the constraint or nothing changes."}],
+  model:"Sorry to bother you — could you send it today? The file closes at five and I can't submit without it.",
+  teach:"When you need to push, push with a constraint, not with a stronger softener. Reasons move people; hedges only reassure them."},
+
+ {s:"Ploy is at the next desk. The stapler is next to her elbow. You eat lunch together every single day.",
+  who:"ploy", core:"You pass me the stapler.", act:"ask",
+  room:{d:0,p:0,s:0}, tgt:{r:1,d:1,c:"none",gr:"D",a:1},
+  slots:["addr","core","close","affect"],
+  frames:"ask",
+  cores:[
+   {t:"pass me the stapler?", r:1, g:[1,2], d:1, n:"Imperative with rising intonation. Normal between friends.", i:"Exactly right. Friends do not use the polite forms on each other."},
+   {t:"can you pass the stapler?", r:2, g:[1,3], d:3, n:"Present modal question.", i:"Also fine. Slightly more careful than she expects."},
+   {t:"could you pass me the stapler?", r:3, g:[0,0], d:4, n:"The workhorse, used on your closest friend.", i:"Faintly odd. She will wonder what you want."},
+   {t:"I was wondering if it would be possible for you to pass me the stapler", r:4, g:[0,0], d:6, n:"Register 5 machinery on a stapler.", i:"OVER-INDIRECT. This is an error, not extra politeness — it implies the stapler is a serious matter."}],
+  model:"Ploy — pass me the stapler?",
+  teach:"Over-indirectness is also a mistake. Mark it as wrong. The dial has a floor as well as a ceiling."},
+
+ {s:"14:00. The supplier's invoice for the June order arrived eleven days late, which is why your quarter is behind. You are emailing Mr. Surachai, whom you have never met, for the first time.",
+  who:"surachai", core:"Your invoice arrived late.", act:"report",
+  room:{d:2,p:0,s:2}, tgt:{r:4,c:"fact",gr:"B",a:0},
+  slots:["greet","addr","frame","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"you sent the invoice late", r:2, g:[0,0], c:"fact", n:"True, and it puts him in the subject slot of an accusation.", i:"He now has to defend himself before he can help you."},
+   {t:"the invoice for the June order reached us on the 11th of July", r:4, g:[3,5], c:"fact", n:"The fact, with no blame attached to anyone.", i:"Unarguable and unaccusing. He can act on it without losing face."},
+   {t:"I think maybe the invoice might have been a bit late", r:3, g:[0,0], c:"might", clar:-24, n:"Hedging a date you can read off the envelope.", i:"He cannot tell whether you are complaining or asking."},
+   {t:"it is regretted that your organisation failed to meet the agreed terms", r:5, g:[0,0], c:"fact", n:"Formal, passive, and an accusation anyway.", i:"Now it reads like the opening of a dispute."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no detail)", n:"", i:"He does not know why you are telling him."},
+   {t:"Our terms are thirty days from delivery, so it has put our quarter-end behind.", gr:"B", n:"The consequence, stated once.", i:"Explains why it matters without any adjective doing the complaining."},
+   {t:"This is extremely unprofessional and has caused us serious problems.", gr:"B", n:"Evaluation instead of consequence.", i:"Feels good to write. Costs you the relationship and gets you nothing faster."}],
+  model:"Good morning, Mr. Wattana. The invoice for the June order reached us on the 11th of July. Our terms are thirty days from delivery, so it has put our quarter-end behind.",
+  teach:"Hedge other people's blame, never your own facts. State the date; let the date do the accusing."},
+
+ {s:"Same email. You also need him to resend it with the purchase-order number on it, because you cannot process it without one.",
+  who:"surachai", core:"You resend the invoice with the PO number.", act:"ask",
+  room:{d:2,p:0,s:2}, tgt:{r:4,d:5,c:"none",gr:"C",a:0},
+  slots:["frame","core","reason","close","affect"],
+  frames:"ask",
+  cores:[
+   {t:"resend it with the PO number on it", r:2, g:[0,0], d:0, n:"Bare imperative to an external company.", i:"In writing, to a stranger, this is close to rude."},
+   {t:"please resend it with the PO number", r:3, g:[0,0], d:1, n:"The 'please' trap again, this time in writing.", i:"Still an instruction. In an email it will be read as one."},
+   {t:"could you resend it with the purchase-order number shown", r:4, g:[3,5], d:4, n:"The workhorse.", i:"Perfectly adequate. Safe in any business email."},
+   {t:"would you be able to resend it with the purchase-order number shown", r:4, g:[4,5], d:5, n:"Ability periphrasis — one step softer.", i:"Ideal for a real imposition on someone outside your organisation."},
+   {t:"it is requested that the invoice be reissued bearing the purchase-order number", r:5, g:[0,0], d:2, n:"Passive, agentless, subjunctive.", i:"Sounds like a regulation. Nobody is asked, so nobody feels asked."}],
+  reasons:[
+   {t:"", lbl:"(no reason)", r:0, g:[1,5], n:"", i:"He may think you are being difficult."},
+   {t:"— we can't process an invoice without it", r:4, g:[2,5], n:"The constraint, stated plainly.", i:"Makes the request obviously reasonable. Do this every time."},
+   {t:"— it's our policy", r:3, g:[2,5], n:"True, and unhelpful.", i:"Policy is a reason for you, not for him."}],
+  model:"Would you be able to resend it with the purchase-order number shown? We can't process an invoice without it. Thank you very much.",
+  teach:"Outside your organisation, one step softer than you would use inside it — and always with the reason attached."},
+
+ {s:"16:10. Cpl Adul has filed a month of vouchers alphabetically instead of by date. He is nineteen and he looks worried already. He reports to you.",
+  who:"adul", core:"You file these by date.", act:"ask",
+  room:{d:1,p:0,s:1}, tgt:{r:3,d:2,c:"none",gr:"B",a:0},
+  slots:["addr","frame","core","reason","close","affect"],
+  frames:"ask",
+  cores:[
+   {t:"these need to be by date, not alphabetical", r:3, g:[2,4], d:2, n:"Clear, correct, no blame in it.", i:"He knows exactly what to do and is not humiliated. Downward, clarity is the kindness."},
+   {t:"file these by date", r:3, g:[2,4], d:0, n:"Bare imperative, downward.", i:"Acceptable — you do outrank him — but it costs you nothing to soften by one step."},
+   {t:"why did you do it like this?", r:2, g:[0,0], d:2, clar:-22, n:"A question that is not a request.", i:"He has to account for himself before he can fix it. He will freeze."},
+   {t:"I was wondering if you might possibly be able to refile these by date", r:4, g:[0,0], d:6, n:"Register 5 machinery aimed downward.", i:"He cannot tell whether it is an instruction or an option, so he may do nothing."},
+   {t:"you've done these completely wrong", r:2, g:[0,0], d:2, n:"Evaluation of him instead of instruction about the work.", i:"He goes red, says nothing, and stops asking you questions for a month."}],
+  reasons:[
+   {t:"", lbl:"(no reason)", r:0, g:[1,5], n:"", i:"He will do it, and learn nothing."},
+   {t:"— the auditors check them against the payment dates", r:3, g:[2,5], n:"Why the rule exists.", i:"He will never file them alphabetically again. Reasons teach; orders only correct."},
+   {t:"— it's how we've always done it", r:2, g:[1,3], n:"No reason at all.", i:"Teaches him to obey and not to think."}],
+  model:"Adul — these need to be by date rather than alphabetical. The auditors check them against the payment dates. Thanks.",
+  teach:"Downward, aim for clarity and a reason. Too indirect and he cannot tell whether he has been given an instruction."}
+]}
+];
+MISSIONS.push(
+{
+id:"m3", title:"The Audit Visit", tag:"Repair under pressure",
+blurb:"An internal auditor two ranks above you spends a morning at your desk. You will mishear him, meet a word you don't know, and be asked a figure you don't have.",
+focus:"Register 5 · locating the breakdown · 'I don't know' with a second half · confirming upward",
+turns:[
+ {s:"09:00. Gp Capt Wichai arrives at your desk with a folder and sits down. He has not met you before. He says nothing and waits for you.",
+  who:"wichai", core:"Hello. I help you.", act:"social",
+  room:{d:2,p:2,s:1}, tgt:{r:5,c:"none",gr:"D",a:0},
+  slots:["greet","addr","core","close","affect"],
+  frames:"ask",
+  cores:[
+   {t:"how can I help?", r:3, g:[3,5], c:"none", n:"Short, professional, hands him the floor.", i:"Correct. Brief is respectful here, not curt."},
+   {t:"please let me know if there is anything at all that I can possibly assist you with today", r:5, g:[0,0], c:"none", n:"Four softeners on an offer of help.", i:"He came to work, not to be waited on. Over-formal reads as nervous."},
+   {t:"what do you want?", r:1, g:[0,0], c:"none", n:"Direct question, no framing.", i:"Grammatically fine. To a Group Captain, close to insolent."},
+   {t:"everything's ready for you", r:3, g:[2,4], c:"fact", n:"Useful, if it is true.", i:"Good — but it answers a question he has not asked yet."}],
+  model:"Good morning, Sir. How can I help?",
+  teach:"Five words can be register 5. Formality is in the address and the grammar, not in the word count."},
+
+ {s:"A trolley clatters past in the corridor. He has asked you something ending in <em>“...for the second quarter?”</em> and you caught nothing else.",
+  who:"wichai", core:"Please repeat.", act:"repair",
+  room:{d:2,p:2,s:1}, tgt:{r:5,c:"none",gr:"D",a:0},
+  slots:["core","affect"],
+  frames:"ask",
+  cores:[
+   {t:"I beg your pardon, Sir — I only caught the last part. For the second quarter?", r:5, g:[4,5], c:"none", n:"Apologises, then locates exactly what you missed.", i:"Best answer. He repeats four words instead of the whole question."},
+   {t:"sorry, could you say that again?", r:3, g:[3,4], c:"none", n:"Correct and polite, but it replays everything.", i:"Perfectly acceptable. You just made him say it all twice."},
+   {t:"what?", r:1, g:[0,0], c:"none", n:"Fine with a friend.", i:"To a Group Captain, sharp enough to be remembered."},
+   {t:"...yes", r:0, g:[0,0], c:"none", clar:-45, pen:16, code:["RP","guessed instead of asking for a repeat"], n:"Guessing rather than asking.", i:"The most dangerous option on the page. You may now answer a question he never asked."}],
+  model:"I beg your pardon, Sir — I only caught the last part. For the second quarter?",
+  teach:"Locate the breakdown. Naming the part you missed costs him four words; a full replay costs him thirty."},
+
+ {s:"<em>“And what's your accrual policy for unspent travel budget at year end?”</em> — You understood every word except <em>accrual</em>.",
+  who:"wichai", core:"I don't understand this word.", act:"repair",
+  room:{d:2,p:2,s:1}, tgt:{r:5,c:"none",gr:"D",a:0},
+  slots:["frame","core","affect"],
+  frames:"ask",
+  cores:[
+   {t:"could I ask what accrual refers to here, Sir?", r:5, g:[4,5], c:"none", n:"One word named, question form, address.", i:"Best answer. Asking about a term reads as precision, not ignorance."},
+   {t:"I'm sorry, I don't understand", r:3, g:[2,4], c:"none", n:"True, but unlocated.", i:"He now has to rebuild the whole question. He may also conclude you understood none of it."},
+   {t:"I don't know that word", r:2, g:[1,3], c:"none", n:"Honest and a little bare.", i:"Fine with a colleague. Upward, put it in a question."},
+   {t:"our policy is that we return it", r:4, g:[0,0], c:"fact", n:"Answering around the word you did not understand.", i:"You have guessed at a technical question in front of an auditor. This is how a wrong answer gets written down."}],
+  model:"Could I ask what accrual refers to here, Sir? I want to be sure I'm answering the right question.",
+  teach:"Asking what one word means is a mark of care. Guessing at a technical question in front of an auditor is not recoverable."},
+
+ {s:"<em>“What was the petty-cash balance at the thirty-first of March?”</em> — The book is in the safe and Malee has the key. You could have it in twenty minutes.",
+  who:"wichai", core:"I don't know.", act:"repair",
+  room:{d:2,p:2,s:2}, tgt:{r:5,c:"fact",gr:"C",a:0},
+  slots:["core","detail","affect"],
+  frames:"fact",
+  cores:[
+   {t:"I don't have that figure to hand, Sir", r:5, g:[4,5], c:"fact", n:"Names the limit precisely — you don't have it here, which is not the same as not knowing it.", i:"Composed and accurate. This is the professional form."},
+   {t:"I don't know", r:3, g:[2,4], c:"fact", n:"Bare. True.", i:"Sounds unprepared on its own. It needs the second half."},
+   {t:"I think it was about ninety thousand", r:4, g:[0,0], c:"might", n:"A guess at a figure, offered to an auditor.", i:"He will write down 90,000 and check it. If you are wrong, everything else you said is now suspect."},
+   {t:"that's not really my area", r:3, g:[0,0], c:"fact", clar:-26, n:"Deflection.", i:"It is your desk. He will note that you declined to answer."}],
+  details:[
+   {t:"", gr:"D", lbl:"(no second half)", n:"", i:"An admission with no plan attached is the weakest thing you can say all morning."},
+   {t:"The book is in the safe — I'll have it for you within the half hour.", gr:"C", n:"Where it is, and when he gets it.", i:"This is what converts 'I don't know' into 'I am reliable'."},
+   {t:"I'll try to find out.", gr:"D", n:"No place, no time.", i:"Better than nothing and much weaker than a deadline."}],
+  model:"I don't have that figure to hand, Sir. The book is in the safe — I'll have it for you within the half hour.",
+  teach:"'I don't know' is a complete professional answer only when it has a second half: where the answer is, and when you will have it."},
+
+ {s:"<em>“I'll need the ledger extracts for October to March, by Thursday morning, in hard copy.”</em> — Three conditions, and you are not writing fast enough.",
+  who:"wichai", core:"You need it by Thursday.", act:"repair",
+  room:{d:2,p:2,s:2}, tgt:{r:5,c:"fact",gr:"B",a:0},
+  slots:["frame","core","affect"],
+  frames:"fact",
+  cores:[
+   {t:"if I've understood correctly, Sir — October to March, hard copy, by Thursday morning", r:5, g:[4,5], c:"fact", n:"Frames it as your understanding, then repeats all three conditions.", i:"Best answer. Confirming upward reads as competence, and it protects you from a misheard date."},
+   {t:"yes, Sir", r:4, g:[2,5], c:"fact", n:"Agreement without confirmation.", i:"Polite and risky. If you have one of the three conditions wrong, you find out on Thursday."},
+   {t:"so Thursday?", r:2, g:[1,3], c:"fact", n:"Confirms one condition of three.", i:"Better than nothing. The format and the range are still guesses."},
+   {t:"could I just note that down, Sir?", r:5, g:[4,5], c:"none", n:"Buys the time to get it right.", i:"Entirely acceptable and often the wiser move. Pair it with the read-back."}],
+  model:"If I've understood correctly, Sir — October to March, hard copy, by Thursday morning.",
+  teach:"Repeating an instruction back to a senior officer is expected, not slow. It is also the only thing standing between you and acting on a misheard number."},
+
+ {s:"11:30. He closes the folder. <em>“That was well organised. Thank you for your time.”</em>",
+  who:"wichai", core:"Thank you.", act:"social",
+  room:{d:2,p:2,s:0}, tgt:{r:5,c:"none",gr:"D",a:1},
+  slots:["core","affect"],
+  frames:"ask",
+  cores:[
+   {t:"thank you, Sir — I'm glad it was useful", r:5, g:[4,5], c:"none", a:1, n:"Warm and composed at the same time.", i:"Gratitude is the one warm thing allowed to pass the register-5 ceiling."},
+   {t:"no problem", r:2, g:[0,0], c:"none", n:"The standard reply to thanks among friends.", i:"To a Group Captain it sounds like you are waving off a small favour he did you."},
+   {t:"of course, Sir", r:5, g:[4,5], c:"none", n:"Short, correct, slightly cooler.", i:"Entirely safe. The right form if you do not want to add anything."},
+   {t:"yes!! thank you so much!!", r:1, g:[0,0], c:"none", a:3, n:"High affect upward.", i:"Reads as losing your composure at the last moment of a good morning's work."}],
+  model:"Thank you, Sir — I'm glad it was useful.",
+  teach:"Positive affect aimed at the other person passes through the ceiling. Everything else comes down as the register goes up."}
+]},
+
+{
+id:"m4", title:"One Office Day", tag:"Switching registers",
+blurb:"Six exchanges between 08:05 and 16:30, with four different people and the register swinging from 1 to 5 and back. This is the real skill.",
+focus:"Register switching · the affect ceiling · frustration has no upward form · sympathy",
+turns:[
+ {s:"08:05. You have just seen your result: you passed the professional paper you sat in June. Ploy is putting her bag down at the next desk.",
+  who:"ploy", core:"I passed the exam.", act:"social",
+  room:{d:0,p:0,s:0}, tgt:{r:1,c:"fact",gr:"C",a:3},
+  slots:["greet","addr","core","affect"],
+  frames:"fact",
+  cores:[
+   {t:"I passed!! I actually passed!", r:1, g:[1,2], c:"fact", a:3, n:"Full affect, friend, good news.", i:"Exactly right. There is no ceiling here and using one would be strange."},
+   {t:"I passed the exam", r:3, g:[2,4], c:"fact", a:0, n:"Flat delivery of your own good news.", i:"She will ask if you are all right. At register 1, flat reads as something being wrong."},
+   {t:"I am pleased to inform you that I have passed the examination", r:5, g:[0,0], c:"fact", a:0, n:"Register 5 aimed at your closest friend.", i:"She will ask why you are talking like that — or assume you are joking."},
+   {t:"guess what", r:1, g:[1,2], c:"none", a:2, n:"A pre-sequence between friends.", i:"Warm and natural. Just remember to deliver the news afterwards."}],
+  model:"Ploy! I passed!! I actually passed!",
+  teach:"The dial has a floor. Under-shooting affect with a close friend reads as bad news, not as composure."},
+
+ {s:"08:40. Sqn Ldr Malee signed your study-leave form in April. She deserves to be told, and she has a meeting in four minutes.",
+  who:"malee", core:"I passed the exam.", act:"social",
+  room:{d:1,p:1,s:1}, tgt:{r:3,c:"fact",gr:"C",a:1},
+  slots:["greet","addr","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"I passed the June paper", r:4, g:[3,5], c:"fact", a:1, n:"Same fact, affect dialled down one notch.", i:"Composed and still clearly pleased. The warmth moves into your voice."},
+   {t:"I passed!! I can't believe it!!", r:1, g:[0,0], c:"fact", a:3, n:"Register-1 affect aimed one level up.", i:"Not offensive, but it reads as young. She is about to walk into a meeting."},
+   {t:"it is my pleasure to report a satisfactory outcome in the June examination", r:5, g:[0,0], c:"fact", a:0, n:"Written-report English about your own exam.", i:"Airless. Register 4 does not mean bloodless."},
+   {t:"I got my result", r:3, g:[2,4], c:"none", a:0, clar:-24, n:"No news in it.", i:"She has to ask. With four minutes on the clock, tell her the outcome."}],
+  details:[
+   {t:"", gr:"D", lbl:"(nothing further)", n:"", i:"Fine, but it misses an easy piece of grace."},
+   {t:"Thank you for signing off the study leave — it made the difference.", gr:"C", n:"Credits the person who helped you.", i:"Gratitude passes the ceiling at any register. This is the sentence she will remember."},
+   {t:"So I'll be wanting the next one approved as well.", gr:"C", n:"A request bolted onto good news.", i:"Turns a gift into an invoice. Ask her tomorrow."}],
+  model:"Good morning, Squadron Leader Malee. I passed the June paper — thank you for signing off the study leave, it made the difference.",
+  teach:"Same fact, one notch down on affect, and the warmth moves from the punctuation into the voice."},
+
+ {s:"09:15. The lift. Wg Cdr Anan is the only other person in it. He says: <em>“Good morning. Busy week?”</em> There are four floors to go.",
+  who:"anan", core:"I am busy but fine.", act:"social",
+  room:{d:2,p:2,s:0}, tgt:{r:5,c:"fact",gr:"D",a:1},
+  slots:["core","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"quite busy, Sir — month end. All on schedule, though", r:5, g:[4,5], c:"fact", a:1, n:"Short, complete, pleasant, and it answers the question.", i:"Ideal. Register 5 with nothing at stake means brief and warm, not long."},
+   {t:"yes", r:3, g:[0,0], c:"fact", a:0, n:"Accurate and closed.", i:"Leaves three floors of silence. A missed chance rather than an error."},
+   {t:"very busy, Sir, we've had the travel-claim variance and the audit visit and the June invoices are still outstanding and Procurement haven't sent the receipts", r:4, g:[0,0], c:"fact", a:1, clar:-28, n:"A full status report in a lift.", i:"He asked a social question. This is where register and length get confused."},
+   {t:"not too bad thanks, you?", r:2, g:[0,0], c:"fact", a:1, n:"Peer-to-peer small talk.", i:"Friendly, and it skips the rank. Fine with a colleague; not with the Division head."}],
+  model:"Quite busy, Sir — month end. All on schedule, though.",
+  teach:"Register 5 with zero stakes is short and pleasant. Learners answer 'How are you?' with a paragraph because they think formal means long."},
+
+ {s:"12:30. Lunch. Ploy's request to transfer to Chiang Mai — where her mother is ill — has been refused. She has just told you and she is holding it together.",
+  who:"ploy", core:"I am sorry about your news.", act:"social",
+  room:{d:0,p:0,s:0}, tgt:{r:1,c:"fact",gr:"C",a:1},
+  slots:["core","detail","affect"],
+  frames:"fact",
+  cores:[
+   {t:"oh Ploy, no. I'm so sorry", r:1, g:[1,2], c:"fact", a:2, n:"Names her, names the feeling, nothing else.", i:"Right. At register 1 with someone hurting, warmth is the whole content."},
+   {t:"that's unfortunate", r:4, g:[0,0], c:"fact", a:0, n:"The register-4 form, used on your closest friend.", i:"Correct English and it will land as cold. This is a real clash, not a small one."},
+   {t:"you should appeal it, and you could also ask Malee to write a letter, and there's the compassionate posting form", r:2, g:[0,0], c:"fact", a:1, n:"Solutions, immediately.", i:"Useful tomorrow. Right now she wanted you to hear her, not to fix it."},
+   {t:"well, at least you still have your job", r:1, g:[0,0], c:"fact", a:1, n:"Silver lining offered too early.", i:"Heard as dismissing what she just told you."}],
+  details:[
+   {t:"", gr:"D", lbl:"(say nothing more)", n:"Silence, with attention.", i:"Often the correct answer. Not every turn needs filling."},
+   {t:"Do you want to talk about it, or shall we talk about something else?", gr:"C", n:"Hands her the choice.", i:"Excellent. It works at register 1 to 3 and in almost any language."},
+   {t:"Anyway — did you see the new coffee machine?", gr:"E", n:"Changing the subject without asking.", i:"She may be relieved. She may also feel dropped."}],
+  model:"Oh Ploy, no. I'm so sorry. Do you want to talk about it, or shall we talk about something else?",
+  teach:"The register-4 sympathy forms are not cold in themselves — but used one register too high they are. Match the person, not the seriousness."},
+
+ {s:"15:00. Malee tells you the funding for the advanced course you were promised has been cut from next year's budget. You are disappointed and she is not the one who cut it.",
+  who:"malee", core:"I am disappointed.", act:"stance",
+  room:{d:1,p:1,s:1}, tgt:{r:3,c:"fact",gr:"C",a:1},
+  slots:["frame","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"that's disappointing", r:4, g:[3,5], c:"fact", a:1, n:"Names the feeling once, at the right register.", i:"Honest and composed. You are allowed to be disappointed; you are not allowed to spill it."},
+   {t:"that's so unfair!!", r:1, g:[0,0], c:"fact", a:3, n:"Register-1 affect aimed at your section head.", i:"She agrees with you and can now do nothing except manage your reaction."},
+   {t:"it's fine, doesn't matter", r:2, g:[0,0], c:"fact", a:0, n:"Denying a feeling she can see.", i:"She knows it matters. Now she cannot help you either."},
+   {t:"I note the decision", r:5, g:[0,0], c:"fact", a:0, n:"Minute-taking English.", i:"Reads as cold anger, which is worse than the anger."}],
+  details:[
+   {t:"", gr:"D", lbl:"(nothing further)", n:"", i:"Leaves you with a feeling and no door."},
+   {t:"Is there another route to it — a part-funded place, or next year's cycle?", gr:"C", n:"Converts the feeling into a question she can act on.", i:"This is the move. Disappointment plus a question reads as ambition; disappointment alone reads as sulking."},
+   {t:"Can I ask who made the decision?", gr:"B", n:"Looking for the person to blame.", i:"She will not tell you, and she will remember that you asked."}],
+  model:"That's disappointing. Is there another route to it — a part-funded place, or next year's cycle?",
+  teach:"Name the feeling once, at the register you are in, then hand the other person something to do."},
+
+ {s:"16:30. Malee: <em>“Where are we on the supplier receipts?”</em> — Nowhere. You have emailed Procurement three times and had nothing back, and you have had enough.",
+  who:"malee", core:"I am frustrated.", act:"report",
+  room:{d:1,p:1,s:1}, tgt:{r:3,c:"fact",gr:"B",a:0},
+  slots:["frame","core","detail","close","affect"],
+  frames:"fact",
+  cores:[
+   {t:"Procurement hasn't responded to three emails since Monday", r:4, g:[3,5], c:"fact", a:0, n:"The obstacle, as a countable fact.", i:"Best answer. Naming the obstacle reads as professional; naming the feeling reads as complaining."},
+   {t:"this is incredibly frustrating", r:2, g:[0,0], c:"fact", a:2, n:"The feeling, at high affect, upward.", i:"She hears a complaint she cannot act on. Frustration has no safe upward form."},
+   {t:"nobody in that section ever does anything", r:1, g:[0,0], c:"fact", a:2, n:"A judgement about people, not a report about work.", i:"Unusable — and if she repeats it, it is now yours in writing."},
+   {t:"it's still in progress", r:3, g:[0,0], c:"none", clar:-32, a:0, n:"True, and it conceals the blockage.", i:"She will find out on Thursday that nothing moved, and that you knew."}],
+  details:[
+   {t:"", gr:"D", lbl:"(nothing further)", n:"", i:"You have handed her a problem with no options."},
+   {t:"Could you ask Sqn Ldr Prasit directly, or shall I go over in person tomorrow morning?", gr:"C", n:"Two routes, one of them yours.", i:"Converts a complaint into a decision she can make in five seconds."},
+   {t:"I'll keep chasing.", gr:"D", n:"More of what has already failed.", i:"Honest, and it commits you to a method that is not working."}],
+  model:"Procurement hasn't responded to three emails since Monday. Could you ask Sqn Ldr Prasit directly, or shall I go over in person tomorrow morning?",
+  teach:"Convert frustration into a countable obstacle plus two options. Naming the feeling upward is heard as complaining, every time."}
+]}
+);
+/* ============================================================
+   ENGINE
+   ============================================================ */
+const SLOT_ORDER = ["greet","addr","frame","core","time","detail","reason","close","affect"];
+const SLOT_META = {
+  greet:{n:"Greeting", g:"Set by register. First contact only."},
+  addr:{n:"Address", g:"Set by register. The clash that gets noticed most."},
+  frame:{n:"Softener / frame", g:"Set by hedging. Wraps the clause; never changes it."},
+  core:{n:"Core thought + modal", g:"Set by commitment and directness. The only slot you cannot leave empty."},
+  time:{n:"Time", g:"Set by tense and time adverbial."},
+  detail:{n:"Detail", g:"Set by grain — what does this person have to DO with the information?"},
+  reason:{n:"Justification", g:"A reason does more politeness work than any softener."},
+  close:{n:"Closer", g:"Set by register. Its absence is noticed above register 3."},
+  affect:{n:"Delivery", g:"Set by affect, capped by register. In speech this is pitch, not punctuation."}
+};
+const REG_SLOTS = ["greet","addr","frame","core","reason","close"];
+const GRAIN_I = {A:0,B:1,C:2,D:3,E:4};
+const C_ORDER = {none:0,might:1,should:2,will:3,fact:4};
+const AFFECT_CEIL = {1:3,2:3,3:2,4:1,5:0};
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+
+let ST = {xp:0, done:{}, best:{}};
+function load(){ try{ const r=localStorage.getItem("rtafRegisterOps_v1"); if(r) ST=Object.assign(ST,JSON.parse(r)); }catch(e){} }
+function save(){ try{ localStorage.setItem("rtafRegisterOps_v1", JSON.stringify(ST)); }catch(e){} }
+
+function rankFor(x){ let r=RANKS[0]; RANKS.forEach(k=>{ if(x>=k.x) r=k; }); return r; }
+function nextRank(x){ return RANKS.find(k=>k.x>x) || null; }
+function paintRank(){
+  const r=rankFor(ST.xp), nx=nextRank(ST.xp);
+  document.getElementById("rkName").textContent=r.n;
+  document.getElementById("rkXp").textContent = nx ? ST.xp+" pts · "+(nx.x-ST.xp)+" to "+nx.n : ST.xp+" pts · top grade";
+  const lo=r.x, hi=nx?nx.x:r.x+1;
+  document.getElementById("rkBar").style.width = (nx?clamp((ST.xp-lo)/(hi-lo)*100,2,100):100)+"%";
+}
+function toast(msg){
+  const t=document.getElementById("toast"); t.innerHTML=msg; t.classList.add("show");
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2600);
+}
+
+/* ---------- option pools per turn ---------- */
+function addrOpts(turn){
+  const p = PEOPLE[turn.who], out=[];
+  out.push({t:"", r:0, g:[1,5], lbl:"(no address)", n:"No name at all.", i:"Fine mid-conversation. At first contact above register 3 its absence is felt."});
+  ADDR_DEFS.forEach(d=>{
+    const txt = p.addr[d.k]; if(!txt) return;
+    out.push({t:txt, r:d.r, g:d.g, n:d.n, i:d.i, key:d.k});
+  });
+  return out;
+}
+function optsFor(turn, slot){
+  switch(slot){
+    case "greet":  return [{t:"", r:0, g:[1,5], lbl:"(no greeting)", n:"Straight in.", i:"Correct mid-conversation; abrupt at first contact."}].concat(GREET);
+    case "addr":   return addrOpts(turn);
+    case "frame":  return turn.frames==="ask" ? FRAME_ASK : FRAME_FACT;
+    case "core":   return turn.cores;
+    case "time":   return turn.times||[];
+    case "detail": return turn.details||[];
+    case "reason": return turn.reasons||[];
+    case "close":  return CLOSE;
+    case "affect": return AFFECT;
+  }
+  return [];
+}
+
+/* ---------- sentence assembly ---------- */
+function isQ(txt){
+  if(!txt) return false;
+  if(/[?]\s*$/.test(txt)) return true;
+  return /^(could|can|would|will you|shall|may i|might i|what|how|why|do you|are you|is there)\b/i.test(txt.trim());
+}
+function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
+
+function buildSentence(turn, sel){
+  const g=sel.greet, a=sel.addr;
+  let open="";
+  if(g && g.t){
+    const addrB = a && a.t ? a.t.replace(/[,.]\s*$/,"") : "";
+    open = addrB ? (g.pre+", "+addrB+g.pk) : (g.pre+g.pk);
+    if(g.post) open += " "+g.post;
+  } else if(a && a.t){
+    open = a.t.replace(/,\s*$/,"") + " —";
+  }
+  const core = sel.core ? sel.core.t : "";
+  let body="";
+  if(core){
+    const fr = sel.frame && sel.frame.t ? sel.frame.t : "";
+    let seg = fr ? (fr.replace(/[—,]\s*$/,"").trim()+(/[—]$/.test(fr.trim())?" ":" ")+core) : core;
+    if(fr && /[—]\s*$/.test(fr)) seg = fr.trim()+" "+core;
+    else if(fr) seg = fr.trim()+" "+core;
+    else seg = core;
+    if(sel.time && sel.time.t) seg += " "+sel.time.t;
+    const q = isQ(core);
+    let tailSent = "";
+    if(sel.reason && sel.reason.t){
+      if(q){ let rt=sel.reason.t.replace(/^[—-]\s*/,"").trim();
+             tailSent = rt.charAt(0).toUpperCase()+rt.slice(1)+(/[.!?]$/.test(rt)?"":"."); }
+      else { seg += " "+sel.reason.t; }
+    }
+    const already = /[.!?]\s*$/.test(seg);
+    let mark = ".";
+    const aff = sel.affect ? sel.affect.a : 0;
+    if(q) mark="?"; else if(aff>=3) mark="!!"; else if(aff>=2) mark="!";
+    body = cap(seg.trim()) + (already ? "" : mark);
+    body = body.replace(/\?\?+$/,"?").replace(/\.\.+$/,".");
+    if(tailSent) body += " "+tailSent;
+  }
+  const parts=[];
+  if(open) parts.push(open);
+  if(body) parts.push(body);
+  if(sel.detail && sel.detail.t) parts.push(sel.detail.t);
+  if(sel.close && sel.close.t) parts.push(sel.close.t);
+  return parts.join(" ").replace(/\s+/g," ").trim();
+}
+function buildBrackets(turn, sel){
+  return turn.slots.filter(s=>s!=="affect").map(s=>{
+    const o=sel[s];
+    const txt = o ? (o.t || (o.lbl||"—")) : "…";
+    const cls = (o && o.t) ? "" : " empty";
+    return '<span class="b'+cls+'">['+esc(txt)+']</span>';
+  }).join("");
+}
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+/* ---------- assessment ---------- */
+function assess(turn, sel){
+  const tr = turn.tgt.r;
+  let over=0, under=0, regs=[];
+  REG_SLOTS.forEach(k=>{
+    if(!turn.slots.includes(k)) return;
+    const o = sel[k]; if(!o) return;
+    const g = o.g || [o.r,o.r];
+    if(g[0]===0 && g[1]===0){                       // marked wrong at any register
+      if((o.r||tr) > tr) over += 2.2; else under += 2.2;
+      if(o.r) regs.push(o.r);
+      return;
+    }
+    if(o.r===0) return;                             // neutral / empty option
+    if(tr < g[0]) over += (g[0]-tr);
+    else if(tr > g[1]) under += (tr-g[1]);
+    regs.push(o.r);
+  });
+  const missing=[];
+  if(turn.slots.includes("greet") && tr>=3 && !(sel.greet && sel.greet.t)){ under+=1.2; missing.push(["R\u2193","no greeting at first contact above register 3"]); }
+  if(turn.slots.includes("addr") && tr>=4 && !(sel.addr && sel.addr.t)){ under+=1.0; missing.push(["R\u2193","no name or rank — its absence is felt at register 4 and 5"]); }
+  const clash = regs.length>1 && (Math.max.apply(null,regs)-Math.min.apply(null,regs))>=2;
+  let respect = clamp(over*24 - under*32, -100, 100);
+
+  const core = sel.core;
+  let clarity=100;
+  if(turn.tgt.gr && turn.slots.includes("detail")){
+    if(sel.detail) clarity -= Math.abs((GRAIN_I[sel.detail.gr]||0)-(GRAIN_I[turn.tgt.gr]||0))*16;
+  }
+  if(core && turn.tgt.c==="fact" && core.c!=="fact") clarity -= 18;
+  if(core && core.c==="none" && turn.tgt.c==="fact") clarity -= 12;
+  if(sel.frame && sel.frame.h>=2 && turn.tgt.c==="fact") clarity -= 16;
+  if(turn.slots.includes("time") && sel.time && !sel.time.t) clarity -= 15;
+  if(turn.slots.includes("reason") && sel.reason && !sel.reason.t) clarity -= 12;
+  if(core && /,.*,.*,/.test(core.t) && core.t.length>120) clarity -= 14;
+  SLOT_ORDER.forEach(k=>{ const o=sel[k]; if(o && o.clar) clarity += o.clar; });
+
+  let cred=100;
+  if(core && turn.tgt.c){ cred -= Math.abs((C_ORDER[core.c||"none"])-(C_ORDER[turn.tgt.c]))*16; }
+  if(sel.frame && turn.tgt.c==="fact") cred -= (sel.frame.h||0)*13;
+  if(sel.frame && turn.tgt.c==="might" && (sel.frame.h||0)===0) cred -= 10;
+
+  const ceil = Math.max(AFFECT_CEIL[tr], turn.tgt.a!=null?turn.tgt.a:0);
+  const aff = Math.max(sel.affect? (sel.affect.a||0) : 0, (core && core.a!=null)? core.a : 0);
+  let comp=100, flat=false;
+  comp -= Math.max(0, aff-ceil)*30;
+  if(turn.tgt.a!=null && (turn.tgt.a-aff)>=2){ comp -= (turn.tgt.a-aff)*17; flat=true; }
+  if(clash) { respect = respect + (over>under?10:-10); }
+
+  clarity=clamp(clarity,0,100); cred=clamp(cred,0,100); comp=clamp(comp,0,100);
+  respect=clamp(respect,-100,100);
+
+  /* codes */
+  const codes=[];
+  missing.forEach(c=>codes.push(c));
+  if(under>=1.5) codes.push(["R↓","register too low for this listener"]);
+  if(over>=1.5)  codes.push(["R↑","register too high for this listener"]);
+  if(clash)      codes.push(["CL","clash — two slots at different registers"]);
+  if(sel.frame && (sel.frame.h||0)>=2 && turn.tgt.c==="fact") codes.push(["H+","over-hedged: you softened a fact"]);
+  if(core && turn.tgt.c!=="fact" && core.c==="fact") codes.push(["H−","under-hedged: you stated a guess as a fact"]);
+  if(core && core.d!=null && turn.tgt.d!=null && core.d-turn.tgt.d>=2) codes.push(["D+","too indirect for this person"]);
+  if(core && core.d!=null && turn.tgt.d!=null && turn.tgt.d-core.d>=2) codes.push(["D−","too direct for this person"]);
+  if(sel.detail && turn.tgt.gr && (GRAIN_I[sel.detail.gr]-GRAIN_I[turn.tgt.gr])<=-2) codes.push(["G+","too much detail for this listener"]);
+  if(sel.detail && turn.tgt.gr && (GRAIN_I[sel.detail.gr]-GRAIN_I[turn.tgt.gr])>=2) codes.push(["G−","too little detail for this listener"]);
+  if(core && turn.tgt.c==="fact" && ["might","should"].includes(core.c)) codes.push(["M","modal on a verified fact"]);
+  if(core && turn.tgt.c==="might" && core.c==="fact") codes.push(["M","no modal on an unverified cause"]);
+  if(aff>ceil) codes.push(["AF+","affect above the ceiling for register "+tr]);
+  if(flat) codes.push(["AF−","flat delivery for this register"]);
+
+  /* score */
+  let stylePen=0;
+  SLOT_ORDER.forEach(k=>{ const o=sel[k]; if(o&&o.pen){ stylePen+=o.pen; if(o.code) codes.push([o.code[0],o.code[1]]); } });
+  const seen={}, merged=[];
+  codes.forEach(c=>{ if(seen[c[0]]!=null){ if(merged[seen[c[0]]][1].indexOf(c[1])<0) merged[seen[c[0]]][1]+="; "+c[1]; }
+                     else { seen[c[0]]=merged.length; merged.push([c[0],c[1]]); } });
+  codes.length=0; merged.forEach(c=>codes.push(c));
+  const regScore = 55*Math.max(0,1-(over+under)/3.2);
+  const dimScore = 33*((clarity+cred+comp)/300);
+  const clean = (codes.length===0) ? 12 : Math.max(0, 12-codes.length*4);
+  const build = Math.round(clamp(regScore+dimScore+clean-stylePen,0,100));
+
+  let rx="good";
+  if(under>=2) rx="rude";
+  else if(cred<60) rx="unsure";
+  else if(clarity<60) rx="unclear";
+  else if(aff>ceil+1) rx="rude";
+  else if(over>=2) rx="stiff";
+  else if(flat) rx="stiff";
+  else if(comp<60) rx="stiff";
+
+  return {respect,clarity,cred,comp,clash,codes,build,rx,over,under,aff,ceil,flat};
+}
+const L_RESP = v => v<=-60?["Rude","bad"] : v<=-25?["Blunt","warn"] : v<25?["Appropriate","good"] : v<60?["Formal","warn"] : ["Stiff / over-polite","bad"];
+const L_CLAR = v => v>=85?["Clear","good"] : v>=65?["Mostly clear","good"] : v>=45?["Vague","warn"] : ["Unclear","bad"];
+const L_CRED = v => v>=85?["Convinced","good"] : v>=65?["Fairly convinced","good"] : v>=45?["Doubtful","warn"] : ["Unconvinced","bad"];
+const L_COMP = (v,f) => f&&v<80?["Flat","warn"] : v>=85?["Composed","good"] : v>=65?["Steady","good"] : v>=45?["Excitable","warn"] : ["Rattled","bad"];
+function grade(n){ return n>=90?"Exemplary" : n>=75?"Proficient" : n>=60?"Acceptable" : n>=40?"Marginal" : "Unacceptable"; }
+
+/* ---------- speech ---------- */
+let VOICES=[];
+function pickVoice(){
+  if(!("speechSynthesis" in window)) return null;
+  VOICES = window.speechSynthesis.getVoices()||[];
+  return VOICES.find(v=>/en-GB/i.test(v.lang)) || VOICES.find(v=>/^en/i.test(v.lang)) || VOICES[0] || null;
+}
+if("speechSynthesis" in window){ window.speechSynthesis.onvoiceschanged = pickVoice; }
+function say(text, reg, aff){
+  if(!("speechSynthesis" in window) || !text) { toast("Speech is not available in this browser."); return; }
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text.replace(/—/g," , "));
+  const v=pickVoice(); if(v) u.voice=v;
+  u.lang = v && v.lang ? v.lang : "en-GB";
+  u.rate = 1.02 - (reg-3)*0.05 + (aff*0.03);     // higher register = slightly slower
+  u.pitch = 1 + (aff-1)*0.16 - (reg-3)*0.04;     // affect widens pitch
+  u.volume = 1;
+  window.speechSynthesis.speak(u);
+}
+/* ============================================================
+   UI
+   ============================================================ */
+const ROOM_Q = [
+  {k:"d", q:"<b>Distance</b> — how well do I know this person?",
+   o:["We have lunch together","I know their name and section","Never met, or outside the unit"]},
+  {k:"p", q:"<b>Power</b> — who ranks above whom?",
+   o:["Same level, or junior to me","A step or two above, or their approval I need","My commander, a senior officer, an auditor"]},
+  {k:"s", q:"<b>Stakes</b> — what is riding on this?",
+   o:["Nothing; a small favour","Money, a deadline, or work someone must redo","An error, a rule breached, a large sum, or blame in the room"]}
+];
+const REG_NAME = {1:"Friendly",2:"Informal",3:"Professional",4:"Serious",5:"Deference"};
+function registerFrom(d,p,s){
+  const t=d+p+s;
+  let r = t<=0?1 : t===1?2 : t<=3?3 : t<=5?4 : 5;
+  if(p===2) r=Math.max(r,3);
+  if(s===2) r=Math.max(r,4);
+  if(p===2 && d===2) r=Math.max(r,5);
+  return r;
+}
+const FLAT = [];
+MISSIONS.forEach((m,mi)=>m.turns.forEach((t,ti)=>FLAT.push({mi,ti,m,t})));
+
+let VIEW={screen:"missions", mid:null, ti:0, phase:"room", sel:{}, room:{}, locked:false, res:null, tally:[], cRef:0, cReg:null, dIdx:0, dScore:0, dAns:null};
+
+const NAVS=[["missions","Missions"],["console","Console"],["drill","Reverse drill"],["dossier","Dossier"]];
+function renderNav(){
+  document.getElementById("nav").innerHTML = NAVS.map(([k,l])=>
+    '<button data-nav="'+k+'" aria-current="'+((VIEW.screen===k||(k==="missions"&&VIEW.screen==="play"))?"true":"false")+'">'+l+'</button>').join("");
+}
+function render(){
+  renderNav();
+  const m=document.getElementById("main");
+  m.innerHTML = VIEW.screen==="missions" ? vMissions()
+    : VIEW.screen==="play" ? vPlay()
+    : VIEW.screen==="console" ? vConsole()
+    : VIEW.screen==="drill" ? vDrill()
+    : vDossier();
+  paintRank();
+  window.scrollTo({top:0,behavior:"instant"});
+}
+function regChip(r){ return '<span class="rr rrc'+(r||0)+'">'+(r||"·")+'</span>'; }
+
+/* ---------- missions list ---------- */
+function vMissions(){
+  const cards = MISSIONS.map(m=>{
+    const b=ST.best[m.id];
+    return '<button class="mcard" data-act="open" data-id="'+m.id+'">'
+      +'<span class="mm">'+esc(m.tag)+'</span>'
+      +'<span class="mt">'+esc(m.title)+'</span>'
+      +'<span class="md">'+esc(m.blurb)+'</span>'
+      +'<span class="md" style="color:var(--gold-dim);font-size:.76rem">'+esc(m.focus)+'</span>'
+      +'<span>'+(b?'<span class="badge done">Best '+b+'/100</span>':'<span class="badge">'+m.turns.length+' exchanges</span>')+'</span>'
+      +'</button>';
+  }).join("");
+  return '<div class="card"><h3>How this works</h3>'
+    +'<p style="font-size:.9rem">You are given a situation and a <b>core thought</b> — one blunt clause with no politeness in it. '
+    +'You read the room, set the dials, and the sentence assembles as you choose. Then you find out what the other person heard.</p>'
+    +'<div class="hint">Every exchange scores your <b>reading of the situation</b> as well as the sentence. Getting the register right for the wrong reasons still costs you points.</div>'
+    +'</div><div class="mlist">'+cards+'</div>'
+    +'<div class="card" style="margin-top:16px"><h4>Training grades</h4><div class="kv">'
+    + RANKS.map(r=>'<dt>'+r.x+'</dt><dd>'+r.n+(ST.xp>=r.x?' &nbsp;<span style="color:var(--good)">achieved</span>':'')+'</dd>').join("")
+    +'</div></div>';
+}
+
+/* ---------- play ---------- */
+function curM(){ return MISSIONS.find(m=>m.id===VIEW.mid); }
+function curT(){ return curM().turns[VIEW.ti]; }
+function askRoom(){
+  const m=curM();
+  if(VIEW.ti===0) return true;
+  return m.turns[VIEW.ti].who !== m.turns[VIEW.ti-1].who;
+}
+function startMission(id){
+  VIEW.mid=id; VIEW.ti=0; VIEW.tally=[]; VIEW.screen="play";
+  startTurn();
+}
+function startTurn(){
+  VIEW.sel={}; VIEW.room={}; VIEW.locked=false; VIEW.res=null;
+  VIEW.phase = askRoom() ? "room" : "build";
+  if(VIEW.phase==="build") preselect();
+}
+function preselect(){
+  const t=curT();
+  t.slots.forEach(s=>{
+    if(s==="core") return;
+    const o=optsFor(t,s);
+    if(o && o.length && VIEW.sel[s]===undefined) VIEW.sel[s]=o[0];
+  });
+}
+function vPlay(){
+  const m=curM(), t=curT(), p=PEOPLE[t.who];
+  const dots = m.turns.map((_,i)=>'<span class="dot '+(i<VIEW.ti?"on":i===VIEW.ti?"cur":"")+'"></span>').join("");
+  const left = VIEW.phase==="room" ? pRoom() : VIEW.phase==="build" ? pBuild() : pVerdict();
+  return '<div class="row" style="margin:0 0 10px"><button class="btn ghost sm" data-act="back">‹ Missions</button>'
+    +'<span style="font-weight:650">'+esc(m.title)+'</span>'
+    +'<span style="color:var(--ink-dim);font-size:.85rem">Exchange '+(VIEW.ti+1)+' of '+m.turns.length+'</span></div>'
+    +'<div class="dots">'+dots+'</div>'
+    +'<div class="grid2"><div>'
+      +'<div class="card"><div class="who"><div class="av">'+p.init+'</div><div><div class="nm">'+esc(p.name)+'</div><div class="rl">'+esc(p.role)+'</div></div></div>'
+      +'<p style="font-size:.92rem">'+t.s+'</p>'
+      +'<div class="core"><div class="lbl">Core thought</div><div class="txt">'+esc(t.core)+'</div></div></div>'
+      +left
+    +'</div><div><div class="sticky">'+pPanel()+'</div></div></div>';
+}
+function pRoom(){
+  const t=curT();
+  const qs = ROOM_Q.map((q,qi)=>{
+    const v=VIEW.room[q.k];
+    return '<div class="qrow"><div class="ql">'+q.q+'</div><div class="opts">'
+      + q.o.map((o,i)=>{
+          let cls="opt";
+          if(VIEW.locked){ if(i===t.room[q.k]) cls+=" ok"; else if(i===v) cls+=" no"; }
+          return '<button class="'+cls+'" data-act="room" data-k="'+q.k+'" data-v="'+i+'" aria-pressed="'+(v===i)+'"'+(VIEW.locked?" disabled":"")+'><span class="k">'+i+'</span>'+esc(o)+'</button>';
+        }).join("")
+      +'</div></div>';
+  }).join("");
+  const done = ROOM_Q.every(q=>VIEW.room[q.k]!=null);
+  let after="";
+  if(VIEW.locked){
+    const t2=t.room, r=registerFrom(t2.d,t2.p,t2.s);
+    const mine=registerFrom(VIEW.room.d,VIEW.room.p,VIEW.room.s);
+    const pts=ROOM_Q.reduce((a,q)=>a+(VIEW.room[q.k]===t.room[q.k]?1:0),0);
+    after='<div class="verdict '+(pts===3?"v-good":pts===2?"v-ok":"v-bad")+'">'
+      +'<div class="rx">Read: <b>'+pts+'/3</b>. Correct scoring is D'+t2.d+' P'+t2.p+' S'+t2.s+' = <b>register '+r+', '+REG_NAME[r]+'</b>.'
+      +(mine!==r?' Your scoring would have given register '+mine+' — that is the decision the whole sentence hangs on.':'')+'</div>'
+      +(t2.p===2?'<div style="font-size:.82rem;color:var(--ink-dim)">Power = 2 sets a floor of register 3, whatever the other scores say.'+(t2.d===2?' Distance 2 with Power 2 takes it to 5.':'')+'</div>':'')
+      +(t2.s===2?'<div style="font-size:.82rem;color:var(--ink-dim)">Stakes = 2 sets a floor of register 4. Bad news is delivered seriously even to a friend.</div>':'')
+      +'<div class="row"><button class="btn" data-act="toBuild">Build the sentence ›</button></div></div>';
+  }
+  return '<div class="card"><h3>1 · Read the room</h3><p style="font-size:.85rem;color:var(--ink-dim)">Score each question 0, 1 or 2. Ten seconds, no sentence yet.</p>'
+    +qs+'<div class="row"><button class="btn" data-act="lock" '+(done?"":"disabled")+'>Lock in the reading</button></div></div>'+after;
+}
+function pBuild(){
+  const t=curT();
+  const tgtR=t.tgt.r;
+  const slots = t.slots.map(s=>{
+    const opts=optsFor(t,s);
+    if(!opts.length) return "";
+    const sel=VIEW.sel[s];
+    const chips = opts.map((o,i)=>{
+      const lbl = o.lbl || o.t || "—";
+      const rc = (s==="affect") ? '<span class="rr rrc0">'+("·♪!!".charAt(o.a)||"·")+'</span>' : regChip(o.r);
+      return '<button class="chip" data-act="pick" data-slot="'+s+'" data-i="'+i+'" aria-pressed="'+(sel===o)+'">'+rc+esc(lbl)+'</button>';
+    }).join("");
+    const note = sel ? '<div class="note show"><b>Why:</b> '+esc(sel.n||"")+' <span class="imp">Likely impact: '+esc(sel.i||"")+'</span></div>' : '';
+    return '<div class="slot"><div class="sh"><span class="sn">'+SLOT_META[s].n+'</span><span class="sg">'+SLOT_META[s].g+'</span></div>'
+      +'<div class="chips">'+chips+'</div>'+note+'</div>';
+  }).join("");
+  const ready = !!VIEW.sel.core;
+  return '<div class="card"><h3>2 · Set the dials</h3>'
+    +'<p style="font-size:.85rem;color:var(--ink-dim)">Target for this listener: <b style="color:var(--gold)">register '+tgtR+' — '+REG_NAME[tgtR]+'</b>. '
+    +'Numbers on the chips are the register each option belongs to.</p>'
+    +slots
+    +'<div class="row"><button class="btn" data-act="submit" '+(ready?"":"disabled")+'>Say it</button>'
+    +'<button class="btn ghost sm" data-act="say">🔊 Hear it</button></div></div>';
+}
+function pVerdict(){
+  const t=curT(), r=VIEW.res, p=PEOPLE[t.who];
+  const pool=p.rx[r.rx]||p.rx.good;
+  const line=pool[r.seed % pool.length];
+  const cls = r.total>=75?"v-good":r.total>=55?"v-ok":"v-bad";
+  const last = VIEW.ti===curM().turns.length-1;
+  return '<div class="verdict '+cls+'"><div class="rx">'+line+'</div>'
+    +'<div class="sc"><span class="big">'+r.total+'</span><span class="gr">'+grade(r.total)+'</span>'
+    +(r.roomPts!=null?'<span class="gr">room read '+r.roomPts+'/3</span>':'')+'</div>'
+    +(r.codes.length?'<div class="codes">'+r.codes.map(c=>'<span class="codechip" title="'+esc(c[1])+'">'+c[0]+'</span>').join("")+'</div>'
+      +'<div style="font-size:.8rem;color:var(--ink-dim)">'+r.codes.map(c=>'<b>'+c[0]+'</b> '+esc(c[1])).join(' · ')+'</div>':'<div class="codes"><span class="codechip" style="background:#0c2b1a;border-color:#14532d;color:#86efac">clean — no clashes</span></div>')
+    +'<h4 style="margin-top:14px">Model answer</h4><div class="model">'+esc(t.model)+'</div>'
+    +'<div class="hint"><b>The lesson:</b> '+esc(t.teach)+'</div>'
+    +'<div class="row"><button class="btn" data-act="next">'+(last?"Debrief ›":"Next exchange ›")+'</button>'
+    +'<button class="btn ghost sm" data-act="retry">Try this one again</button>'
+    +'<button class="btn ghost sm" data-act="sayModel">🔊 Hear the model</button></div></div>';
+}
+function meter(lbl,val,pair){
+  const [txt,tone]=pair;
+  const col = tone==="good"?"var(--good)":tone==="warn"?"var(--warn)":"var(--bad)";
+  return '<div class="mtr"><div class="ml"><span>'+lbl+'</span><b style="color:'+col+'">'+txt+'</b></div>'
+    +'<div class="bar"><i style="width:'+clamp(val,2,100)+'%;background:'+col+'"></i></div></div>';
+}
+function pPanel(){
+  const t=curT();
+  const sent = buildSentence(t,VIEW.sel);
+  const live = assess(t,VIEW.sel);
+  const [rl,rt]=L_RESP(live.respect);
+  const rcol = rt==="good"?"var(--good)":rt==="warn"?"var(--warn)":"var(--bad)";
+  return '<div class="card"><h4>Assembly</h4>'
+    +'<div class="asm">'+buildBrackets(t,VIEW.sel)+'</div>'
+    +'<div class="sent'+(sent?"":" ph")+'">'+(sent?esc(sent):"Your sentence will appear here as you choose.")+'</div>'
+    +'<h4 style="margin-top:14px">What '+esc(PEOPLE[t.who].short)+' hears</h4>'
+    +'<div class="mtr"><div class="ml"><span>Respect</span><b style="color:'+rcol+'">'+rl+'</b></div>'
+    +'<div class="axis"><div class="band"></div><div class="ndl" style="left:'+((live.respect+100)/2)+'%"></div>'
+    +'<span class="tk" style="left:4px">rude</span><span class="tk" style="right:4px">stiff</span></div></div>'
+    +meter("Clarity",live.clarity,L_CLAR(live.clarity))
+    +meter("Credibility",live.cred,L_CRED(live.cred))
+    +meter("Composure",live.comp,L_COMP(live.comp,live.flat))
+    +(live.clash?'<div class="flags"><span class="flag">CLASH — slots at different registers</span></div>':"")
+    +'</div>';
+}
+function submitTurn(){
+  const t=curT();
+  const r=assess(t,VIEW.sel);
+  let total=r.build, roomPts=null;
+  if(askRoom()){
+    roomPts=ROOM_Q.reduce((a,q)=>a+(VIEW.room[q.k]===t.room[q.k]?1:0),0);
+    total=Math.round(r.build*0.8 + (roomPts/3)*100*0.2);
+  }
+  r.total=clamp(total,0,100); r.roomPts=roomPts; r.seed=Math.floor(Math.random()*97);
+  VIEW.res=r; VIEW.phase="verdict";
+  VIEW.tally[VIEW.ti]=r.total;
+  ST.xp += Math.round(r.total/4);
+  const nr=nextRank(ST.xp-Math.round(r.total/4));
+  save();
+  if(nr && ST.xp>=nr.x) toast("Promoted — "+nr.n);
+  render();
+}
+function finishMission(){
+  const m=curM();
+  const avg=Math.round(VIEW.tally.reduce((a,b)=>a+b,0)/VIEW.tally.length);
+  ST.done[m.id]=true;
+  if(!ST.best[m.id] || avg>ST.best[m.id]) ST.best[m.id]=avg;
+  save();
+  const rows=m.turns.map((t,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(t.core)+'</td><td>R'+t.tgt.r+'</td><td><b>'+(VIEW.tally[i]||0)+'</b></td></tr>').join("");
+  document.getElementById("main").innerHTML =
+   '<div class="card"><h3>Debrief — '+esc(m.title)+'</h3>'
+   +'<div class="sc" style="display:flex;gap:14px;align-items:center;margin-bottom:12px"><span class="big" style="font-size:2.4rem;font-family:var(--mono)">'+avg+'</span><span class="gr">'+grade(avg)+'</span></div>'
+   +'<div class="tw"><table><thead><tr><th>#</th><th>Core thought</th><th>Target</th><th>Score</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+   +'<div class="hint"><b>Focus of this mission:</b> '+esc(m.focus)+'</div>'
+   +'<div class="row"><button class="btn" data-act="back">‹ Missions</button><button class="btn ghost" data-act="open" data-id="'+m.id+'">Run it again</button></div></div>';
+  paintRank();
+}
+/* ---------- console (free play) ---------- */
+function consoleTurn(){
+  const base=FLAT[VIEW.cRef].t;
+  const slots=SLOT_ORDER.filter(s=>{ if(s==="core") return true; const o=optsFor(base,s); return o&&o.length>0; });
+  const tgt=Object.assign({},base.tgt);
+  if(VIEW.cReg) tgt.r=VIEW.cReg;
+  return Object.assign({},base,{slots:slots,tgt:tgt});
+}
+function vConsole(){
+  const t=consoleTurn(), p=PEOPLE[t.who];
+  t.slots.forEach(s=>{ if(s==="core") return; const o=optsFor(t,s); if(o&&o.length&&VIEW.sel[s]===undefined) VIEW.sel[s]=o[0]; });
+  const sel=FLAT.map((f,i)=>'<option value="'+i+'"'+(i===VIEW.cRef?" selected":"")+'>'+esc(f.m.title+" "+(f.ti+1)+" — "+f.t.core)+'</option>').join("");
+  const regBtns=[1,2,3,4,5].map(r=>'<button class="opt" style="flex:0 0 auto" data-act="creg" data-v="'+r+'" aria-pressed="'+(t.tgt.r===r)+'">'+r+' '+REG_NAME[r]+'</button>').join("");
+  const slots=t.slots.map(s=>{
+    const opts=optsFor(t,s), cur=VIEW.sel[s];
+    const chips=opts.map((o,i)=>{
+      const rc=(s==="affect")?'<span class="rr rrc0">'+("·♪!!".charAt(o.a)||"·")+'</span>':regChip(o.r);
+      return '<button class="chip" data-act="pick" data-slot="'+s+'" data-i="'+i+'" aria-pressed="'+(cur===o)+'">'+rc+esc(o.lbl||o.t||"—")+'</button>';
+    }).join("");
+    const note=cur?'<div class="note show"><b>Why:</b> '+esc(cur.n||"")+' <span class="imp">Likely impact: '+esc(cur.i||"")+'</span></div>':"";
+    return '<div class="slot"><div class="sh"><span class="sn">'+SLOT_META[s].n+'</span><span class="sg">'+SLOT_META[s].g+'</span></div><div class="chips">'+chips+'</div>'+note+'</div>';
+  }).join("");
+  return '<div class="card"><h3>Modulation console</h3>'
+    +'<p style="font-size:.88rem">Pick any core thought, then move the dials and watch the sentence and the listener\'s reading change. '
+    +'Nothing is scored here. Change <b>who is listening</b> without changing a single word and see the same sentence go from appropriate to rude.</p>'
+    +'<div class="row" style="margin-top:4px"><select class="sel" data-act="cref" style="flex:1 1 320px">'+sel+'</select></div>'
+    +'<div class="who" style="margin-top:12px"><div class="av">'+p.init+'</div><div><div class="nm">'+esc(p.name)+'</div><div class="rl">'+esc(p.role)+'</div></div></div>'
+    +'<div class="core"><div class="lbl">Core thought</div><div class="txt">'+esc(t.core)+'</div></div>'
+    +'<h4 style="margin-top:14px">Listener register (override)</h4><div class="opts">'+regBtns+'</div>'
+    +'</div>'
+    +'<div class="grid2"><div class="card">'+slots+'<div class="row"><button class="btn ghost sm" data-act="say">🔊 Hear it</button></div></div>'
+    +'<div><div class="sticky">'+cPanel(t)+'</div></div></div>';
+}
+function cPanel(t){
+  const sent=buildSentence(t,VIEW.sel), live=assess(t,VIEW.sel);
+  const [rl,rt]=L_RESP(live.respect);
+  const rcol=rt==="good"?"var(--good)":rt==="warn"?"var(--warn)":"var(--bad)";
+  return '<div class="card"><h4>Assembly</h4><div class="asm">'+buildBrackets(t,VIEW.sel)+'</div>'
+    +'<div class="sent'+(sent?"":" ph")+'">'+(sent?esc(sent):"Choose a core thought option to begin.")+'</div>'
+    +'<h4 style="margin-top:14px">Impression at register '+t.tgt.r+'</h4>'
+    +'<div class="mtr"><div class="ml"><span>Respect</span><b style="color:'+rcol+'">'+rl+'</b></div>'
+    +'<div class="axis"><div class="band"></div><div class="ndl" style="left:'+((live.respect+100)/2)+'%"></div>'
+    +'<span class="tk" style="left:4px">rude</span><span class="tk" style="right:4px">stiff</span></div></div>'
+    +meter("Clarity",live.clarity,L_CLAR(live.clarity))
+    +meter("Credibility",live.cred,L_CRED(live.cred))
+    +meter("Composure",live.comp,L_COMP(live.comp,live.flat))
+    +(live.codes.length?'<div class="flags">'+live.codes.map(c=>'<span class="flag" title="'+esc(c[1])+'">'+c[0]+'</span>').join("")+'</div>':'<div class="flags"><span class="flag g">clean</span></div>')
+    +(live.codes.length?'<div style="font-size:.76rem;color:var(--ink-dim);margin-top:7px">'+live.codes.map(c=>'<b>'+c[0]+'</b> '+esc(c[1])).join('<br>')+'</div>':"")
+    +'</div>';
+}
+
+/* ---------- reverse drill ---------- */
+const DRILL=[
+ {u:"Hey, Wing Commander Anan — the numbers are all over the place.", c:"Said to the Division head, about a 4,200-baht variance.",
+  o:["CL — clash: a register-1 greeting with a register-4 address","R↑ — too formal for him","H+ — over-hedged","Nothing is wrong"], a:0,
+  fix:"Two slots, two registers. Also no figure: <em>“Good morning, Sir. The May travel claims are 4,200 baht over budget.”</em>"},
+ {u:"There might possibly be a small issue with maybe the travel claims.", c:"To her section head, about a figure she has counted twice.",
+  o:["D+ — too indirect","H+ — over-hedged: she softened a verified fact","G− — too little detail","Nothing is wrong"], a:1,
+  fix:"Three hedges on a number she has checked. Register never softens a number, a date, or her own mistake."},
+ {u:"Would it be possible for you to pass me the stapler?", c:"To Ploy, at the next desk, who she eats lunch with every day.",
+  o:["D+ — too indirect for a close friend","R↓ — too casual","M — modal on a fact","Nothing is wrong"], a:0,
+  fix:"Over-indirectness is an error too. It implies the stapler is a serious matter. <em>“Ploy — pass me the stapler?”</em>"},
+ {u:"Please send me the receipt for claim 114.", c:"To Khun Nok in Procurement, whom she barely knows.",
+  o:["H+ — over-hedged","D− — still an imperative; 'please' does not make it a request","R↑ — too formal","Nothing is wrong"], a:1,
+  fix:"English makes a request by turning the sentence into a question and pushing the modal into its past form: <em>“Could you send me the receipt for claim 114?”</em>"},
+ {u:"Good morning, Sir. I found the error!!", c:"To the Division head, in his office doorway.",
+  o:["AF+ — affect above the ceiling for register 5","R↓ — too casual","G+ — too much detail","Nothing is wrong"], a:0,
+  fix:"At register 5 the impression to aim for is composure. Exclamation reads as losing it. <em>“Good morning, Sir. I've found the cause of the variance.”</em>"},
+ {u:"I'll have it done as soon as possible.", c:"To her section head, who asked when the correction would be ready.",
+  o:["H+ — over-hedged","No date: 'as soon as possible' is heard upward as 'I don't know'","AF− — too flat","Nothing is wrong"], a:1,
+  fix:"A commitment with no date is not a commitment. <em>“I'll have the corrected reconciliation to you by Thursday.”</em>"},
+ {u:"Owing to the fact that Procurement have not responded, the matter remains outstanding.", c:"Spoken aloud to her section head at her desk.",
+  o:["Written-English connectors used in speech","R↓ — too casual","M — modal on a fact","Nothing is wrong"], a:0,
+  fix:"Spoken register 5 uses short words in a formal frame. <em>“Procurement hasn't responded to three emails since Monday.”</em>"},
+ {u:"Good morning, Sir. The May travel claims are 4,200 baht over budget — a duplicated claim. I'm correcting it by Thursday.", c:"To the Division head, in a corridor, holding a folder.",
+  o:["G+ — too much detail","H+ — over-hedged","R↑ — too formal","Nothing is wrong"], a:3,
+  fix:"Headline, cause, action, date. Four seconds, nothing left to chase. This is the target."},
+ {u:"I think it might have been me.", c:"Asked directly by the Division head whose error it was. It was hers.",
+  o:["The forbidden hedge — she softened her own mistake","G− — too little detail","R↓ — too casual","Nothing is wrong"], a:0,
+  fix:"He hears someone trying not to be blamed. <em>“Mine, Sir. I imported the file twice on the 16th. It's corrected.”</em>"},
+ {u:"It shall be completed by Thursday.", c:"Promising her section head a corrected reconciliation.",
+  o:["'shall' is contract English, not a stronger 'will'","H+ — over-hedged","AF+ — too emphatic","Nothing is wrong"], a:0,
+  fix:"<em>shall</em> means obligation in a contract (<em>“The Contractor shall submit…”</em>) or an offer (<em>“Shall I open a new file?”</em>). For a promise: <em>“I'll have it to you by Thursday.”</em>"},
+ {u:"That's unfortunate.", c:"To Ploy, who has just told her that her transfer was refused and her mother is ill.",
+  o:["R↑ — a register-4 form aimed at her closest friend","AF+ — too emphatic","H− — under-hedged","Nothing is wrong"], a:0,
+  fix:"Correct English, one register too high, and it lands as cold. <em>“Oh Ploy, no. I'm so sorry.”</em>"},
+ {u:"I don't know.", c:"To an auditor two ranks above her, who has asked for the petty-cash balance at 31 March.",
+  o:["Missing the second half — where the answer is and when he gets it","R↓ — too casual","D+ — too indirect","Nothing is wrong"], a:0,
+  fix:"<em>“I don't have that figure to hand, Sir. The book is in the safe — I'll have it for you within the half hour.”</em>"},
+ {u:"Could you send me the receipt for claim 114 — I need it to close the May file?", c:"To Khun Nok in Procurement.",
+  o:["D+ — too indirect","H+ — over-hedged","R↑ — too formal","Nothing is wrong"], a:3,
+  fix:"Question form, past-form modal, and a reason attached. A reason does more politeness work than any softener."}
+];
+function vDrill(){
+  if(VIEW.dIdx>=DRILL.length){
+    const pct=Math.round(VIEW.dScore/DRILL.length*100);
+    return '<div class="card"><h3>Reverse drill complete</h3>'
+      +'<div class="sc" style="display:flex;gap:14px;align-items:center"><span style="font-size:2.4rem;font-weight:700;font-family:var(--mono)">'+VIEW.dScore+'/'+DRILL.length+'</span><span class="gr">'+grade(pct)+'</span></div>'
+      +'<p style="font-size:.9rem;margin-top:10px">This is the drill that shows real understanding, and the only one that works as homework — she names the settings instead of producing them.</p>'
+      +'<div class="row"><button class="btn" data-act="dreset">Run it again</button></div></div>';
+  }
+  const d=DRILL[VIEW.dIdx];
+  const answered=VIEW.dAns!=null;
+  const opts=d.o.map((o,i)=>{
+    let cls="opt";
+    if(answered){ if(i===d.a) cls+=" ok"; else if(i===VIEW.dAns) cls+=" no"; }
+    return '<button class="'+cls+'" style="flex:1 1 100%" data-act="dans" data-v="'+i+'" aria-pressed="'+(VIEW.dAns===i)+'"'+(answered?" disabled":"")+'>'+esc(o)+'</button>';
+  }).join("");
+  return '<div class="card"><h3>Reverse drill <span style="color:var(--ink-dim);font-weight:400;font-size:.85rem">'+(VIEW.dIdx+1)+' / '+DRILL.length+' · score '+VIEW.dScore+'</span></h3>'
+    +'<p style="font-size:.85rem;color:var(--ink-dim)">You are given the finished sentence. Name what is wrong with it — or say that nothing is.</p>'
+    +'<div class="sent" style="font-style:normal">“'+esc(d.u)+'”</div>'
+    +'<p style="font-size:.84rem;color:var(--ink-dim)">'+esc(d.c)+'</p>'
+    +'<div class="opts" style="flex-direction:column">'+opts+'</div>'
+    +(answered?'<div class="verdict '+(VIEW.dAns===d.a?"v-good":"v-bad")+'" style="margin-top:14px">'
+       +'<div class="rx">'+(VIEW.dAns===d.a?"Correct.":"Not quite.")+' '+d.fix+'</div>'
+       +'<div class="row"><button class="btn" data-act="dnext">Next ›</button></div></div>':"")
+    +'</div>';
+}
+/* ---------- dossier ---------- */
+const DOSSIER=[
+["The five registers — the master dial",
+`<p style="font-size:.86rem">One decision, seven consequences. Read down any column: every cell has to agree. That is what makes register a dial and not five dials.</p>
+<div class="tw"><table><thead><tr><th></th><th>1 Friendly</th><th>2 Informal</th><th>3 Professional</th><th>4 Serious</th><th>5 Deference</th></tr></thead><tbody>
+<tr><th>Greeting</th><td>Hey!</td><td>Hi!</td><td>Hello.</td><td>Good morning.</td><td>Good morning, Sir / Ma'am.</td></tr>
+<tr><th>Address</th><td>Nickname</td><td>First name</td><td>Khun + first name · Ms./Mr. + surname</td><td>Rank + first name</td><td>Sir / Ma'am · Rank + first name</td></tr>
+<tr><th>Length</th><td>Short, fragments fine</td><td>Short</td><td>Medium, complete</td><td>Complete, one idea each</td><td>Short and complete</td></tr>
+<tr><th>Grammar</th><td>Contractions, rules bent</td><td>Contractions, phrasal verbs</td><td>Contractions fine, full clauses</td><td>Few contractions, some passive</td><td>No contractions in writing, precise tense</td></tr>
+<tr><th>Words</th><td>Slang, in-jokes</td><td>Idioms, everyday verbs</td><td>Neutral professional</td><td>Fact and evidence, no idiom</td><td>Plain, exact, no filler</td></tr>
+<tr><th>Affect ceiling</th><td>No limit</td><td>High</td><td>Moderate</td><td>Low</td><td>Very low (thanks excepted)</td></tr>
+<tr><th>Hedging floor</th><td>None</td><td>Light</td><td>Moderate on requests</td><td>Heavy on asks, none on facts</td><td>Heavy on asks, none on facts</td></tr>
+<tr><th>Who</th><td>Ploy</td><td>Section colleagues</td><td>Khun Nok, suppliers, most email</td><td>Bad news, disputes, reports</td><td>Wg Cdr Anan, auditors</td></tr>
+</tbody></table></div>
+<div class="hint">Register 5 is <b>shorter</b> than register 4, not longer. It buys brevity, not ornament.</div>`],
+
+["Reading the room — Distance, Power, Stakes",
+`<div class="tw"><table><thead><tr><th>Question</th><th>0</th><th>1</th><th>2</th></tr></thead><tbody>
+<tr><th>Distance</th><td>We have lunch together</td><td>I know their name and section</td><td>Never met, or outside the unit</td></tr>
+<tr><th>Power</th><td>Same level, or junior to me</td><td>A step or two above</td><td>Commander, senior officer, auditor</td></tr>
+<tr><th>Stakes</th><td>Nothing; a small favour</td><td>Money, a deadline, work to redo</td><td>An error, a rule breached, blame in the room</td></tr>
+</tbody></table></div>
+<p style="font-size:.86rem">Add the three. 0 → register 1 · 1 → 2 · 2–3 → 3 · 4–5 → 4 · 6 → 5. Then the floors, which matter more than the arithmetic:</p>
+<ul style="font-size:.86rem"><li><b>Power 2</b> sets a floor of register 3 — never below professional with a senior officer, however friendly.</li>
+<li><b>Stakes 2</b> sets a floor of register 4 — bad news is delivered seriously even to a friend.</li>
+<li><b>Power 2 with Distance 2</b> takes it to 5.</li></ul>`],
+
+["Directness — where English keeps its politeness",
+`<p style="font-size:.86rem">Thai puts politeness in particles and status words while the clause stays an imperative. English moves it into the grammar of the clause. <b>“Please” barely raises politeness in English</b> — it makes an order a polite order, not a request.</p>
+<div class="tw"><table><thead><tr><th>#</th><th>Form</th><th>Example</th><th>Use with</th></tr></thead><tbody>
+<tr><td>0</td><td>Bare imperative</td><td>Send me the receipt.</td><td>Juniors, urgency, safety</td></tr>
+<tr><td>1</td><td>Marked imperative</td><td>Please send me the receipt.</td><td>Peers, small favours</td></tr>
+<tr><td>2</td><td>Declarative of need</td><td>I need the receipt for the May file.</td><td>Peers, routine</td></tr>
+<tr><td>3</td><td>Present-modal question</td><td>Can you send me the receipt?</td><td>Colleagues, register 2–3</td></tr>
+<tr><td>4</td><td>Past-modal question</td><td>Could you send me the receipt?</td><td><b>The workhorse.</b> Register 3–4, anything</td></tr>
+<tr><td>5</td><td>Ability periphrasis</td><td>Would you be able to send it?</td><td>Register 4, real imposition</td></tr>
+<tr><td>6</td><td>Embedded question</td><td>I was wondering if you could send it.</td><td>Register 4–5, large imposition</td></tr>
+<tr><td>7</td><td>Impersonal / conditional</td><td>Would it be possible to have it by Friday?</td><td>Register 5, or may be refused</td></tr>
+</tbody></table></div>
+<div class="hint"><b>Could</b>, <b>would</b> and <b>might</b> are not past tense here. They are remoteness markers — the same past morphology that makes <em>if I were</em> hypothetical makes <em>could you</em> a hypothetical request. Distance is what politeness is made of in English.</div>
+<p style="font-size:.86rem"><b>Over-indirectness is also an error.</b> <em>“Would it be possible for you to pass me the stapler?”</em> to a friend implies the stapler is a serious matter. And the dial is <b>asymmetric</b>: the Division head may say <em>“Send me that file”</em> to you; you cannot say it back.</p>`],
+
+["Commitment — the calibrated ladder",
+`<div class="tw"><table><thead><tr><th>Confidence</th><th>Form</th><th>Example</th></tr></thead><tbody>
+<tr><td>0%</td><td>can't / couldn't</td><td>The May total can't be right.</td></tr>
+<tr><td>20–30%</td><td>might not / may not</td><td>The receipt might not be in the file.</td></tr>
+<tr><td>30–50%</td><td>might · may · could · possibly</td><td>The variance could be a duplicated claim.</td></tr>
+<tr><td>50–60%</td><td>may well · could well · perhaps</td><td>It may well be a rounding error.</td></tr>
+<tr><td>70–80%</td><td>should · ought to · probably</td><td>The transfer should clear on Monday.</td></tr>
+<tr><td>90–95%</td><td>must · will · almost certainly</td><td>The discrepancy must be the duplicate entry.</td></tr>
+<tr><td><b>100%</b></td><td><b>no modal at all</b></td><td>The travel-claims line is 4,200 baht over.</td></tr>
+</tbody></table></div>
+<p style="font-size:.86rem"><em>might</em> and <em>may</em> are the same confidence level — the difference is register, not probability.</p>
+<h4>Two modals doing two jobs</h4>
+<div class="tw"><table><thead><tr><th></th><th>Obligation</th><th>Deduction / expectation</th></tr></thead><tbody>
+<tr><th>must</th><td>You must sign the form.</td><td>It must be a rounding error.</td></tr>
+<tr><th>should</th><td>You should check the receipt.</td><td>The payment should arrive Friday.</td></tr>
+</tbody></table></div>
+<p style="font-size:.86rem">Heuristic: an animate <em>you</em> means obligation; <em>it / the figure / the payment</em> means deduction.</p>
+<h4>What <em>shall</em> actually does</h4>
+<ul style="font-size:.86rem">
+<li><b>Contract obligation</b> — <em>“The Contractor shall submit invoices within thirty days.”</em> This means <b>must</b>. Recognise it with total reliability; you will read it constantly.</li>
+<li><b>Offers and suggestions with I/we</b> — <em>“Shall I open a new file?”</em> Produce this one.</li>
+<li><b>Formal first-person future</b> — <em>“I shall write to them today.”</em> Correct and dated. Comprehension only.</li>
+</ul>
+<div class="hint">For maximum certainty use <b>no modal</b> (<em>The report goes out on Friday</em>) or <b>will + adverb</b> (<em>I'll definitely have it by Friday</em>). <em>shall</em> is not an intensified <em>will</em>.</div>`],
+
+["Hedging — and where it is forbidden",
+`<div class="tw"><table><thead><tr><th>Register</th><th>Frames for a claim</th></tr></thead><tbody>
+<tr><td>1–2</td><td>I have a feeling… · I reckon… · Not sure, but…</td></tr>
+<tr><td>3</td><td>I think… · It looks like… · It seems that… · As far as I can see…</td></tr>
+<tr><td>4</td><td>It appears that… · My understanding is that… · On the figures I have… · Subject to confirmation…</td></tr>
+<tr><td>5</td><td>If I may… · I'd want to verify this, but… · Pending the reconciliation…</td></tr>
+</tbody></table></div>
+<p style="font-size:.86rem">Softening a <b>request</b> has its own frames: <em>I'm sorry to ask, but… · When you have a moment… · I know you're busy, but… · If it's not too much trouble…</em></p>
+<blockquote style="border-left:3px solid var(--gold);padding:10px 14px;margin:12px 0;background:#0b2138;border-radius:0 8px 8px 0;font-size:.95rem">
+<b>Register never softens three things: a number, a date, or your own mistake.</b></blockquote>
+<p style="font-size:.86rem">The hedge goes on the <b>ask</b> and on <b>other people's blame</b>, never on the facts you are reporting. Bad news at register 5 is <b>hard fact, soft ask</b>:</p>
+<div class="model">“Good morning, Sir. The May travel claims are 4,200 baht over budget. The cause is a duplicated claim from the 14th — that part I still need to confirm with Accounts. I could have a corrected reconciliation to you by Thursday, if that works.”</div>
+<p style="font-size:.86rem">Unhedged: the amount, the date, the line item. Hedged: the unverified cause, and the proposed deadline.</p>`],
+
+["Grain and order — BLUF",
+`<div class="tw"><table><thead><tr><th></th><th>Grain</th><th>When</th></tr></thead><tbody>
+<tr><td>A</td><td>Every step</td><td>They will redo or check the work</td></tr>
+<tr><td>B</td><td>Cause and evidence</td><td>They will decide something</td></tr>
+<tr><td>C</td><td>Result and action</td><td>Accountable, but not doing the work</td></tr>
+<tr><td>D</td><td>Status only</td><td>Tracking many things</td></tr>
+<tr><td>E</td><td>Pattern</td><td>Looking across periods</td></tr>
+</tbody></table></div>
+<p style="font-size:.86rem">Grain is set by <b>what this person has to do with the information</b>, not by how formal you are being. A commander who asks <em>“walk me through how you found it”</em> has just requested setting A.</p>
+<h4>The four-part upward report</h4>
+<ol style="font-size:.88rem"><li><b>What</b> — the result, with its number</li><li><b>Why</b> — the cause, one clause</li><li><b>What I'm doing</b> — action and deadline</li><li><b>What I need from you</b> — or <em>nothing needed from you</em></li></ol>
+<div class="hint">Part 4 is the one learners leave out, and its absence forces the listener to ask. <em>“Nothing needed from you, Sir”</em> is a complete and very well-received sentence.</div>`],
+
+["Time anchoring",
+`<div class="tw"><table><thead><tr><th>Meaning</th><th>Form</th><th>Example</th></tr></thead><tbody>
+<tr><td>Finished, specific past time</td><td>Past simple + adverbial</td><td>I sent the invoice on Monday.</td></tr>
+<tr><td>Finished, result matters now</td><td>Present perfect</td><td>I've sent the invoice.</td></tr>
+<tr><td>Still open</td><td>Present perfect + yet / still</td><td>They haven't paid yet.</td></tr>
+<tr><td>Past running to now</td><td>Present perfect + for / since</td><td>We've used this form since April.</td></tr>
+<tr><td>Fixed future arrangement</td><td>Present continuous / simple</td><td>The audit is on Thursday.</td></tr>
+<tr><td>Intention</td><td>going to</td><td>I'm going to check the petty cash.</td></tr>
+<tr><td>Decision now, or promise</td><td>will</td><td>I'll send it this afternoon.</td></tr>
+</tbody></table></div>
+<div class="hint"><em>“I sent it”</em> (and here is when) versus <em>“I've sent it”</em> (so you have it now). The second is what a colleague chasing a document wants — and the one Thai speakers under-produce, because Thai marks completion aspectually rather than through a perfect tense. Same ground as the Past Simple / Present Perfect modules in Grammar Ops.</div>`],
+
+["Affect — the ceiling, and the emotions",
+`<div class="tw"><table><thead><tr><th>Register</th><th>Ceiling</th><th>What breaks it</th></tr></thead><tbody>
+<tr><td>1</td><td>None</td><td>—</td></tr><tr><td>2</td><td>High</td><td>—</td></tr>
+<tr><td>3</td><td>Moderate</td><td>Exclamation marks in email</td></tr>
+<tr><td>4</td><td>Low</td><td>Any intensifier stronger than <em>very</em></td></tr>
+<tr><td>5</td><td>Very low</td><td>Visible emotion of any kind</td></tr>
+</tbody></table></div>
+<p style="font-size:.86rem"><b>Exception:</b> positive affect aimed at the other person passes through the ceiling. <em>“Thank you very much indeed, Sir”</em> is warm and entirely correct at register 5.</p>
+<div class="tw"><table><thead><tr><th></th><th>Register 1–2</th><th>Register 3</th><th>Register 4–5</th></tr></thead><tbody>
+<tr><th>Happiness</th><td>Yes! That's brilliant!</td><td>That's great news.</td><td>That's very good news, thank you.</td></tr>
+<tr><th>Surprise</th><td>No way! Seriously?</td><td>Oh, really? I wasn't expecting that.</td><td>I see — that's unexpected.</td></tr>
+<tr><th>Disappointment</th><td>Ugh, that's rubbish.</td><td>That's a shame.</td><td>That's unfortunate. · That's disappointing.</td></tr>
+<tr><th>Excitement</th><td>I can't wait!</td><td>I'm really looking forward to it.</td><td>I'm looking forward to it.</td></tr>
+<tr><th>Gratitude</th><td>Thanks so much!</td><td>Thank you very much.</td><td>Thank you very much indeed, Sir.</td></tr>
+<tr><th>Frustration</th><td>This is driving me mad.</td><td>This is getting difficult.</td><td>This is proving difficult.</td></tr>
+</tbody></table></div>
+<div class="hint"><b>Frustration has no safe upward form.</b> Convert it into a factual obstacle: not <em>“this is very frustrating”</em> but <em>“the supplier hasn't responded to three emails.”</em> Naming the obstacle is heard as professional; naming the feeling is heard as complaining. And the register 4–5 forms are not cold — the warmth moves from the words into the delivery.</div>`],
+
+["The repair kit",
+`<div class="tw"><table><thead><tr><th>Problem</th><th>Register 1–2</th><th>Register 3</th><th>Register 4–5</th></tr></thead><tbody>
+<tr><th>Didn't hear</th><td>Sorry, what?</td><td>Sorry, could you say that again?</td><td>I beg your pardon, Sir?</td></tr>
+<tr><th>Didn't understand</th><td>I don't get it.</td><td>I'm not sure I follow.</td><td>I'm not certain I've understood, Sir.</td></tr>
+<tr><th>Too fast</th><td>Bit slower?</td><td>Could you slow down a little?</td><td>Would you mind going over that once more, Sir?</td></tr>
+<tr><th>One word missing</th><td>What's <em>accrual</em>?</td><td>What does <em>accrual</em> mean?</td><td>Could I ask what <em>accrual</em> refers to here, Sir?</td></tr>
+<tr><th>Checking</th><td>So it's Thursday, yeah?</td><td>So — you need it by Thursday. Is that right?</td><td>If I've understood correctly, Sir, you need it by Thursday.</td></tr>
+<tr><th>Writing it down</th><td>Hang on, let me note that.</td><td>Could I just note that down?</td><td>May I make a note of that, Sir?</td></tr>
+<tr><th>Buying time</th><td>Umm… let me think.</td><td>Let me think about that for a moment.</td><td>Could I come back to you on that, Sir?</td></tr>
+<tr><th>Don't know</th><td>No idea, sorry.</td><td>I don't know, but I'll find out today.</td><td>I don't have that to hand, Sir. I'll confirm it within the hour.</td></tr>
+</tbody></table></div>
+<ul style="font-size:.86rem">
+<li><b>Locate the breakdown.</b> <em>“Sorry — by Thursday, or by Friday?”</em> beats replaying the whole question.</li>
+<li><b>Confirm upward, always.</b> Repeating an instruction back reads as competence, and it protects you from acting on a misheard number.</li>
+<li><b>“I don't know” needs a second half.</b> Where the answer is, and when you will have it.</li>
+<li><b>Silence is worse than any of these.</b> Asking is what a careful accountant does.</li>
+</ul>`],
+
+["Clash table — how output gets marked",
+`<div class="tw"><table><thead><tr><th>Clash</th><th>How it sounds</th><th>Fix</th></tr></thead><tbody>
+<tr><td>Low greeting + high grammar</td><td>Sarcastic, or a bad translation</td><td>Pick one register, rebuild both slots</td></tr>
+<tr><td>High greeting + slang tone</td><td>Disrespectful, unserious</td><td>Raise the tone to match the address</td></tr>
+<tr><td>High affect + high power distance</td><td>Loss of composure</td><td>Drop the affect, keep the content</td></tr>
+<tr><td>High hedging + hard facts</td><td>Evasive, or she doesn't know her own work</td><td>Unhedge the number; hedge only the cause</td></tr>
+<tr><td>No hedging + a real request</td><td>Rude</td><td>Question form + <em>could</em></td></tr>
+<tr><td>High grain + senior listener</td><td>She can't prioritise</td><td>Headline first, detail on request</td></tr>
+<tr><td>Low grain + a colleague fixing it</td><td>Unhelpful, withholding</td><td>Setting A: every step</td></tr>
+<tr><td>Formal connectors in speech</td><td>Pompous, over-rehearsed</td><td>Register-3 connectors, register-5 address</td></tr>
+<tr><td>Directness too high for a peer</td><td>Strange; implies it matters</td><td>Levels 1–3</td></tr>
+<tr><td>Apology without repair</td><td>Anxious, problem still unsolved</td><td>Apologise once, then say what you've done</td></tr>
+<tr><td>Modal on a verified fact</td><td>Unsure of her own arithmetic</td><td>No modal on a checked number</td></tr>
+<tr><td><em>Shall</em> as emphasis</td><td>Archaic and odd</td><td>I'll send it this afternoon.</td></tr>
+</tbody></table></div>
+<h4>Marking codes</h4><div class="kv">
+<dt>R↑ / R↓</dt><dd>register too high / too low for the situation</dd>
+<dt>CL</dt><dd>clash: two slots at different registers</dd>
+<dt>H+ / H−</dt><dd>over-hedged / under-hedged</dd>
+<dt>D+ / D−</dt><dd>too indirect / too direct</dd>
+<dt>G+ / G−</dt><dd>too much / too little detail</dd>
+<dt>AF+ / AF−</dt><dd>affect above the ceiling / too flat</dd>
+<dt>M</dt><dd>modal on a fact, or no modal on a guess</dd>
+<dt>ST</dt><dd>style: a form that is understood but marked</dd>
+</div>
+<div class="hint">None of these codes is about grammar. She will often be marked heavily on a sentence containing no grammatical error at all — which is exactly the lesson.</div>`],
+
+["Address — the Thai and English forms",
+`<ul style="font-size:.88rem">
+<li><b>Thai title + first name vs English title + surname.</b> Thai workplace practice attaches the honorific to the first name — <em>Khun Siriporn</em>. English attaches it to the surname — <em>Ms. Chaiyasit</em>. Both are correct in their own contexts: <em>Khun</em> + first name with Thai colleagues, <em>Ms.</em> + surname in English correspondence and with foreign counterparts. What does not work is <em>Ms. Siriporn</em> in a formal English letter.</li>
+<li><b>Rank pairs with the first name.</b> Thai service practice is <em>Wing Commander Anan</em>, not <em>Wing Commander Prasert</em>. Copying the Western rank + surname habit is understood but marks you as working from an English textbook. Confirm the spellings and abbreviations your own unit uses on English correspondence.</li>
+<li><b>Sir and Ma'am do the work when the rank fails.</b> If the rank or the surname will not come, <em>Sir</em> or <em>Ma'am</em> alone is complete and correct. <em>“Good morning, Sir”</em> never fails — and hesitating in front of a senior officer reads as reluctance rather than as vocabulary trouble.</li>
+<li><b>Not <em>Madame</em>.</b> It is <em>Ma'am</em> in speech and <em>Madam</em> in a letter opening. <em>Madame</em> reads as French.</li>
+<li><b>Write out your own reporting line in English</b> before the first register-4 exchange. Five minutes, and it removes a whole class of freeze.</li>
+</ul>`],
+
+["The slot card",
+`<div class="asm" style="font-size:.9rem;margin-bottom:12px">[Greeting] [Address] [Frame] [CORE THOUGHT + modal] [Time] [Detail] [Justification] [Closer]</div>
+<div class="tw"><table><thead><tr><th>Step</th><th></th></tr></thead><tbody>
+<tr><th>1. What do I mean?</th><td>One clause, no politeness</td></tr>
+<tr><th>2. Distance / Power / Stakes?</th><td>Three numbers → register</td></tr>
+<tr><th>3. Am I asking for something?</th><td>If yes: question form + <em>could</em></td></tr>
+<tr><th>4. How sure am I?</th><td>Fact = no modal. Guess = <em>might</em></td></tr>
+<tr><th>5. What do they need?</th><td>Headline first, then cause, then my action</td></tr>
+<tr><th>6. Fill the slots</th><td>Greeting · Address · Frame · Thought · Time · Detail · Reason · Closer</td></tr>
+</tbody></table></div>
+<div class="hint">A reason in the Justification slot does more politeness work than any softener. <em>“Could you send me the receipt? I need it to close the May file”</em> beats <em>“Could you possibly send me the receipt?”</em> every time.</div>`]
+];
+function vDossier(){
+  return '<div class="card tight"><h3>Dossier</h3><p style="font-size:.86rem;margin:0">Every table behind the scoring. Open it during an exchange if you are stuck.</p></div>'
+    + DOSSIER.map((d,i)=>'<div class="acc'+(i===0?" open":"")+'"><button data-act="acc"><span>'+esc(d[0])+'</span><span class="car">›</span></button><div class="body">'+d[1]+'</div></div>').join("");
+}
+
+/* ---------- events ---------- */
+function activeTurn(){ return VIEW.screen==="console" ? consoleTurn() : curT(); }
+document.getElementById("nav").addEventListener("click",e=>{
+  const b=e.target.closest("[data-nav]"); if(!b) return;
+  VIEW.screen=b.dataset.nav;
+  if(VIEW.screen==="console" && !VIEW.sel.core){ VIEW.sel={affect:AFFECT[0]}; }
+  render();
+});
+document.getElementById("main").addEventListener("change",e=>{
+  const s=e.target.closest('[data-act="cref"]'); if(!s) return;
+  VIEW.cRef=+s.value; VIEW.cReg=null; VIEW.sel={affect:AFFECT[0]}; render();
+});
+document.getElementById("main").addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]"); if(!b || b.disabled) return;
+  const a=b.dataset.act;
+  if(a==="acc"){ b.closest(".acc").classList.toggle("open"); return; }
+  switch(a){
+    case "open": startMission(b.dataset.id); render(); break;
+    case "back": VIEW.screen="missions"; render(); break;
+    case "room": VIEW.room[b.dataset.k]=+b.dataset.v; render(); break;
+    case "lock": VIEW.locked=true; render(); break;
+    case "toBuild": VIEW.phase="build"; preselect(); render(); break;
+    case "pick": {
+      const t=activeTurn(), s=b.dataset.slot;
+      VIEW.sel[s]=optsFor(t,s)[+b.dataset.i]; render(); break;
+    }
+    case "submit": submitTurn(); break;
+    case "next":
+      if(VIEW.ti===curM().turns.length-1){ finishMission(); }
+      else { VIEW.ti++; startTurn(); render(); }
+      break;
+    case "retry": startTurn(); render(); break;
+    case "say": {
+      const t=activeTurn();
+      const s=buildSentence(t,VIEW.sel);
+      if(!s){ toast("Choose a core thought first."); break; }
+      say(s, t.tgt.r, Math.max(VIEW.sel.affect?VIEW.sel.affect.a:0,(VIEW.sel.core&&VIEW.sel.core.a!=null)?VIEW.sel.core.a:0));
+      break;
+    }
+    case "sayModel": say(curT().model, curT().tgt.r, curT().tgt.a||0); break;
+    case "creg": VIEW.cReg=+b.dataset.v; render(); break;
+    case "dans":
+      if(VIEW.dAns==null){ VIEW.dAns=+b.dataset.v; if(VIEW.dAns===DRILL[VIEW.dIdx].a) VIEW.dScore++; render(); }
+      break;
+    case "dnext": VIEW.dIdx++; VIEW.dAns=null; render(); break;
+    case "dreset": VIEW.dIdx=0; VIEW.dScore=0; VIEW.dAns=null; render(); break;
+  }
+});
+
+/* ---------- init ---------- */
+load();
+VIEW.sel={affect:AFFECT[0]};
+render();
+pickVoice();
+</script>
+</body>
+</html>
