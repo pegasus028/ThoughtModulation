@@ -348,6 +348,7 @@ const AFFECT = [
 /* ---------- people ---------- */
 const PEOPLE = {
   malee:{name:"Squadron Leader Malee Thongchai", short:"Sqn Ldr Malee", init:"M", pron:"she",
+    dWhy:"You know her name and her section, but you do not eat lunch together.", pWhy:"She is one level above you and she signs off your work.",
     role:"Your section head. One level above you. Approachable, but she signs off your work.",
     addr:{nick:"Malee!", first:"Malee,", khun:"Khun Malee,", title:"Ms. Thongchai,", rank:"Squadron Leader Malee,", rankS:"Squadron Leader Thongchai,", sir:"Ma'am,"},
     rx:{rude:["Sqn Ldr Malee puts her pen down. <em>“Let's start that again, shall we.”</em>","<em>She stiffens.</em> “I'd like you to try that with the rank, please.”"],
@@ -356,6 +357,7 @@ const PEOPLE = {
         unsure:["<em>She frowns.</em> “Have you checked that, or are you guessing?”"],
         good:["<em>She nods and writes it down.</em> “Good. Carry on.”","<em>She nods.</em> “Clear. Thank you.”"]}},
   anan:{name:"Wing Commander Anan Prasert", short:"Wg Cdr Anan", init:"A", pron:"he",
+    dWhy:"Head of the whole Division — you have never worked with him directly.", pWhy:"Two levels above you, and he is the Division head.",
     role:"Head of the Finance Division, two levels above you. Brisk, reads everything, hates being told a story.",
     addr:{nick:"Anan!", first:"Anan,", khun:"Khun Anan,", title:"Mr. Prasert,", rank:"Wing Commander Anan,", rankS:"Wing Commander Prasert,", sir:"Sir,"},
     rx:{rude:["Wg Cdr Anan's expression does not change. <em>“I'll pretend I didn't hear that.”</em>","<em>A long pause.</em> “Who trained you?”"],
@@ -364,6 +366,7 @@ const PEOPLE = {
         unsure:["<em>He looks up.</em> “Do you know that, or do you think it?”"],
         good:["<em>He nods once.</em> “Understood. Carry on.”","“Good. Thank you.” <em>He is already reading again.</em>"]}},
   wichai:{name:"Group Captain Wichai Sombat", short:"Gp Capt Wichai", init:"W", pron:"he",
+    dWhy:"From outside your unit; today is the first time you have met.", pWhy:"Senior officer and an auditor — as high as Power goes.",
     role:"Internal auditor from outside your unit. Senior, courteous, writes down everything you say.",
     addr:{nick:"Wichai!", first:"Wichai,", khun:"Khun Wichai,", title:"Mr. Sombat,", rank:"Group Captain Wichai,", rankS:"Group Captain Sombat,", sir:"Sir,"},
     rx:{rude:["<em>He writes something down.</em> “Interesting.”","<em>He looks up slowly.</em> “I see.”"],
@@ -372,6 +375,7 @@ const PEOPLE = {
         unsure:["“Is that your assessment, or the record's?”"],
         good:["<em>He nods, satisfied.</em> “Thank you. That's exactly what I needed.”","“Very good. Clear answer.”"]}},
   nok:{name:"Khun Nok (Kanokwan)", short:"Khun Nok", init:"N", pron:"she",
+    dWhy:"Another section, but you know her name and what she does.", pWhy:"Same level as you. She does not report to you and you do not report to her.",
     role:"Clerk in Procurement, your own level. You know her name and not much else. Always behind on filing.",
     addr:{nick:"Nokkie!", first:"Nok,", khun:"Khun Nok,", title:"Ms. Kanokwan,", rank:"", rankS:"", sir:"Ma'am,"},
     rx:{rude:["<em>She doesn't look up.</em> “I'll get to it.”","“Wow. Okay.” <em>She turns back to her screen.</em>"],
@@ -380,6 +384,7 @@ const PEOPLE = {
         unsure:["“Do you need it or not?”"],
         good:["“Sure, give me ten minutes.” <em>She writes the number down.</em>","“No problem — sending it now.”"]}},
   ploy:{name:"Ploy", short:"Ploy", init:"P", pron:"she",
+    dWhy:"Your desk neighbour; you eat lunch together every day.", pWhy:"Exactly your level, and a friend.",
     role:"Your desk neighbour and closest friend in the section. You eat lunch together every day.",
     addr:{nick:"Ploy!", first:"Ploy,", khun:"Khun Ploy,", title:"Ms. Rattanakosin,", rank:"", rankS:"", sir:"Ma'am,"},
     rx:{rude:["<em>She blinks.</em> “Okay, rude.”"],
@@ -388,6 +393,7 @@ const PEOPLE = {
         unsure:["“Do you know or not?”"],
         good:["<em>She grins.</em> “Yeah, of course!”","“Ha! Nice one.”"]}},
   surachai:{name:"Mr. Surachai Wattana", short:"Mr. Surachai", init:"S", pron:"he",
+    dWhy:"An outside company, and you have never met him.", pWhy:"Neither of you outranks the other — he is a supplier, not a superior.",
     role:"Accounts manager at an outside supplier. You have never met him. Every email you send him could end up in a file.",
     addr:{nick:"Surachai!", first:"Surachai,", khun:"Khun Surachai,", title:"Mr. Wattana,", rank:"", rankS:"", sir:"Sir,"},
     rx:{rude:["<em>A short reply arrives.</em> “Noted.”","<em>He forwards your message to his manager without comment.</em>"],
@@ -396,6 +402,7 @@ const PEOPLE = {
         unsure:["“Are you saying it was late, or asking whether it was?”"],
         good:["“Thank you for flagging it — I'll send a corrected copy today.”","“Understood, and apologies for the delay. Resending now.”"]}},
   adul:{name:"Corporal Adul", short:"Cpl Adul", init:"D", pron:"he",
+    dWhy:"You know him and work with him, but he is not a friend.", pWhy:"He reports to you. Power scores 0 whether the person is level with you or below you.",
     role:"Junior clerk, one level below you. Nineteen, willing, frightened of getting it wrong.",
     addr:{nick:"Adul!", first:"Adul,", khun:"Khun Adul,", title:"Mr. Kittisak,", rank:"Corporal Adul,", rankS:"Corporal Kittisak,", sir:"Sir,"},
     rx:{rude:["<em>He goes red and says nothing.</em>","<em>He nods fast, twice, and does not look up again.</em>"],
@@ -418,10 +425,10 @@ turns:[
   frames:"fact",
   cores:[
    {t:"the travel claims are a total mess", r:1, g:[1,2], c:"fact", clar:-34, n:"Slang, and an opinion where a figure should be.", i:"She learns how you feel and not what happened."},
-   {t:"something's wrong with the travel claims", r:2, g:[1,3], c:"none", clar:-30, n:"No month, no line, no number.", i:"She has to ask you two questions to get what you already know."},
+   {t:"something's wrong with the travel claims", r:2, g:[1,3], c:"fact", clar:-30, n:"No month, no line, no number.", i:"She has to ask you two questions to get what you already know."},
    {t:"there might be a problem with the travel claims", r:3, g:[2,4], c:"might", n:"A modal on something you have counted twice.", i:"Reads as unsure of your own arithmetic — the worst impression for an accountant."},
    {t:"the May travel claims are 4,200 baht over budget", r:4, g:[3,5], c:"fact", n:"Month, line, figure, no modal.", i:"This is what a verified number is supposed to sound like."},
-   {t:"a discrepancy has been identified in the May travel-claim account", r:5, g:[4,5], c:"fact", n:"Passive and nominalised — written-memo English.", i:"Correct on paper. Out loud it hides who found it and sounds evasive."}],
+   {t:"a discrepancy has been identified in the May travel-claim account", r:5, g:[4,5], pen:12, code:["AG","nominalised passive — it hides who found it"], c:"fact", n:"Passive and nominalised — written-memo English.", i:"Correct on paper. Out loud it hides who found it and sounds evasive."}],
   details:[
    {t:"", gr:"D", lbl:"(no detail)", n:"Headline only.", i:"She will have to ask why. One extra exchange."},
    {t:"I'm correcting it today.", gr:"C", n:"Result plus your action.", i:"Answers the question she was about to ask."},
@@ -473,8 +480,8 @@ turns:[
   cores:[
    {t:"the May travel claims are 4,200 baht over budget", r:4, g:[3,5], c:"fact", n:"Month, line, figure.", i:"He knows what happened in four seconds. This is the target."},
    {t:"I wanted to let you know about a small issue with some of the claims", r:3, g:[2,4], c:"none", clar:-36, n:"An announcement that you are about to say something.", i:"He has spent five seconds and learned nothing. He will interrupt."},
-   {t:"there's a variance in the travel claims", r:4, g:[3,5], c:"fact", clar:-24, n:"Correct register, no figure.", i:"His next word is 'How much?' — you had the number and did not use it."},
-   {t:"I regret to inform you that an irregularity has arisen", r:5, g:[0,0], c:"fact", clar:-30, n:"Letter English, spoken aloud.", i:"Sounds like a disciplinary notice. He still does not know the amount."}],
+   {t:"there's a variance in the travel claims", r:4, g:[3,5], pen:16, clar:-38, code:["NF","correct register, and you left out the number"], c:"fact", n:"Correct register, no figure.", i:"His next word is 'How much?' — you had the number and did not use it."},
+   {t:"I regret to inform you that an irregularity has arisen", r:5, g:[5,5], pen:12, code:["OR","letter English spoken aloud"], c:"fact", clar:-30, n:"Letter English, spoken aloud. The register is right and the shape is wrong.", i:"Sounds like a disciplinary notice. He still does not know the amount."}],
   details:[
    {t:"", gr:"D", lbl:"(no detail)", n:"", i:"In a corridor, with a folder in his hand, he needs your action too."},
    {t:"A duplicated claim. Sqn Ldr Malee has it, and I'm correcting it by Thursday.", gr:"C", n:"Cause, who knows, your action, your date.", i:"Complete in one breath. Nothing left for him to chase."},
@@ -489,9 +496,9 @@ turns:[
   frames:"fact",
   cores:[
    {t:"mine, Sir. I imported the file twice on the 16th", r:5, g:[4,5], c:"fact", n:"Named, unhedged, one clause.", i:"Composed and credible. Owning it plainly costs you less than any hedge would."},
-   {t:"I think it might have been me", r:3, g:[0,0], c:"might", n:"A hedge on your own action.", i:"He hears someone trying not to be blamed. The forbidden hedge."},
-   {t:"there was an error in the import process", r:5, g:[0,0], c:"fact", clar:-26, n:"Passive with no agent. Grammatically neat, socially transparent.", i:"He will ask the question again, and less pleasantly."},
-   {t:"it was my fault, I'm so sorry, I really am so sorry about this", r:2, g:[0,0], c:"fact", n:"Apology repeated three times, no repair.", i:"Reads as panic. The problem is still unsolved and now he is managing your feelings."}],
+   {t:"I think it might have been me", r:3, g:[3,5], pen:14, code:["HB","hedging your own mistake"], c:"might", n:"A hedge on your own action — the one thing register never softens.", i:"He hears someone trying not to be blamed. The forbidden hedge."},
+   {t:"there was an error in the import process", r:5, g:[5,5], pen:16, code:["AG","agentless passive — it hides who did it"], c:"fact", clar:-26, n:"Passive with no agent. Grammatically neat, socially transparent.", i:"He will ask the question again, and less pleasantly."},
+   {t:"it was my fault, I'm so sorry, I really am so sorry about this", r:2, g:[0,0], pen:10, code:["AP","apology repeated, no repair offered"], c:"fact", n:"Apology repeated three times, no repair.", i:"Reads as panic. The problem is still unsolved and now he is managing your feelings."}],
   details:[
    {t:"", gr:"D", lbl:"(no repair)", n:"", i:"An apology without a repair leaves him holding the problem."},
    {t:"It's corrected, and I've added a duplicate check to the import step so it can't recur.", gr:"C", n:"Fixed, plus the thing that stops it happening again.", i:"This is the sentence that turns an error into a demonstration of competence."},
@@ -508,7 +515,7 @@ turns:[
    {t:"Nothing needed from you, Sir", r:5, g:[4,5], c:"fact", n:"Short, complete, closes the matter.", i:"Exactly right. He can walk away and stop thinking about it."},
    {t:"No", r:1, g:[0,0], c:"fact", n:"True, and bare.", i:"Accurate and slightly rude. One word is not enough upward."},
    {t:"No, I don't think so, unless you want me to check anything else, I could look at the other lines too if you like", r:2, g:[0,0], c:"might", clar:-26, n:"An answer that will not end.", i:"He asked a yes/no question and got a paragraph. This is where register and length get confused."},
-   {t:"I shall not require any assistance", r:5, g:[0,0], c:"will", n:"Archaic and stiff.", i:"Correct English from 1935."}],
+   {t:"I shall not require any assistance", r:5, g:[5,5], pen:14, code:["SH","shall misused — this is the archaic first-person future"], c:"will", n:"Archaic first-person future. Not wrong English, but nobody under sixty says it.", i:"Correct English from 1935."}],
   model:"Nothing needed from you, Sir. Thank you.",
   teach:"'Nothing needed from you, Sir' is a complete, well-received sentence. Register controls the shape of the language; stakes control the length."}
 ]},
@@ -526,7 +533,7 @@ turns:[
   cores:[
    {t:"send me the receipt for claim 114", r:2, g:[0,0], d:0, n:"Bare imperative to someone at your own level.", i:"You do not outrank her. This is heard as an order."},
    {t:"please send me the receipt for claim 114", r:2, g:[0,0], d:1, n:"An imperative with a courtesy word on it.", i:"THE trap. 'Please' makes an order polite; it does not make it a request."},
-   {t:"I need the receipt for claim 114", r:3, g:[2,3], d:2, n:"Statement of need.", i:"Fine between colleagues who help each other daily. Blunt otherwise."},
+   {t:"I need the receipt for claim 114", r:3, g:[2,2], d:2, n:"Statement of need.", i:"Fine between colleagues who help each other daily. Blunt otherwise."},
    {t:"could you send me the receipt for claim 114", r:3, g:[3,5], d:4, n:"Question form, past-form modal. The workhorse.", i:"Appropriate almost everywhere above register 2 and never wrong."},
    {t:"I was wondering if you could possibly send me the receipt for claim 114", r:4, g:[0,0], d:6, n:"Embedded question for a thirty-second favour.", i:"Over-indirect. It implies the receipt is a serious imposition."}],
   reasons:[
@@ -555,7 +562,7 @@ turns:[
 
  {s:"Ploy is at the next desk. The stapler is next to her elbow. You eat lunch together every single day.",
   who:"ploy", core:"You pass me the stapler.", act:"ask",
-  room:{d:0,p:0,s:0}, tgt:{r:1,d:1,c:"none",gr:"D",a:1},
+  room:{d:0,p:0,s:0}, tgt:{r:1,d:2,c:"none",gr:"D",a:1},
   slots:["addr","core","close","affect"],
   frames:"ask",
   cores:[
@@ -574,8 +581,8 @@ turns:[
   cores:[
    {t:"you sent the invoice late", r:2, g:[0,0], c:"fact", n:"True, and it puts him in the subject slot of an accusation.", i:"He now has to defend himself before he can help you."},
    {t:"the invoice for the June order reached us on the 11th of July", r:4, g:[3,5], c:"fact", n:"The fact, with no blame attached to anyone.", i:"Unarguable and unaccusing. He can act on it without losing face."},
-   {t:"I think maybe the invoice might have been a bit late", r:3, g:[0,0], c:"might", clar:-24, n:"Hedging a date you can read off the envelope.", i:"He cannot tell whether you are complaining or asking."},
-   {t:"it is regretted that your organisation failed to meet the agreed terms", r:5, g:[0,0], c:"fact", n:"Formal, passive, and an accusation anyway.", i:"Now it reads like the opening of a dispute."}],
+   {t:"I think maybe the invoice might have been a bit late", r:3, g:[3,4], pen:8, code:["H+","hedging a date you can read off the envelope"], c:"might", clar:-24, n:"Three hedges on a date printed on the document.", i:"He cannot tell whether you are complaining or asking."},
+   {t:"it is regretted that your organisation failed to meet the agreed terms", r:5, g:[0,0], pen:10, code:["AC","an accusation in formal dress"], c:"fact", n:"Formal, passive, and an accusation anyway.", i:"Now it reads like the opening of a dispute."}],
   details:[
    {t:"", gr:"D", lbl:"(no detail)", n:"", i:"He does not know why you are telling him."},
    {t:"Our terms are thirty days from delivery, so it has put our quarter-end behind.", gr:"B", n:"The consequence, stated once.", i:"Explains why it matters without any adjective doing the complaining."},
@@ -608,7 +615,7 @@ turns:[
   frames:"ask",
   cores:[
    {t:"these need to be by date, not alphabetical", r:3, g:[2,4], d:2, n:"Clear, correct, no blame in it.", i:"He knows exactly what to do and is not humiliated. Downward, clarity is the kindness."},
-   {t:"file these by date", r:3, g:[2,4], d:0, n:"Bare imperative, downward.", i:"Acceptable — you do outrank him — but it costs you nothing to soften by one step."},
+   {t:"file these by date", r:3, g:[2,4], d:0, pen:6, n:"Bare imperative, downward.", i:"Acceptable — you do outrank him — but it costs you nothing to soften by one step."},
    {t:"why did you do it like this?", r:2, g:[0,0], d:2, clar:-22, n:"A question that is not a request.", i:"He has to account for himself before he can fix it. He will freeze."},
    {t:"I was wondering if you might possibly be able to refile these by date", r:4, g:[0,0], d:6, n:"Register 5 machinery aimed downward.", i:"He cannot tell whether it is an instruction or an option, so he may do nothing."},
    {t:"you've done these completely wrong", r:2, g:[0,0], d:2, n:"Evaluation of him instead of instruction about the work.", i:"He goes red, says nothing, and stops asking you questions for a month."}],
@@ -633,9 +640,9 @@ turns:[
   frames:"ask",
   cores:[
    {t:"how can I help?", r:3, g:[3,5], c:"none", n:"Short, professional, hands him the floor.", i:"Correct. Brief is respectful here, not curt."},
-   {t:"please let me know if there is anything at all that I can possibly assist you with today", r:5, g:[0,0], c:"none", n:"Four softeners on an offer of help.", i:"He came to work, not to be waited on. Over-formal reads as nervous."},
+   {t:"please let me know if there is anything at all that I can possibly assist you with today", r:5, g:[5,5], pen:28, clar:-14, code:["OR","four softeners on an offer of help"], c:"none", n:"Four softeners on an offer of help. Formal, and far too long.", i:"He came to work, not to be waited on. Over-formal reads as nervous."},
    {t:"what do you want?", r:1, g:[0,0], c:"none", n:"Direct question, no framing.", i:"Grammatically fine. To a Group Captain, close to insolent."},
-   {t:"everything's ready for you", r:3, g:[2,4], c:"fact", n:"Useful, if it is true.", i:"Good — but it answers a question he has not asked yet."}],
+   {t:"everything's ready for you", r:3, g:[2,4], c:"none", clar:-14, n:"Useful, if it is true.", i:"Good — but it answers a question he has not asked yet."}],
   model:"Good morning, Sir. How can I help?",
   teach:"Five words can be register 5. Formality is in the address and the grammar, not in the word count."},
 
@@ -661,7 +668,7 @@ turns:[
    {t:"could I ask what accrual refers to here, Sir?", r:5, g:[4,5], c:"none", n:"One word named, question form, address.", i:"Best answer. Asking about a term reads as precision, not ignorance."},
    {t:"I'm sorry, I don't understand", r:3, g:[2,4], c:"none", n:"True, but unlocated.", i:"He now has to rebuild the whole question. He may also conclude you understood none of it."},
    {t:"I don't know that word", r:2, g:[1,3], c:"none", n:"Honest and a little bare.", i:"Fine with a colleague. Upward, put it in a question."},
-   {t:"our policy is that we return it", r:4, g:[0,0], c:"fact", n:"Answering around the word you did not understand.", i:"You have guessed at a technical question in front of an auditor. This is how a wrong answer gets written down."}],
+   {t:"our policy is that we return it", r:4, g:[4,5], pen:16, clar:-20, code:["GS","answered around a word you did not understand"], c:"fact", n:"Answering around the word you did not understand.", i:"You have guessed at a technical question in front of an auditor. This is how a wrong answer gets written down."}],
   model:"Could I ask what accrual refers to here, Sir? I want to be sure I'm answering the right question.",
   teach:"Asking what one word means is a mark of care. Guessing at a technical question in front of an auditor is not recoverable."},
 
@@ -673,7 +680,7 @@ turns:[
   cores:[
    {t:"I don't have that figure to hand, Sir", r:5, g:[4,5], c:"fact", n:"Names the limit precisely — you don't have it here, which is not the same as not knowing it.", i:"Composed and accurate. This is the professional form."},
    {t:"I don't know", r:3, g:[2,4], c:"fact", n:"Bare. True.", i:"Sounds unprepared on its own. It needs the second half."},
-   {t:"I think it was about ninety thousand", r:4, g:[0,0], c:"might", n:"A guess at a figure, offered to an auditor.", i:"He will write down 90,000 and check it. If you are wrong, everything else you said is now suspect."},
+   {t:"I think it was about ninety thousand", r:4, g:[4,5], pen:14, code:["GS","guessed a figure in front of an auditor"], c:"might", n:"A guess at a figure, offered to an auditor.", i:"He will write down 90,000 and check it. If you are wrong, everything else you said is now suspect."},
    {t:"that's not really my area", r:3, g:[0,0], c:"fact", clar:-26, n:"Deflection.", i:"It is your desk. He will note that you declined to answer."}],
   details:[
    {t:"", gr:"D", lbl:"(no second half)", n:"", i:"An admission with no plan attached is the weakest thing you can say all morning."},
@@ -689,9 +696,9 @@ turns:[
   frames:"fact",
   cores:[
    {t:"if I've understood correctly, Sir — October to March, hard copy, by Thursday morning", r:5, g:[4,5], c:"fact", n:"Frames it as your understanding, then repeats all three conditions.", i:"Best answer. Confirming upward reads as competence, and it protects you from a misheard date."},
-   {t:"yes, Sir", r:4, g:[2,5], c:"fact", n:"Agreement without confirmation.", i:"Polite and risky. If you have one of the three conditions wrong, you find out on Thursday."},
-   {t:"so Thursday?", r:2, g:[1,3], c:"fact", n:"Confirms one condition of three.", i:"Better than nothing. The format and the range are still guesses."},
-   {t:"could I just note that down, Sir?", r:5, g:[4,5], c:"none", n:"Buys the time to get it right.", i:"Entirely acceptable and often the wiser move. Pair it with the read-back."}],
+   {t:"yes, Sir", r:4, g:[2,5], c:"fact", clar:-26, pen:20, code:["CF","agreed without confirming any of the three conditions"], n:"Agreement without confirmation.", i:"Polite and risky. If you have one of the three conditions wrong, you find out on Thursday."},
+   {t:"so Thursday?", r:2, g:[1,3], c:"fact", clar:-14, n:"Confirms one condition of three.", i:"Better than nothing. The format and the range are still guesses."},
+   {t:"could I just note that down, Sir?", r:5, g:[4,5], c:"fact", clar:-8, n:"Buys the time to get it right, without confirming anything yet.", i:"Entirely acceptable and often the wiser move. Pair it with the read-back."}],
   model:"If I've understood correctly, Sir — October to March, hard copy, by Thursday morning.",
   teach:"Repeating an instruction back to a senior officer is expected, not slow. It is also the only thing standing between you and acting on a misheard number."},
 
@@ -736,7 +743,7 @@ turns:[
    {t:"I passed the June paper", r:4, g:[3,5], c:"fact", a:1, n:"Same fact, affect dialled down one notch.", i:"Composed and still clearly pleased. The warmth moves into your voice."},
    {t:"I passed!! I can't believe it!!", r:1, g:[0,0], c:"fact", a:3, n:"Register-1 affect aimed one level up.", i:"Not offensive, but it reads as young. She is about to walk into a meeting."},
    {t:"it is my pleasure to report a satisfactory outcome in the June examination", r:5, g:[0,0], c:"fact", a:0, n:"Written-report English about your own exam.", i:"Airless. Register 4 does not mean bloodless."},
-   {t:"I got my result", r:3, g:[2,4], c:"none", a:0, clar:-24, n:"No news in it.", i:"She has to ask. With four minutes on the clock, tell her the outcome."}],
+   {t:"I got my result", r:3, g:[2,4], c:"fact", a:0, clar:-24, n:"No news in it.", i:"She has to ask. With four minutes on the clock, tell her the outcome."}],
   details:[
    {t:"", gr:"D", lbl:"(nothing further)", n:"", i:"Fine, but it misses an easy piece of grace."},
    {t:"Thank you for signing off the study leave — it made the difference.", gr:"C", n:"Credits the person who helped you.", i:"Gratitude passes the ceiling at any register. This is the sentence she will remember."},
@@ -752,7 +759,7 @@ turns:[
   cores:[
    {t:"quite busy, Sir — month end. All on schedule, though", r:5, g:[4,5], c:"fact", a:1, n:"Short, complete, pleasant, and it answers the question.", i:"Ideal. Register 5 with nothing at stake means brief and warm, not long."},
    {t:"yes", r:3, g:[0,0], c:"fact", a:0, n:"Accurate and closed.", i:"Leaves three floors of silence. A missed chance rather than an error."},
-   {t:"very busy, Sir, we've had the travel-claim variance and the audit visit and the June invoices are still outstanding and Procurement haven't sent the receipts", r:4, g:[0,0], c:"fact", a:1, clar:-28, n:"A full status report in a lift.", i:"He asked a social question. This is where register and length get confused."},
+   {t:"very busy, Sir, we've had the travel-claim variance and the audit visit and the June invoices are still outstanding and Procurement haven't sent the receipts", r:4, g:[4,5], pen:20, code:["G+","a full status report in answer to a social question"], c:"fact", a:1, clar:-28, n:"A full status report in a lift.", i:"He asked a social question. This is where register and length get confused."},
    {t:"not too bad thanks, you?", r:2, g:[0,0], c:"fact", a:1, n:"Peer-to-peer small talk.", i:"Friendly, and it skips the rank. Fine with a colleague; not with the Division head."}],
   model:"Quite busy, Sir — month end. All on schedule, though.",
   teach:"Register 5 with zero stakes is short and pleasant. Learners answer 'How are you?' with a paragraph because they think formal means long."},
@@ -765,8 +772,8 @@ turns:[
   cores:[
    {t:"oh Ploy, no. I'm so sorry", r:1, g:[1,2], c:"fact", a:2, n:"Names her, names the feeling, nothing else.", i:"Right. At register 1 with someone hurting, warmth is the whole content."},
    {t:"that's unfortunate", r:4, g:[0,0], c:"fact", a:0, n:"The register-4 form, used on your closest friend.", i:"Correct English and it will land as cold. This is a real clash, not a small one."},
-   {t:"you should appeal it, and you could also ask Malee to write a letter, and there's the compassionate posting form", r:2, g:[0,0], c:"fact", a:1, n:"Solutions, immediately.", i:"Useful tomorrow. Right now she wanted you to hear her, not to fix it."},
-   {t:"well, at least you still have your job", r:1, g:[0,0], c:"fact", a:1, n:"Silver lining offered too early.", i:"Heard as dismissing what she just told you."}],
+   {t:"you should appeal it, and you could also ask Malee to write a letter, and there's the compassionate posting form", r:2, g:[1,2], pen:26, clar:-10, code:["TM","solutions offered before she has been heard"], c:"fact", a:1, n:"Solutions, immediately. The register is right; the timing is not.", i:"Useful tomorrow. Right now she wanted you to hear her, not to fix it."},
+   {t:"well, at least you still have your job", r:1, g:[1,2], pen:28, code:["TM","silver lining offered too early"], c:"fact", a:1, n:"Silver lining offered too early.", i:"Heard as dismissing what she just told you."}],
   details:[
    {t:"", gr:"D", lbl:"(say nothing more)", n:"Silence, with attention.", i:"Often the correct answer. Not every turn needs filling."},
    {t:"Do you want to talk about it, or shall we talk about something else?", gr:"C", n:"Hands her the choice.", i:"Excellent. It works at register 1 to 3 and in almost any language."},
@@ -782,7 +789,7 @@ turns:[
   cores:[
    {t:"that's disappointing", r:4, g:[3,5], c:"fact", a:1, n:"Names the feeling once, at the right register.", i:"Honest and composed. You are allowed to be disappointed; you are not allowed to spill it."},
    {t:"that's so unfair!!", r:1, g:[0,0], c:"fact", a:3, n:"Register-1 affect aimed at your section head.", i:"She agrees with you and can now do nothing except manage your reaction."},
-   {t:"it's fine, doesn't matter", r:2, g:[0,0], c:"fact", a:0, n:"Denying a feeling she can see.", i:"She knows it matters. Now she cannot help you either."},
+   {t:"it's fine, doesn't matter", r:2, g:[2,3], pen:24, clar:-12, code:["AF−","denying a feeling she can already see"], c:"fact", a:0, n:"Denying a feeling she can see.", i:"She knows it matters. Now she cannot help you either."},
    {t:"I note the decision", r:5, g:[0,0], c:"fact", a:0, n:"Minute-taking English.", i:"Reads as cold anger, which is worse than the anger."}],
   details:[
    {t:"", gr:"D", lbl:"(nothing further)", n:"", i:"Leaves you with a feeling and no door."},
@@ -800,7 +807,7 @@ turns:[
    {t:"Procurement hasn't responded to three emails since Monday", r:4, g:[3,5], c:"fact", a:0, n:"The obstacle, as a countable fact.", i:"Best answer. Naming the obstacle reads as professional; naming the feeling reads as complaining."},
    {t:"this is incredibly frustrating", r:2, g:[0,0], c:"fact", a:2, n:"The feeling, at high affect, upward.", i:"She hears a complaint she cannot act on. Frustration has no safe upward form."},
    {t:"nobody in that section ever does anything", r:1, g:[0,0], c:"fact", a:2, n:"A judgement about people, not a report about work.", i:"Unusable — and if she repeats it, it is now yours in writing."},
-   {t:"it's still in progress", r:3, g:[0,0], c:"none", clar:-32, a:0, n:"True, and it conceals the blockage.", i:"She will find out on Thursday that nothing moved, and that you knew."}],
+   {t:"it's still in progress", r:3, g:[2,4], pen:16, code:["EV","true, and it conceals the blockage"], c:"fact", clar:-32, a:0, n:"True, and it conceals the blockage.", i:"She will find out on Thursday that nothing moved, and that you knew."}],
   details:[
    {t:"", gr:"D", lbl:"(nothing further)", n:"", i:"You have handed her a problem with no options."},
    {t:"Could you ask Sqn Ldr Prasit directly, or shall I go over in person tomorrow morning?", gr:"C", n:"Two routes, one of them yours.", i:"Converts a complaint into a decision she can make in five seconds."},
@@ -839,9 +846,9 @@ turns:[
          "Now pick the <b>4</b>s and <b>5</b>s in every row — and notice that the sentence gets <b>shorter</b>, not longer."],
   cores:[
    {t:"how's it going?", r:1, g:[0,0], c:"none", n:"The friendly form, aimed two levels up.", i:"He will not reply in kind. Over-familiar."},
-   {t:"how are you, Sir?", r:5, g:[3,5], c:"none", n:"Neutral question plus the address.", i:"Correct and safe. Short is respectful here."},
-   {t:"I hope this morning finds you in good health", r:5, g:[0,0], c:"none", n:"Ornament instead of respect.", i:"Register 5 buys brevity, not decoration. This sounds like a letter from 1910."}],
-  model:"Good morning, Sir. How are you, Sir?",
+   {t:"how are you?", r:4, g:[3,5], c:"none", n:"A neutral question. The deference is already carried by the greeting and the address, so the clause itself stays plain.", i:"Correct and safe. Short is respectful here — and you do not need to say Sir twice."},
+   {t:"I hope this morning finds you in good health", r:5, g:[5,5], pen:28, clar:-16, code:["OR","ornament where register 5 wants brevity"], c:"none", n:"Ornament instead of respect. The register is right; the length is not.", i:"Register 5 buys brevity, not decoration. This sounds like a letter from 1910."}],
+  model:"Good morning, Sir. How are you?",
   teach:"Register 5 is shorter than register 4, not longer. Learners assume the most respectful sentence is the longest one."},
 
  {s:"09:30. Wg Cdr Anan has approved your study leave. You want to thank him.",
@@ -854,7 +861,7 @@ turns:[
   cores:[
    {t:"thanks!", r:1, g:[0,0], c:"none", a:2, n:"The friendly form.", i:"Too casual upward, and the exclamation makes it worse."},
    {t:"thank you very much indeed, Sir", r:5, g:[4,5], c:"none", a:1, n:"Formal and genuinely warm at the same time.", i:"Exactly right. Gratitude passes the ceiling."},
-   {t:"your approval is acknowledged", r:5, g:[0,0], c:"none", a:0, n:"Formal with the warmth removed.", i:"Reads as cold, or even as displeasure."}],
+   {t:"your approval is acknowledged", r:5, g:[5,5], pen:28, code:["AF−","warmth removed where warmth is allowed"], c:"none", a:0, n:"Correctly formal, with all the warmth taken out.", i:"Reads as cold, or even as displeasure."}],
   model:"Sir — thank you very much indeed.",
   teach:"Positive feeling aimed at the other person passes through the register ceiling. Everything else comes down as the register goes up."},
 
@@ -869,7 +876,8 @@ turns:[
   cores:[
    {t:"send me the June payment file", r:2, g:[0,0], d:0, n:"A bare order to someone at your own level.", i:"You do not outrank her. This will be remembered."},
    {t:"please send me the June payment file", r:2, g:[0,0], d:1, n:"An order with a courtesy word on it.", i:"The trap. Polite-sounding to you, an instruction to her."},
-   {t:"could you send me the June payment file", r:3, g:[3,5], d:4, n:"Question form, past-form modal.", i:"The workhorse. Right almost everywhere above register 2."}],
+   {t:"can you send me the June payment file", r:2, g:[1,3], d:3, n:"A question, but with the present-tense modal.", i:"Acceptable between colleagues. One step less careful than the form below."},
+   {t:"could you send me the June payment file", r:3, g:[3,5], d:4, n:"Question form, and the modal pushed into its past form.", i:"The workhorse. Right almost everywhere above register 2, and never wrong."}],
   reasons:[
    {t:"", lbl:"(no reason)", r:0, g:[1,5], n:"No reason given.", i:"Requests without reasons get done last."},
    {t:"— I need it to finish the June return", r:3, g:[2,5], n:"One clause of why.", i:"She can now rank your request against her other twelve. This is the big lever."},
@@ -889,7 +897,7 @@ turns:[
    {t:"the June return might be finished", r:3, g:[3,4], c:"might", n:"A modal on something you counted twice.", i:"She will ask whether you actually checked it."},
    {t:"the June return should be finished", r:3, g:[3,4], c:"should", n:"Expectation, not fact.", i:"Right for something someone else is doing. Wrong for your own completed work."},
    {t:"the June return is finished and it balances", r:3, g:[2,5], c:"fact", n:"Plain present tense, no modal.", i:"This is what a checked figure is supposed to sound like."}],
-  model:"Khun Malee — the June return is finished and it balances. Thank you.",
+  model:"Squadron Leader Malee — the June return is finished and it balances. Thank you.",
   teach:"No modal on a checked number. Save the modals for the causes you have not proved yet."},
 
  {s:"13:40. Gp Capt Wichai, the visiting auditor, asks you something while a trolley rattles past. You caught none of it.",
@@ -916,7 +924,7 @@ turns:[
          "The second half says <b>where the answer is</b> and <b>when he will have it</b>. Without it you sound unprepared; with it you sound reliable.",
          "Never guess a figure in front of an auditor. He will write it down and check it."],
   cores:[
-   {t:"I think it's about ninety thousand", r:4, g:[0,0], c:"might", clar:-25, pen:10, code:["GS","guessed a figure in front of an auditor"], n:"A guess at a number.", i:"He writes down 90,000 and checks it. If it is wrong, everything else you said is now suspect."},
+   {t:"I think it's about ninety thousand", r:4, g:[4,5], c:"might", clar:-25, pen:12, code:["GS","guessed a figure in front of an auditor"], n:"A guess at a number.", i:"He writes down 90,000 and checks it. If it is wrong, everything else you said is now suspect."},
    {t:"I don't know", r:3, g:[2,4], c:"fact", clar:-18, n:"True, and bare.", i:"Sounds unprepared on its own. It needs the second half."},
    {t:"I don't have that figure to hand, Sir", r:5, g:[4,5], c:"fact", n:"Names the limit exactly — not having it here is not the same as not knowing it.", i:"Composed and accurate. The professional form."}],
   details:[
@@ -1135,8 +1143,8 @@ function assess(turn, sel){
   if(clash)      codes.push(["CL","clash — two slots at different registers"]);
   if(sel.frame && (sel.frame.h||0)>=2 && turn.tgt.c==="fact") codes.push(["H+","over-hedged: you softened a fact"]);
   if(core && turn.tgt.c!=="fact" && core.c==="fact") codes.push(["H−","under-hedged: you stated a guess as a fact"]);
-  if(core && core.d!=null && turn.tgt.d!=null && core.d-turn.tgt.d>=2) codes.push(["D+","too indirect for this person"]);
-  if(core && core.d!=null && turn.tgt.d!=null && turn.tgt.d-core.d>=2) codes.push(["D−","too direct for this person"]);
+  if(core && core.d!=null && turn.tgt.d!=null && core.d-turn.tgt.d>=3) codes.push(["D+","too indirect for this person"]);
+  if(core && core.d!=null && turn.tgt.d!=null && turn.tgt.d-core.d>=3) codes.push(["D−","too direct for this person"]);
   if(sel.detail && turn.tgt.gr && (GRAIN_I[sel.detail.gr]-GRAIN_I[turn.tgt.gr])<=-2) codes.push(["G+","too much detail for this listener"]);
   if(sel.detail && turn.tgt.gr && (GRAIN_I[sel.detail.gr]-GRAIN_I[turn.tgt.gr])>=2) codes.push(["G−","too little detail for this listener"]);
   if(core && turn.tgt.c==="fact" && ["might","should"].includes(core.c)) codes.push(["M","modal on a verified fact"]);
@@ -1151,10 +1159,11 @@ function assess(turn, sel){
   codes.forEach(c=>{ if(seen[c[0]]!=null){ if(merged[seen[c[0]]][1].indexOf(c[1])<0) merged[seen[c[0]]][1]+="; "+c[1]; }
                      else { seen[c[0]]=merged.length; merged.push([c[0],c[1]]); } });
   codes.length=0; merged.forEach(c=>codes.push(c));
-  const regScore = 55*Math.max(0,1-(over+under)/3.2);
-  const dimScore = 33*((clarity+cred+comp)/300);
-  const clean = (codes.length===0) ? 12 : Math.max(0, 12-codes.length*4);
-  const build = Math.round(clamp(regScore+dimScore+clean-stylePen,0,100));
+  const regPen    = 55*Math.min(1,(over+under)/3.2);
+  const commitPen = (core && turn.tgt.c) ? Math.abs((C_ORDER[core.c||"none"])-(C_ORDER[turn.tgt.c]))*6 : 0;
+  const dimPen    = (100-clarity)*0.33 + (100-cred)*0.22 + (100-comp)*0.30;
+  const codePen   = codes.length*4;
+  const build = Math.round(clamp(100 - regPen - commitPen - dimPen - codePen - stylePen, 0, 100));
 
   let rx="good";
   if(under>=2) rx="rude";
@@ -1217,7 +1226,7 @@ MISSIONS.forEach((m,mi)=>m.turns.forEach((t,ti)=>FLAT.push({mi,ti,m,t})));
 
 let VIEW={screen:"missions", mid:null, ti:0, phase:"room", sel:{}, room:{}, locked:false, res:null, tally:[], paid:{},
   attempt:1, hints:0, hintTxt:"", revealed:false,
-  cRef:0, cReg:null, dIdx:0, dScore:0, dAns:null, dTries:0, dWrong:[]};
+  cRef:0, cReg:null, dIdx:0, dScore:0, dAns:null, dTries:0, dWrong:[], dPerm:{}};
 const PASS=75;
 
 /* ---------- hint engine ---------- */
@@ -1233,7 +1242,63 @@ const RULES={
   affect:"Affect comes down as the register goes up. Gratitude is the one exception \u2014 and with a close friend the dial has a floor too."
 };
 const CODE_SLOT={"R\u2191":null,"R\u2193":null,"CL":null,"H+":"frame","H\u2212":"frame","D+":"core","D\u2212":"core",
-  "G+":"detail","G\u2212":"detail","M":"core","AF+":"affect","AF\u2212":"affect","ST":"addr","RP":"core","GS":"core"};
+  "G+":"detail","G\u2212":"detail","M":"core","AF+":"affect","AF\u2212":"affect","ST":"addr","RP":"core","GS":"core",
+  "OR":"core","AG":"core","SH":"core","HB":"frame","AP":"detail","AC":"core","TM":"detail","EV":"core","CF":"core"};
+
+/* why the Stakes score is what it is, per exchange */
+const S_WHY={
+ "m1-0":"A 4,200-baht error in work that has already been submitted. Money, plus a mistake someone will have to answer for.",
+ "m1-1":"The same error, still unexplained. Stakes do not drop just because the conversation has moved on to the cause.",
+ "m1-2":"You are committing to a date on a known error. Missing it would be a second failure on top of the first.",
+ "m1-3":"The same variance, now being carried to the Division head.",
+ "m1-4":"You are about to name yourself as the cause. Nothing scores higher than that.",
+ "m1-5":"The error is closed and he is only asking whether you need anything — but a deadline is still running.",
+ "m2-0":"A document you need for a deadline. Money and time, but no error and nobody to blame.",
+ "m2-1":"Still a document and a deadline. The pressure has gone up; the stakes have not.",
+ "m2-2":"It is a stapler.",
+ "m2-3":"A supplier has missed the agreed terms and your quarter-end has slipped. A rule breached scores 2.",
+ "m2-4":"The same breach — and this message could end up in a file.",
+ "m2-5":"A month of vouchers to refile before the auditors see them. Work someone must redo.",
+ "m3-0":"An audit is under way. Nothing has gone wrong yet, but everything you say today is written down.",
+ "m3-1":"You have missed a question in an audit. Recoverable — if you ask.",
+ "m3-2":"A technical term inside an audit question. Still recoverable, as long as you do not guess.",
+ "m3-3":"A figure an auditor has formally asked for, and you cannot produce it.",
+ "m3-4":"A three-part instruction from an auditor. Getting one part wrong becomes a finding in his report.",
+ "m3-5":"He is thanking you. Nothing is riding on your reply.",
+ "m4-0":"Your own good news, told to a friend.",
+ "m4-1":"Good news — but she signed the study leave that made it possible, so something is owed here.",
+ "m4-2":"Small talk in a lift. Nothing is riding on it at all, which is exactly why learners over-answer.",
+ "m4-3":"Nothing transactional is at stake. What is at stake is the friendship, which this question does not measure.",
+ "m4-4":"A funded place you were promised has gone. Money and your own development, but nobody has made an error.",
+ "m4-5":"A blocked deadline she needs to know about. Work is stalled, but no rule has been broken."
+};
+const CODE_RULE={
+ "OR":"Register 5 buys brevity, not decoration. Say less, not more.",
+ "AG":"Name the agent. An agentless passive hides who did it, and everyone notices.",
+ "SH":"<em>shall</em> is contract English and offers with I/we. For a promise, use <em>will</em>.",
+ "HB":"Never hedge your own mistake. Own it plainly, then say what you have changed.",
+ "AP":"Apologise once, then say what you have done about it. Repetition is not contrition.",
+ "AC":"State the fact and let the fact do the accusing.",
+ "GS":"Ask, or say you will find out. Never guess in front of someone who will check.",
+ "CF":"Repeat the instruction back. Agreement is not confirmation.",
+ "EV":"Say what is blocking it. Concealing the blockage only moves the problem to Thursday.",
+ "TM":"Right words, wrong moment. Let the person be heard before you start fixing things.",
+ "NF":"Use the number. A report without the figure just makes the listener ask for it.",
+ "RP":"Ask for the repeat. Guessing at a question you did not hear is the most expensive option on the page.",
+ "M":"A fact you have checked takes no modal. A cause you have not proved takes <em>might</em>.",
+ "CL":"Two of your slots are at different registers. Read the greeting and the address together — they have to agree.",
+ "AF+":"Affect comes down as the register goes up. Composure is the impression you want.",
+ "AF\u2212":"Warmth is allowed here. A flat delivery reads as something being wrong.",
+ "H+":"You have softened something that is never softened: a number, a date, or your own mistake.",
+ "H\u2212":"You have stated as a fact something you have not actually checked.",
+ "G+":"Too much detail for this listener. Headline first — the method stays available if they ask.",
+ "G\u2212":"Too little detail for someone who has to act on it.",
+ "D+":"Too indirect. Over-politeness reads as strange, not as extra respect.",
+ "D\u2212":"Too direct. Turn it into a question and push the modal into its past form.",
+ "ST":"Thai service practice pairs the rank with the first name, not the surname.",
+ "R\u2191":"You are above the register this listener needs. Come down a step in every slot.",
+ "R\u2193":"You are below the register this listener needs. Go up a step in every slot."
+};
 function worstSlot(turn, sel){
   const tr=turn.tgt.r; let worst=null, wp=0;
   REG_SLOTS.forEach(k=>{
@@ -1274,6 +1339,11 @@ function hintFor(turn, sel, level){
     }
     if(a.codes.length){ const c=a.codes[0]; return "Your registers line up. The problem is <b>"+c[0]+"</b> \u2014 "+c[1]+"."; }
     return "Nothing is clashing. Check the <b>Detail</b> and <b>Justification</b> rows against what this listener actually needs, then say it.";
+  }
+  if((!ws || wp<1) && a.codes.length){
+    const sym=a.codes[0][0];
+    const rule=CODE_RULE[sym];
+    if(rule) return "<b>Rule ("+sym+"):</b> "+rule+"<br>Your registers are fine — it is the choice inside a slot that is costing you.";
   }
   let slot = ws;
   if(!slot && a.codes.length) slot = CODE_SLOT[a.codes[0][0]] || "core";
@@ -1387,11 +1457,16 @@ function pRoom(){
     const t2=t.room, r=registerFrom(t2.d,t2.p,t2.s);
     const mine=registerFrom(VIEW.room.d,VIEW.room.p,VIEW.room.s);
     const pts=ROOM_Q.reduce((a,q)=>a+(VIEW.room[q.k]===t.room[q.k]?1:0),0);
+    const per=PEOPLE[t.who];
+    const sw=S_WHY[curM().id+"-"+VIEW.ti]||"";
+    const rws=[["Distance",t2.d,per.dWhy],["Power",t2.p,per.pWhy],["Stakes",t2.s,sw]]
+      .map(x=>'<tr><th>'+x[0]+'</th><td style="width:2.4em;text-align:center"><b>'+x[1]+'</b></td><td>'+esc(x[2]||"")+'</td></tr>').join("");
     after='<div class="verdict '+(pts===3?"v-good":pts===2?"v-ok":"v-bad")+'">'
       +'<div class="rx">Read: <b>'+pts+'/3</b>. Correct scoring is D'+t2.d+' P'+t2.p+' S'+t2.s+' = <b>register '+r+', '+REG_NAME[r]+'</b>.'
       +(mine!==r?' Your scoring would have given register '+mine+' — that is the decision the whole sentence hangs on.':'')+'</div>'
-      +(t2.p===2?'<div style="font-size:.94rem;color:var(--ink-dim)">Power = 2 sets a floor of register 3, whatever the other scores say.'+(t2.d===2?' Distance 2 with Power 2 takes it to 5.':'')+'</div>':'')
-      +(t2.s===2?'<div style="font-size:.94rem;color:var(--ink-dim)">Stakes = 2 sets a floor of register 4. Bad news is delivered seriously even to a friend.</div>':'')
+      +'<div class="tw"><table><tbody>'+rws+'</tbody></table></div>'
+      +(t2.p===2?'<div class="hint" style="margin-top:8px">Power = 2 sets a floor of register 3, whatever the other scores say.'+(t2.d===2?' Distance 2 together with Power 2 takes it to 5.':'')+'</div>':'')
+      +(t2.s===2?'<div class="hint" style="margin-top:8px">Stakes = 2 sets a floor of register 4. Bad news is delivered seriously even to a friend.</div>':'')
       +'<div class="row"><button class="btn" data-act="toBuild">Build the sentence ›</button></div></div>';
   }
   return '<div class="card"><h3>1 · Read the room</h3><p style="font-size:.95rem;color:var(--ink-dim)">Score each question 0, 1 or 2. Ten seconds, no sentence yet.</p>'
@@ -1419,7 +1494,7 @@ function pBuild(){
   const coach = t.guide ? '<div class="coach"><div class="ch">Coach</div>'+t.guide.map(g=>'<p>'+g+'</p>').join("")+'</div>' : '';
   const hintsLeft = 2-VIEW.hints;
   const hintBtn = hintsLeft>0
-    ? '<button class="btn ghost sm" data-act="hint">Need a hint?'+(m.trainer?" (free)":" (−6 pts)")+'</button>' : '';
+    ? '<button class="btn ghost sm" data-act="hint">Need a hint?'+(m.trainer?" (free)":" (−5 pts)")+'</button>' : '';
   const hintBox = VIEW.hintTxt ? '<div class="hintbox"><div class="hl">Hint '+VIEW.hints+' of 2</div>'+VIEW.hintTxt+'</div>' : '';
   const tries = VIEW.attempt>1 ? '<span class="tries">second attempt · worth 60%</span>' : '';
   return '<div class="card">'+coach+'<h3>'+(m.trainer?"Set the dials":"2 · Set the dials")+'</h3>'
@@ -1448,7 +1523,7 @@ function pVerdict(){
   const last = VIEW.ti===curM().turns.length-1;
   const multTxt = r.mult>=1 ? "first attempt \u00b7 full points" : (VIEW.revealed?"answer revealed \u00b7 45%":"second attempt \u00b7 60%");
   return '<div class="verdict '+cls+'"><div class="rx">'+line+'</div>'
-    +'<div class="sc"><span class="big">'+r.awarded+'</span><span class="gr">'+grade(r.total)+'</span>'
+    +'<div class="sc"><span class="big">'+r.awarded+'</span><span class="gr">sentence: '+grade(r.total)+'</span>'
     +'<span class="gr">'+r.total+' raw \u00b7 '+multTxt+'</span>'
     +(r.hintPen?'<span class="gr">\u2212'+r.hintPen+' for hints</span>':'')
     +(r.roomPts!=null?'<span class="gr">room read '+r.roomPts+'/3</span>':'')+'</div>'
@@ -1510,8 +1585,8 @@ function award(r){
   const m=curM();
   r.total=r.raw;
   r.mult = VIEW.revealed ? 0.45 : (VIEW.attempt===1 ? 1 : 0.6);
-  r.hintPen = m.trainer ? 0 : VIEW.hints*6;
-  r.awarded = clamp(Math.round(r.raw*r.mult) - r.hintPen, 0, 100);
+  r.hintPen = m.trainer ? 0 : VIEW.hints*5;
+  r.awarded = clamp(Math.round((r.raw - r.hintPen)*r.mult), 0, 100);
   VIEW.res=r; VIEW.phase="verdict";
   VIEW.tally[VIEW.ti]=r.awarded;
   if(!VIEW.paid[VIEW.ti]){
@@ -1536,6 +1611,8 @@ function finishMission(){
    +'<div class="sc" style="display:flex;gap:14px;align-items:center;margin-bottom:12px"><span class="big" style="font-size:2.4rem;font-family:var(--mono)">'+avg+'</span><span class="gr">'+grade(avg)+'</span></div>'
    +'<div class="tw"><table><thead><tr><th>#</th><th>Core thought</th><th>Target</th><th>Score</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
    +'<div class="hint"><b>Focus of this mission:</b> '+esc(m.focus)+'</div>'
+   +'<h4 style="margin-top:18px">Rules covered</h4>'
+   +'<ul style="font-size:.98rem;line-height:1.55">'+m.turns.map(t=>'<li>'+esc(t.teach)+'</li>').join("")+'</ul>'
    +'<div class="row"><button class="btn" data-act="back">‹ Missions</button><button class="btn ghost" data-act="open" data-id="'+m.id+'">Run it again</button></div></div>';
   paintRank();
 }
@@ -1648,8 +1725,33 @@ const DRILL=[
   o:["D+ — too indirect","H+ — over-hedged","R↑ — too formal","Nothing is wrong"], a:3,
   h:"Question form, past-form modal, reason attached. Check each one before you answer.",
   fix:"Question form, past-form modal, and a reason attached. A reason does more politeness work than any softener."}
+ ,{u:"The 300-baht difference must be a rounding error.", c:"Explaining a small variance to her section head.",
+  o:["Nothing is wrong — <em>must</em> here means “I conclude that it is”","M — modal on a verified fact","H+ — over-hedged","R↓ — too casual"], a:0,
+  h:"Look at the subject of the sentence. Is it a person being told to do something, or a thing being concluded about?",
+  fix:"<em>must</em> does two jobs. With an animate subject it is obligation — <em>“you must sign it”</em>. With <em>it / the figure / the payment</em> it is deduction, a conclusion rather than a rule. Here it is deduction, and it is exactly right."},
+ {u:"I opened the May file, filtered the claims by date, sorted them by claimant, checked each one against the receipts, and on the fourth pass I found claim 114 twice.", c:"Said to the Division head in a corridor. He has about thirty seconds.",
+  o:["G+ — setting-A detail delivered to a setting-C listener","R↑ — too formal for him","M — modal on a fact","Nothing is wrong"], a:0,
+  h:"The English is correct and every word of it is true. Ask what this particular listener has to DO with the information.",
+  fix:"He is accountable but he is not doing the work, so he needs setting C — result and action: <em>“The May travel claims are 4,200 baht over — a duplicated claim. I'm correcting it today.”</em> The method stays available if he asks for it."},
+ {u:"I want the receipt for claim 114.", c:"To Khun Nok in Procurement.",
+  o:["<em>I want</em> is not a workplace form in English","R↑ — too formal","AF+ — too emphatic","Nothing is wrong"], a:0,
+  h:"The grammar is perfect. The problem is a single word — and it is the word that maps most directly from Thai.",
+  fix:"Thai อยาก maps straight onto <em>want</em>, which makes this a high-frequency error. <em>I'd like</em> is the neutral register-3 form and <em>I need</em> the high-commitment one. Better still, make it a request: <em>“Could you send me the receipt for claim 114?”</em>"},
+ {u:"Good morning, Wing Commander Prasert.", c:"Greeting Wg Cdr Anan Prasert, the Division head, in his office.",
+  o:["ST — Thai service practice pairs the rank with the first name","R↓ — too casual","CL — clash between two slots","Nothing is wrong"], a:0,
+  h:"The register is right and the greeting matches the address. Look at which part of his name the rank has been attached to.",
+  fix:"<em>Wing Commander Anan</em>. Rank plus surname is a Western habit — understood, but it marks you as working from an English textbook. And if the name will not come, <em>Sir</em> on its own is complete and correct."}
 ];
 const DMAX = DRILL.length*2;
+function drillOrder(i){
+  if(!VIEW.dPerm[i]){
+    const n=DRILL[i].o.length, a=[];
+    for(let k=0;k<n;k++) a.push(k);
+    for(let k=n-1;k>0;k--){ const j=Math.floor(Math.random()*(k+1)); const tmp=a[k]; a[k]=a[j]; a[j]=tmp; }
+    VIEW.dPerm[i]=a;
+  }
+  return VIEW.dPerm[i];
+}
 function vDrill(){
   if(VIEW.dIdx>=DRILL.length){
     const pct=Math.round(VIEW.dScore/DMAX*100);
@@ -1660,13 +1762,14 @@ function vDrill(){
   }
   const d=DRILL[VIEW.dIdx];
   const answered = VIEW.dAns!=null;
-  const opts=d.o.map((o,i)=>{
+  const opts=drillOrder(VIEW.dIdx).map(i=>{
+    const o=d.o[i];
     let cls="opt";
     const wrongBefore = VIEW.dWrong.indexOf(i)>=0;
     if(answered){ if(i===d.a) cls+=" ok"; else if(wrongBefore||i===VIEW.dAns) cls+=" no"; }
     else if(wrongBefore) cls+=" no";
     const dis = answered || wrongBefore;
-    return '<button class="'+cls+'" style="flex:1 1 100%" data-act="dans" data-v="'+i+'" aria-pressed="'+(VIEW.dAns===i)+'"'+(dis?" disabled":"")+'>'+esc(o)+'</button>';
+    return '<button class="'+cls+'" style="flex:1 1 100%" data-act="dans" data-v="'+i+'" aria-pressed="'+(VIEW.dAns===i)+'"'+(dis?" disabled":"")+'>'+o+'</button>';
   }).join("");
   const retryBox = (!answered && VIEW.dTries===1)
     ? '<div class="hintbox"><div class="hl">Hint — one more try, worth 1 point</div>'+d.h+'</div>' : '';
@@ -1850,6 +1953,19 @@ const DOSSIER=[
 <dt>M</dt><dd>modal on a fact, or no modal on a guess</dd>
 <dt>ST</dt><dd>style: a form that is understood but marked</dd>
 </div>
+<h4>Situation codes</h4><div class="kv">
+<dt>OR</dt><dd>ornament: right register, far too many words</dd>
+<dt>AG</dt><dd>agentless passive — it hides who did it</dd>
+<dt>SH</dt><dd><em>shall</em> misused as an emphatic <em>will</em></dd>
+<dt>HB</dt><dd>hedging your own mistake</dd>
+<dt>AP</dt><dd>apology repeated, no repair offered</dd>
+<dt>AC</dt><dd>an accusation in formal dress</dd>
+<dt>GS</dt><dd>guessed instead of asking, or instead of checking</dd>
+<dt>CF</dt><dd>agreed without confirming what was said</dd>
+<dt>EV</dt><dd>true, and it conceals the problem</dd>
+<dt>TM</dt><dd>right words, wrong moment</dd>
+<dt>RP</dt><dd>guessed at a question you did not hear</dd>
+</div>
 <div class="hint">None of these codes is about grammar. She will often be marked heavily on a sentence containing no grammatical error at all — which is exactly the lesson.</div>`],
 
 ["Address — the Thai and English forms",
@@ -1933,7 +2049,7 @@ document.getElementById("main").addEventListener("click",e=>{
       render(); break;
     }
     case "dnext": VIEW.dIdx++; VIEW.dAns=null; VIEW.dTries=0; VIEW.dWrong=[]; render(); break;
-    case "dreset": VIEW.dIdx=0; VIEW.dScore=0; VIEW.dAns=null; VIEW.dTries=0; VIEW.dWrong=[]; render(); break;
+    case "dreset": VIEW.dIdx=0; VIEW.dScore=0; VIEW.dAns=null; VIEW.dTries=0; VIEW.dWrong=[]; VIEW.dPerm={}; render(); break;
   }
 });
 
